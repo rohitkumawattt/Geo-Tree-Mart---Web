@@ -38,12 +38,27 @@ export default function Footer() {
   };
 
   const handleNavClick = (id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      if (window.lenis) {
-        window.lenis.scrollTo(el);
-      } else {
-        el.scrollIntoView({ behavior: 'smooth' });
+    const isCategoryPage = window.location.hash.startsWith('#category/');
+    if (isCategoryPage) {
+      window.location.hash = '';
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          if (window.lenis) {
+            window.lenis.scrollTo(el);
+          } else {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }, 100);
+    } else {
+      const el = document.getElementById(id);
+      if (el) {
+        if (window.lenis) {
+          window.lenis.scrollTo(el);
+        } else {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     }
   };

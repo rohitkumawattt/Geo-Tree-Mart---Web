@@ -39,10 +39,12 @@ const OurCategories = () => {
         {/* Categories */}
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
           {categories.map((category, index) => {
+            const categorySlug = category.name.toLowerCase().replace(/\s+/g, '-');
             return (
-              <div
+              <a
+                href={`#category/${categorySlug}`}
                 key={index}
-                className="group flex flex-col items-center"
+                className="group flex flex-col items-center cursor-pointer no-underline"
               >
                 <div className="flex h-40 w-40 items-center justify-center rounded-full border border-white/10 bg-white shadow-xl transition-all duration-500 group-hover:-translate-y-3 group-hover:shadow-2xl group-hover:shadow-secondary/20">
                   <div className="flex h-24 w-24 items-center justify-center rounded-full bg-bg-light">
@@ -54,10 +56,10 @@ const OurCategories = () => {
                   </div>
                 </div>
 
-                <h3 className="mt-5 text-center text-lg font-semibold text-white">
+                <h3 className="mt-5 text-center text-lg font-semibold text-white group-hover:text-accent transition-colors">
                   {category.name}
                 </h3>
-              </div>
+              </a>
             );
           })}
         </div>

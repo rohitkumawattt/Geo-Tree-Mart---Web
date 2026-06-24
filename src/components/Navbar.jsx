@@ -29,6 +29,11 @@ export default function Navbar() {
   // Monitor scroll position to highlight active nav item
   useEffect(() => {
     const handleScrollActive = () => {
+      if (window.location.hash.startsWith('#category/')) {
+        setActiveSection('categories');
+        return;
+      }
+
       const scrollPosition = window.scrollY + 140; // 140px offset for top navbar height and early highlight
 
       for (const item of NAV_ITEMS) {
@@ -45,43 +50,90 @@ export default function Navbar() {
     };
 
     window.addEventListener('scroll', handleScrollActive);
+    window.addEventListener('hashchange', handleScrollActive);
     handleScrollActive(); // Run once initially
 
-    return () => window.removeEventListener('scroll', handleScrollActive);
+    return () => {
+      window.removeEventListener('scroll', handleScrollActive);
+      window.removeEventListener('hashchange', handleScrollActive);
+    };
   }, []);
 
   const scrollToSection = (id) => {
     setIsMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      // Use window.lenis if available, otherwise fallback to native scroll
-      if (window.lenis) {
-        window.lenis.scrollTo(element, { 
-          offset: -80,
-          onComplete: () => {
-            if (id === 'download-badges' && typeof window.triggerDownloadBlink === 'function') {
-              window.triggerDownloadBlink();
+    const isCategoryPage = window.location.hash.startsWith('#category/');
+
+    if (isCategoryPage) {
+      // Return to landing page hash context
+      window.location.hash = '';
+
+      // Delay scroll until the home page sections render
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          if (window.lenis) {
+            window.lenis.scrollTo(element, { 
+              offset: -80,
+              onComplete: () => {
+                if (id === 'download-badges' && typeof window.triggerDownloadBlink === 'function') {
+                  window.triggerDownloadBlink();
+                }
+              }
+            });
+          } else {
+            const offset = 80;
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = element.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+
+            if (id === 'download-badges') {
+              setTimeout(() => {
+                if (typeof window.triggerDownloadBlink === 'function') {
+                  window.triggerDownloadBlink();
+                }
+              }, 800);
             }
           }
-        });
-      } else {
-        const offset = 80;
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = element.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-
-        if (id === 'download-badges') {
-          setTimeout(() => {
-            if (typeof window.triggerDownloadBlink === 'function') {
-              window.triggerDownloadBlink();
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        // Use window.lenis if available, otherwise fallback to native scroll
+        if (window.lenis) {
+          window.lenis.scrollTo(element, { 
+            offset: -80,
+            onComplete: () => {
+              if (id === 'download-badges' && typeof window.triggerDownloadBlink === 'function') {
+                window.triggerDownloadBlink();
+              }
             }
-          }, 800);
+          });
+        } else {
+          const offset = 80;
+          const bodyRect = document.body.getBoundingClientRect().top;
+          const elementRect = element.getBoundingClientRect().top;
+          const elementPosition = elementRect - bodyRect;
+          const offsetPosition = elementPosition - offset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+
+          if (id === 'download-badges') {
+            setTimeout(() => {
+              if (typeof window.triggerDownloadBlink === 'function') {
+                window.triggerDownloadBlink();
+              }
+            }, 800);
+          }
         }
       }
     }
