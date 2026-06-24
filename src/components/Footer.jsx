@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { FaTree, FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
-import { IoLogoApple, IoLogoGooglePlaystore } from 'react-icons/io5';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();

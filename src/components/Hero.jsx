@@ -58,7 +58,7 @@ export default function Hero() {
   };
 
   // Split title into words for staggered reveal
-  const titleText = "Plant Your Legacy, Watch It Grow Live";
+  const titleText = "Your Online Plant Paradise.";
   const words = titleText.split(" ");
 
   // Container variants for staggered text children
@@ -99,7 +99,9 @@ export default function Hero() {
     <section
       id="home"
       ref={containerRef}
-      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-bg-light pb-24 sm:pb-28"
+      /* CHANGED: Removed min-h-screen. Added min-h-[65vh] md:min-h-[75vh] to reduce height. */
+      /* CHANGED: Reduced pb-24 sm:pb-28 to pb-12 sm:pb-16 to cut down extra bottom space. */
+      className="relative w-full min-h-[65vh] md:min-h-[75vh] flex items-center justify-center overflow-hidden bg-bg-light pb-12 sm:pb-16 pt-20"
     >
       {/* Background Image */}
       <img
@@ -131,9 +133,8 @@ export default function Hero() {
               key={i}
               ref={(el) => (floatingLeavesRef.current[i] = el)}
               style={{ top: pos.top, left: pos.left, right: pos.right, bottom: pos.bottom }}
-              className={`absolute ${pos.size} ${pos.opacity} text-primary ${
-                i === 0 || i === 5 ? '' : 'hidden md:block'
-              }`}
+              className={`absolute ${pos.size} ${pos.opacity} text-primary ${i === 0 || i === 5 ? '' : 'hidden md:block'
+                }`}
             >
               <FaLeaf className="transform -rotate-12 hover:scale-110 transition-transform duration-300" />
             </div>
@@ -142,33 +143,20 @@ export default function Hero() {
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-text-dark select-none mt-16 md:mt-20">
-
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-6 md:mt-0 mt-4"
-        >
-          <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-          <span className="font-display text-xs font-semibold tracking-wider uppercase text-primary-dark">
-            GeoTree Mart
-          </span>
-        </motion.div>
+      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-text-dark select-none mt-10">
 
         {/* Animated Headline */}
         <motion.h1
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight mb-6 text-text-dark"
+          className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-6xl leading-[1.05] tracking-tight mb-4 text-text-dark"
         >
           {words.map((word, idx) => (
             <span key={idx} className="inline-block overflow-hidden mr-3 sm:mr-4 last:mr-0">
               <motion.span
                 variants={wordVariants}
-                className={`inline-block ${['legacy,', 'grow', 'live'].includes(word.toLowerCase())
+                className={`inline-block ${['Paradise.'].includes(word)
                   ? 'bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent'
                   : ''
                   }`}
@@ -204,24 +192,6 @@ export default function Hero() {
             <ArrowIcon className="text-lg" />
           </button>
         </motion.div>
-      </div>
-
-      {/* Scroll indicator animation */}
-      <div className="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-1.5 pointer-events-none select-none">
-        <span className="text-xs text-text-dark/45 uppercase tracking-widest font-semibold font-display">Scroll Down</span>
-        <div className="w-[26px] h-[40px] rounded-full border-2 border-text-dark/20 flex justify-center p-1.5">
-          <motion.div
-            animate={{
-              y: [0, 15, 0],
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="w-1.5 h-1.5 rounded-full bg-primary"
-          />
-        </div>
       </div>
     </section>
   );

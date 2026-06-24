@@ -4,6 +4,7 @@ import { HiMenu, HiX } from 'react-icons/hi';
 
 const NAV_ITEMS = [
   { label: 'Home', id: 'home' },
+  { label: 'Categories', id: 'categories' },
   { label: 'Why GeoTree Mart?', id: 'problem-solution' },
   { label: 'Buy & Sell', id: 'buy' },
   { label: 'FAQs', id: 'faq' }
