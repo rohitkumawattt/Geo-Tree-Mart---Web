@@ -144,7 +144,7 @@ export default function FAQ() {
       <div className="max-w-4xl mx-auto">
 
         {/* Title area */}
-        <div ref={titleRef} className="text-center max-w-2xl mb-16 mx-auto flex flex-col items-center">
+        <div ref={titleRef} className="text-center max-w-2xl mb-8 mx-auto flex flex-col items-center">
           <h2 className="font-display font-black text-3xl sm:text-5xl text-text-dark leading-tight tracking-tight mb-4">
             Frequently Asked
             <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"> Questions</span>

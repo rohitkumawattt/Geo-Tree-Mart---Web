@@ -142,7 +142,7 @@ export default function Feedback() {
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-secondary/5 blur-[100px] pointer-events-none" />
 
       {/* Title area */}
-      <div ref={titleRef} className="text-center max-w-3xl mx-auto px-6 flex flex-col items-center">
+      <div ref={titleRef} className="text-center max-w-3xl mb-8 mx-auto px-6 flex flex-col items-center">
         <h2 className="font-display font-black text-3xl sm:text-5xl text-text-dark leading-tight tracking-tight mb-4">
           Voices of the <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">GeoTree Community</span>
         </h2>

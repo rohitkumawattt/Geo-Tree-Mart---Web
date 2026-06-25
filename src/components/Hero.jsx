@@ -58,7 +58,7 @@ export default function Hero() {
   };
 
   // Split title into words for staggered reveal
-  const titleText = "Your Online Plant Paradise.";
+  const titleText = "Your Online Plant Paradise";
   const words = titleText.split(" ");
 
   // Container variants for staggered text children
@@ -156,7 +156,7 @@ export default function Hero() {
             <span key={idx} className="inline-block overflow-hidden mr-3 sm:mr-4 last:mr-0">
               <motion.span
                 variants={wordVariants}
-                className={`inline-block ${['Paradise.'].includes(word)
+                className={`inline-block ${['Paradise'].includes(word)
                   ? 'bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent'
                   : ''
                   }`}

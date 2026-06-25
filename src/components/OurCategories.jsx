@@ -70,7 +70,7 @@ const OurCategories = () => {
 
       <div className="relative mx-auto max-w-7xl px-6">
         {/* Heading */}
-        <div className="mb-12 text-center">
+        <div className="mb-8 text-center">
           <h2 ref={titleRef} className="font-display text-2xl sm:text-3xl font-bold text-white md:text-4xl">
             Our Categories
           </h2>

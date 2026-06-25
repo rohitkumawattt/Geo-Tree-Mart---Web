@@ -101,7 +101,7 @@ export default function Buy() {
       <div className="max-w-7xl mx-auto">
 
         {/* Title Area */}
-        <div ref={titleRef} className="text-center max-w-2xl mx-auto mb-16 flex flex-col items-center">
+        <div ref={titleRef} className="text-center max-w-2xl mx-auto mb-8 flex flex-col items-center">
           <h2 className="font-display font-black text-3xl sm:text-5xl text-text-dark leading-tight tracking-tight mb-4">
             Bring Your First <br /> Green Friend Home
           </h2>
@@ -127,9 +127,9 @@ export default function Buy() {
                     className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
                   />
-                  
+
                   {/* Category Badge */}
-                  <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-primary-dark text-[9px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-sm border border-black/[0.03] z-10">
+                  <span className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm text-primary-dark text-[9px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-sm border border-black/[0.03] z-10">
                     {plant.category}
                   </span>
 
@@ -145,7 +145,7 @@ export default function Buy() {
                     <h3 className="font-display font-bold text-sm sm:text-base text-text-dark leading-snug group-hover:text-primary transition-colors duration-300 truncate">
                       {plant.name}
                     </h3>
-                    
+
                     <div className="flex items-center gap-1.5 text-text-muted text-[11px] mt-1.5 truncate">
                       <FaStore className="text-primary/60 flex-shrink-0" />
                       <span className="truncate">{plant.origin}</span>
@@ -164,7 +164,7 @@ export default function Buy() {
                         </span>
                       </div>
                     </div>
-                    
+
                     <div className="flex flex-col items-end">
                       <span className="text-[9px] text-text-muted uppercase tracking-wider font-semibold">Available</span>
                       <span className="text-text-dark font-sans font-bold text-xs leading-none mt-1">

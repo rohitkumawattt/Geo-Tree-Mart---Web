@@ -93,7 +93,7 @@ export default function ProblemSolution() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
 
         {/* Centered Header (Matches "Why Choose Us" style from reference image) */}
-        <div className="text-center max-w-3xl mx-auto mb-20 flex flex-col items-center">
+        <div className="text-center max-w-3xl mx-auto mb-8 flex flex-col items-center">
           <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl text-text-dark leading-tight tracking-tight mb-4">
             Why Choose <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">GeoTree Mart?</span>
           </h2>
