@@ -54,6 +54,14 @@ const MOCK_PRODUCTS = {
     { id: 'tool-gloves', name: 'Gardening Protective Gloves', category: 'Safety', price: 40, unit: 'pair', stock: 15000, origin: 'SafeGrip Rubber', rating: 4.6, reviews: 174, desc: 'Nitrile coated puncture-resistant gloves for safe handling.' },
     { id: 'tool-rake', name: 'Premium Garden Rake', category: 'Soil Care', price: 220, unit: 'piece', stock: 1800, origin: 'EarthTools Co.', rating: 4.7, reviews: 53, desc: 'Wide steel teeth for leveling soil and clearing garden leaves.' },
     { id: 'tool-watering-can', name: 'Classical Metal Watering Can', category: 'Watering', price: 190, unit: 'piece', stock: 2400, origin: 'Heritage Copper & Brass', rating: 4.8, reviews: 81, desc: 'Galvanized zinc steel structure with long narrow spout.' }
+  ],
+  "Soil": [
+    { id: 'soil-potting-mix', name: 'Premium Organic Potting Mix', category: 'Potting Mix', price: 120, unit: '10kg bag', stock: 8500, origin: 'Jaipur Organic Greens', rating: 4.8, reviews: 245, image: 'https://images.unsplash.com/photo-1463936575829-25148e1db1b8?auto=format&fit=crop&w=600&q=80', desc: 'Pre-mixed soil fortified with vermicompost, cocopeat, and essential micro-nutrients.' },
+    { id: 'soil-cocopeat-block', name: 'Compressed Cocopeat Block', category: 'Moisture Retainer', price: 80, unit: '5kg block', stock: 15000, origin: 'EcoGrow Solutions', rating: 4.7, reviews: 189, image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80', desc: '100% organic coconut coir dust, expands up to 75 liters when hydrated.' },
+    { id: 'soil-vermicompost', name: 'Premium Vermicompost Manure', category: 'Organic Feed', price: 90, unit: '5kg bag', stock: 12000, origin: 'Earthworm Organics', rating: 4.9, reviews: 312, image: 'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&w=600&q=80', desc: 'Odourless, organic manure produced by earthworms, excellent for vegetable gardens.' },
+    { id: 'soil-red-soil', name: 'Natural Red Garden Soil', category: 'Garden Soil', price: 150, unit: '15kg bag', stock: 6500, origin: 'Amer Forest Growers', rating: 4.5, reviews: 78, image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80', desc: 'Rich in iron oxide, ideal for flowering plants, shrubs, and outdoor garden beds.' },
+    { id: 'soil-neem-mix', name: 'Neem-Infused Potting Soil', category: 'Pest Control', price: 130, unit: '10kg bag', stock: 4000, origin: 'BioShield Fertilizers', rating: 4.6, reviews: 92, image: 'https://images.unsplash.com/photo-1661776358099-38f6daea7752?auto=format&fit=crop&w=600&q=80', desc: 'Soil mixed with neem cake powder to naturally ward off soil-borne pests and root diseases.' },
+    { id: 'soil-perlite', name: 'Premium Horticulture Perlite', category: 'Soil Additive', price: 70, unit: '1kg pack', stock: 9500, origin: 'NutriRoot Soils', rating: 4.8, reviews: 120, image: 'https://images.unsplash.com/photo-1509937528035-ad76254b0356?auto=format&fit=crop&w=600&q=80', desc: 'Volcanic glass granules to dramatically improve soil aeration, drainage, and root structure.' }
   ]
 };
 
@@ -88,6 +96,12 @@ const CATEGORY_DETAILS = {
     tagline: "Durable, ergonomic, and lightweight steel tools for gardeners.",
     gradient: "from-green-900 to-slate-950",
     bannerAccent: "bg-green-500/20 text-green-300 border-green-500/30"
+  },
+  "Soil": {
+    subtitle: "Premium Growing Media",
+    tagline: "Elevate your gardening with nutrient-rich soils, composting media, and organic soil mixes.",
+    gradient: "from-emerald-800 to-green-950",
+    bannerAccent: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
   }
 };
 

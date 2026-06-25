@@ -15,6 +15,7 @@ import PotsPage from '../Pages/Pots';
 import FertilisersPage from '../Pages/Fertilisers';
 import SeedsPage from '../Pages/Seeds';
 import GardenToolsPage from '../Pages/GardenTools';
+import SoilPage from '../Pages/Soil';
 
 function App() {
   useSmoothScroll();
@@ -31,7 +32,8 @@ function App() {
           'pots': 'Pots',
           'fertilisers': 'Fertilisers',
           'seeds': 'Seeds',
-          'garden-tools': 'Garden Tools'
+          'garden-tools': 'Garden Tools',
+          'soil': 'Soil'
         };
         const matched = validCategories[slug.toLowerCase()];
         if (matched) {
@@ -72,6 +74,8 @@ function App() {
         return <SeedsPage onClose={handleCloseCategory} />;
       case 'Garden Tools':
         return <GardenToolsPage onClose={handleCloseCategory} />;
+      case 'Soil':
+        return <SoilPage onClose={handleCloseCategory} />;
       default:
         return null;
     }
