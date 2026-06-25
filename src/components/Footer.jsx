@@ -64,7 +64,7 @@ export default function Footer() {
   };
 
   return (
-    <footer id="footer" className="w-full bg-[#1A1A1A] text-[#F8FFF8]/80 py-10 md:py-12 px-6 md:px-12 relative overflow-hidden select-none border-t border-primary/10">
+    <footer id="footer" className="w-full bg-[#1A1A1A] text-[#F8FFF8]/80 py-10 md:py-12 px-6 md:px-12 relative overflow-hidden border-t border-primary/10">
 
       {/* Soft background glow */}
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-primary/10 blur-[130px] pointer-events-none" />
@@ -75,15 +75,15 @@ export default function Footer() {
         {/* Left Side: Brand and Social Icons */}
         <div className="md:col-span-3 flex flex-col items-start text-left">
           <div className="flex items-center gap-2.5 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-md">
-              <FaTree className="text-white text-xl" />
+            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-md shadow-primary/20 transform transition-transform group-hover:scale-105 duration-300">
+              <img src="./favicon.png" alt="" />
             </div>
             <div className="flex flex-col">
               <span className="font-display font-extrabold text-lg leading-none tracking-tight text-white">
                 GeoTree <span className="text-secondary font-bold">Mart</span>
               </span>
-              <span className="text-[10px] text-accent font-semibold tracking-widest uppercase mt-0.5">
-                Eco Technology
+              <span className="text-[10px] text-primary font-semibold tracking-widest uppercase">
+                <span className='text-white'>By</span> Geo Planet Solution Pvt. Ltd.
               </span>
             </div>
           </div>
@@ -114,10 +114,11 @@ export default function Footer() {
           <ul className="flex flex-col gap-2.5 text-sm font-semibold">
             {[
               { label: 'Home', id: 'home' },
+              { label: 'Categories', id: 'categories' },
+              { label: 'Plants', id: 'buy' },
               { label: 'Why GeoTree Mart?', id: 'problem-solution' },
-              { label: 'Geotagging', id: 'geotagging' },
-              { label: 'Buy & Sell', id: 'buy' },
-              { label: 'FAQ', id: 'faq' }
+              { label: 'Feedback', id: 'feedback' },
+              { label: 'FAQs', id: 'faq' }
             ].map((link) => (
               <li key={link.id}>
                 <button
@@ -162,9 +163,8 @@ export default function Footer() {
             {/* App Store button */}
             <button
               onClick={handleAppStoreClick}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-[#FF2D55] hover:bg-white/10 hover:shadow-[0_0_15px_rgba(255,45,85,0.25)] text-white transition-all duration-300 flex-1 min-w-[140px] shadow-sm group cursor-pointer focus:outline-none ${
-                isBlinking ? 'animate-blink-apple' : ''
-              }`}
+              className={`flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-[#FF2D55] hover:bg-white/10 hover:shadow-[0_0_15px_rgba(255,45,85,0.25)] text-white transition-all duration-300 flex-1 min-w-[140px] shadow-sm group cursor-pointer focus:outline-none ${isBlinking ? 'animate-blink-apple' : ''
+                }`}
             >
               <svg viewBox="0 0 24 24" className="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -188,9 +188,8 @@ export default function Footer() {
             {/* Play Store button */}
             <button
               onClick={handlePlayStoreClick}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-[#4CAF50] hover:bg-white/10 hover:shadow-[0_0_15px_rgba(76,175,80,0.25)] text-white transition-all duration-300 flex-1 min-w-[140px] shadow-sm group cursor-pointer focus:outline-none ${
-                isBlinking ? 'animate-blink-google' : ''
-              }`}
+              className={`flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-[#4CAF50] hover:bg-white/10 hover:shadow-[0_0_15px_rgba(76,175,80,0.25)] text-white transition-all duration-300 flex-1 min-w-[140px] shadow-sm group cursor-pointer focus:outline-none ${isBlinking ? 'animate-blink-google' : ''
+                }`}
             >
               <svg viewBox="0 0 24 24" className="w-6 h-6 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3.25 2.5C3.09 2.66 3 2.92 3 3.25V20.75C3 21.08 3.09 21.34 3.25 21.5L3.31 21.56L12.92 11.95V11.83V11.71L3.31 2.1L3.25 2.16V2.5Z" fill="#00E5FF" />

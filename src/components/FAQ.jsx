@@ -139,22 +139,16 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="relative w-full py-24 md:py-36 bg-bg-light px-6 md:px-12 overflow-hidden"
+      className="relative w-full py-12 bg-bg-light px-6 md:px-12 overflow-hidden"
     >
       <div className="max-w-4xl mx-auto">
 
         {/* Title area */}
-        <div ref={titleRef} className="text-center max-w-2xl mx-auto mb-16 flex flex-col items-center">
-          <span className="font-display text-xs font-bold tracking-widest text-primary uppercase bg-primary/10 px-4 py-1.5 rounded-full mb-6">
-            FAQs
-          </span>
+        <div ref={titleRef} className="text-center max-w-2xl mb-16 mx-auto flex flex-col items-center">
           <h2 className="font-display font-black text-3xl sm:text-5xl text-text-dark leading-tight tracking-tight mb-4">
-            Frequently Asked <br />
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Questions</span>
+            Frequently Asked
+            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"> Questions</span>
           </h2>
-          <p className="font-sans text-base text-text-muted leading-relaxed">
-            Got questions about nursery registration, batch geotagging, or bulk plant orders? Find answers below or speak to our team.
-          </p>
         </div>
 
         {/* FAQ Accordion List */}
