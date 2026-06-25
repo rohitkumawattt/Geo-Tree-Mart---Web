@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FiChevronDown } from 'react-icons/fi';
+import { FiChevronDown, FiHelpCircle } from 'react-icons/fi';
+import { FaLeaf } from 'react-icons/fa';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,7 +39,7 @@ function FAQItem({ faq, isOpen, onToggle }) {
       gsap.to(contentRef.current, {
         height: 'auto',
         opacity: 1,
-        duration: 0.45,
+        duration: 0.4,
         ease: 'power2.out'
       });
       gsap.to(iconRef.current, {
@@ -50,7 +51,7 @@ function FAQItem({ faq, isOpen, onToggle }) {
       gsap.to(contentRef.current, {
         height: 0,
         opacity: 0,
-        duration: 0.35,
+        duration: 0.3,
         ease: 'power2.out'
       });
       gsap.to(iconRef.current, {
@@ -62,17 +63,28 @@ function FAQItem({ faq, isOpen, onToggle }) {
   }, [isOpen]);
 
   return (
-    <div className="border-b border-primary/10 last:border-b-0 py-2">
+    <div className={`mb-4 rounded-2xl border transition-all duration-300 overflow-hidden ${
+      isOpen 
+        ? 'border-primary/30 bg-gradient-to-br from-white to-primary/[0.02] shadow-md shadow-primary/5' 
+        : 'border-primary/10 bg-white hover:border-primary/20 hover:shadow-sm'
+    }`}>
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between py-6 text-left focus:outline-none group cursor-pointer"
+        className="w-full flex items-center justify-between p-5 sm:p-6 text-left focus:outline-none group cursor-pointer"
       >
-        <span className="font-display font-extrabold text-base sm:text-lg text-text-dark group-hover:text-primary transition-colors duration-300">
-          {faq.question}
-        </span>
+        <div className="flex items-start gap-3.5 pr-4">
+          <FiHelpCircle className={`text-xl mt-0.5 flex-shrink-0 transition-colors duration-300 ${
+            isOpen ? 'text-primary' : 'text-primary/40 group-hover:text-primary/75'
+          }`} />
+          <span className="font-display font-extrabold text-base sm:text-lg text-text-dark leading-snug group-hover:text-primary transition-colors duration-300">
+            {faq.question}
+          </span>
+        </div>
         <span
           ref={iconRef}
-          className={`flex-shrink-0 w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center text-text-dark/50 group-hover:bg-primary/10 group-hover:text-primary transition-colors duration-300`}
+          className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
+            isOpen ? 'bg-primary text-white shadow-sm' : 'bg-primary/5 group-hover:bg-primary/10 text-primary'
+          }`}
         >
           <FiChevronDown className="text-lg" />
         </span>
@@ -83,8 +95,10 @@ function FAQItem({ faq, isOpen, onToggle }) {
         className="overflow-hidden h-0 opacity-0"
         style={{ willChange: 'height, opacity' }}
       >
-        <div className="pb-6 pr-6 sm:pr-12 text-sm sm:text-base text-text-muted font-sans leading-relaxed">
-          {faq.answer}
+        <div className="px-5 sm:px-6 pb-6 pt-0">
+          <div className="border-l-2 border-primary/20 pl-4 text-sm sm:text-base text-text-muted font-sans leading-relaxed">
+            {faq.answer}
+          </div>
         </div>
       </div>
     </div>
@@ -139,23 +153,33 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="relative w-full py-12 bg-bg-light px-6 md:px-12 overflow-hidden"
+      className="relative w-full py-20 bg-gradient-to-b from-white to-bg-light px-6 md:px-12 overflow-hidden"
     >
-      <div className="max-w-4xl mx-auto">
+      {/* Decorative background blur spots */}
+      <div className="absolute top-[20%] left-[-50px] w-72 h-72 bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[-50px] w-96 h-96 bg-secondary/5 blur-[150px] rounded-full pointer-events-none" />
+
+      {/* Floating leaves icons */}
+      <div className="absolute top-[10%] right-[15%] opacity-[0.03] rotate-12 pointer-events-none hidden md:block">
+        <FaLeaf className="text-[120px] text-primary" />
+      </div>
+      <div className="absolute bottom-[10%] left-[10%] opacity-[0.02] -rotate-45 pointer-events-none hidden md:block">
+        <FaLeaf className="text-[160px] text-secondary" />
+      </div>
+
+      <div className="max-w-4xl mx-auto relative z-10">
 
         {/* Title area */}
-        <div ref={titleRef} className="text-center max-w-2xl mb-8 mx-auto flex flex-col items-center">
+        <div ref={titleRef} className="text-center max-w-2xl mb-12 mx-auto flex flex-col items-center">
           <h2 className="font-display font-black text-3xl sm:text-5xl text-text-dark leading-tight tracking-tight mb-4">
             Frequently Asked
             <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"> Questions</span>
           </h2>
+          <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mt-2" />
         </div>
 
         {/* FAQ Accordion List */}
-        <div
-          ref={listRef}
-          className="w-full bg-white border border-primary/5 rounded-[32px] p-6 sm:p-10 shadow-sm"
-        >
+        <div ref={listRef} className="w-full">
           {FAQ_DATA.map((faq, idx) => (
             <FAQItem
               key={idx}

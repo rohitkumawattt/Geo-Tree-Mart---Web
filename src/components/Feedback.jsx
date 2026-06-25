@@ -70,7 +70,7 @@ export default function Feedback() {
 
   useEffect(() => {
     const trigger = containerRef.current;
-    
+
     // Header text fade-in
     gsap.fromTo(
       titleRef.current.children,
@@ -96,7 +96,7 @@ export default function Feedback() {
       repeat: -1,
       runBackwards: false
     });
-    
+
     tweenRef.current = tween;
 
     return () => {
@@ -150,8 +150,8 @@ export default function Feedback() {
 
       {/* Scrolling Feedback Container */}
       <div className="w-full overflow-hidden py-4 select-none">
-        <div 
-          ref={rowRef} 
+        <div
+          ref={rowRef}
           className="flex gap-6 w-max px-6 will-change-transform cursor-pointer"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
