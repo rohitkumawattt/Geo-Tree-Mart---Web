@@ -3,7 +3,9 @@ import {
   FaLeaf,
   FaMapMarkerAlt,
   FaEnvelope,
-  FaPhoneAlt
+  FaPhoneAlt,
+  FaApple,
+  FaGooglePlay
 } from 'react-icons/fa';
 
 export default function Footer() {
@@ -95,9 +97,37 @@ export default function Footer() {
                 </span>
               </div>
             </div>
-            <p className="text-sm text-white/50 font-medium leading-relaxed max-w-sm">
+            <p className="text-sm text-white/50 font-medium leading-relaxed max-w-sm mb-4">
               India's first geotagged plant marketplace, connecting gardening enthusiasts with accredited organic nurseries.
             </p>
+            <div className="w-full">
+              <h5 className="font-display font-extrabold text-white text-xs tracking-wider uppercase mb-3 relative inline-block">
+                Download Our App
+                <span className="absolute bottom-[-4px] left-0 w-6 h-[1.5px] bg-secondary rounded-full" />
+              </h5>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href="#"
+                  className="flex items-center gap-3 bg-white/5 border border-white/10 hover:border-secondary/40 hover:bg-white/10 rounded-xl px-3.5 py-1.5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group"
+                >
+                  <FaGooglePlay className="text-lg text-secondary group-hover:scale-110 transition-transform duration-300" />
+                  <div className="flex flex-col text-left">
+                    <span className="text-[8px] text-white/40 font-semibold uppercase tracking-wider leading-none">GET IT ON</span>
+                    <span className="text-xs font-bold text-white tracking-wide mt-0.5">Google Play</span>
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  className="flex items-center gap-3 bg-white/5 border border-white/10 hover:border-secondary/40 hover:bg-white/10 rounded-xl px-3.5 py-1.5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group"
+                >
+                  <FaApple className="text-xl text-white group-hover:scale-110 transition-transform duration-300" />
+                  <div className="flex flex-col text-left">
+                    <span className="text-[8px] text-white/40 font-semibold uppercase tracking-wider leading-none">Download on the</span>
+                    <span className="text-xs font-bold text-white tracking-wide mt-0.5">App Store</span>
+                  </div>
+                </a>
+              </div>
+            </div>
           </div>
 
           {/* Col 2: Navigation Links */}
