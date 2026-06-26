@@ -14,45 +14,12 @@ const PLANTS_DATA = [
   { id: 'peepal', name: 'Peepal Sapling', category: 'Forest Tree', price: 18, originalPrice: 28, stock: 15000, origin: 'Amer Forest Growers', image: 'https://images.unsplash.com/photo-1709314879220-d1619e91bb61?auto=format&fit=crop&w=400&q=80', desc: 'High oxygen output, vital ecological value.' }
 ];
 
-export default function Plants() {
+export default function Buy() {
   const containerRef = useRef(null);
   const titleRef = useRef(null);
   const gridRef = useRef(null);
 
-  const handleMoreClick = (e) => {
-    e.preventDefault();
-    const element = document.getElementById('download-badges');
-    if (element) {
-      if (window.lenis) {
-        window.lenis.scrollTo(element, {
-          offset: -80,
-          onComplete: () => {
-            if (typeof window.triggerDownloadBlink === 'function') {
-              window.triggerDownloadBlink();
-            }
-          }
-        });
-      } else {
-        const offset = 80;
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = element.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-
-        setTimeout(() => {
-          if (typeof window.triggerDownloadBlink === 'function') {
-            window.triggerDownloadBlink();
-          }
-        }, 800);
-      }
-    }
-  };
-
+  // Stagger entry animations
   useEffect(() => {
     gsap.fromTo(
       titleRef.current.children,
@@ -60,12 +27,12 @@ export default function Plants() {
       {
         opacity: 1,
         y: 0,
-        duration: 0.4,
-        stagger: 0.05,
+        duration: 0.8,
+        stagger: 0.15,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: titleRef.current,
-          start: 'top 95%'
+          start: 'top 85%'
         }
       }
     );
@@ -76,12 +43,12 @@ export default function Plants() {
       {
         opacity: 1,
         y: 0,
-        duration: 0.4,
-        stagger: 0.05,
+        duration: 0.8,
+        stagger: 0.08,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: gridRef.current,
-          start: 'top 95%'
+          start: 'top 85%'
         }
       }
     );
@@ -100,14 +67,10 @@ export default function Plants() {
       <div className="max-w-7xl mx-auto">
 
         {/* Title Area */}
-        <div ref={titleRef} className="text-center max-w-2xl mx-auto mb-10 flex flex-col items-center group">
-          <h2 className="font-display text-3xl sm:text-5xl text-text-dark leading-tight tracking-tight">
-            <span className="italic">Bring Your First</span> <br /> Green Friend Home
+        <div ref={titleRef} className="text-center max-w-2xl mx-auto mb-8 flex flex-col items-center">
+          <h2 className="font-display md:text-5xl text-4xl sm:text-3xl text-text-dark leading-tight tracking-tight mb-4">
+            Green Deals You <span className="text-primary italic">Can't Miss</span>
           </h2>
-          <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-secondary transition-all duration-500 group-hover:scale-x-150" />
-          <p className="font-sans text-xs sm:text-sm text-text-muted leading-relaxed mt-5">
-            Choose from a wide variety of verified plant species raised by accredited local nurseries. Order high-volume stocks directly via our platform app.
-          </p>
         </div>
 
         {/* Plants Catalog Grid - Responsive layout fitting 6 in a row on desktop */}
@@ -115,67 +78,63 @@ export default function Plants() {
           ref={gridRef}
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5"
         >
-          {PLANTS_DATA.map((plant, index) => (
+          {PLANTS_DATA.map((plant) => (
             <div key={plant.id} className="w-full will-change-[transform,opacity]">
-              <div 
-                className="w-full h-full rounded-2xl border border-primary/5 shadow-sm hover:shadow-lg hover:border-primary/10 transition-all duration-300 flex flex-col overflow-hidden group text-left cursor-pointer transform hover:-translate-y-1.5"
-                style={{ backgroundColor: index % 2 === 0 ? '#ECF7E9' : '#FFFBF5' }}
-              >
+              <div className="w-full h-full rounded-[20px] bg-white border border-black/[0.04] shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.08)] hover:border-primary/20 transition-all duration-300 flex flex-col overflow-hidden group text-left cursor-pointer transform hover:-translate-y-1.5">
 
-                {/* Plant Image Container - Styled with absolute positioning to prevent margins */}
-                <div className="relative aspect-square w-full p-2.5">
+                {/* Plant Image Container */}
+                <div className="relative aspect-square w-full overflow-hidden bg-gray-100">
                   <img
                     src={plant.image}
                     alt={plant.name}
-                    className="absolute inset-2.5 w-[calc(100%-20px)] h-[calc(100%-20px)] object-cover rounded-xl shadow-sm transform transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
                   />
 
-                  {/* Category Pill Badge - Centered bottom matching category list style */}
-                  <span className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white text-primary text-[9px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full shadow-md border border-white/50 z-10 whitespace-nowrap">
+                  {/* Category Badge */}
+                  <span className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm text-primary-dark text-[9px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-sm border border-black/[0.03] z-10">
                     {plant.category}
                   </span>
 
                   {/* Discount Percentage Badge */}
-                  <span className="absolute top-4 right-4 bg-rose-500 text-white text-[8px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full shadow-sm z-10">
+                  <span className="absolute top-3 right-3 bg-rose-500 text-white text-[9.5px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-sm z-10">
                     {Math.round(((plant.originalPrice - plant.price) / plant.originalPrice) * 100)}% OFF
                   </span>
                 </div>
 
                 {/* Plant Card Details */}
-                <div className="p-3.5 pt-1 flex flex-col flex-grow justify-between">
+                <div className="p-4 flex flex-col flex-grow justify-between bg-white">
                   <div>
-                    <h3 className="font-display font-black text-sm md:text-base text-text-dark leading-snug group-hover:text-primary transition-colors duration-300 line-clamp-1">
+                    <h3 className="font-display font-bold text-sm sm:text-base text-text-dark leading-snug group-hover:text-primary transition-colors duration-300 truncate">
                       {plant.name}
                     </h3>
 
-                    <div className="flex items-center gap-1.5 text-text-muted text-[10px] mt-1.5 font-semibold truncate">
-                      <FaStore className="text-primary text-[10px] flex-shrink-0" />
+                    <div className="flex items-center gap-1.5 text-text-muted text-[11px] mt-1.5 truncate">
+                      <FaStore className="text-primary/60 flex-shrink-0" />
                       <span className="truncate">{plant.origin}</span>
                     </div>
                   </div>
 
-                  <div className="mt-3.5 pt-2.5 border-t border-black/[0.04] flex items-center justify-between">
+                  <div className="mt-4 pt-3 border-t border-black/[0.04] flex items-center justify-between">
                     <div className="flex flex-col text-left">
-                      <span className="text-[9px] text-text-muted uppercase tracking-wider font-bold">Bulk Price</span>
-                      <div className="flex items-baseline gap-1 mt-0.5">
-                        <span className="text-primary font-display font-black text-sm md:text-base leading-none">
+                      <span className="text-[9px] text-text-muted uppercase tracking-wider font-semibold">Bulk Price</span>
+                      <div className="flex items-baseline gap-1.5 mt-0.5">
+                        <span className="text-primary font-display font-extrabold text-base leading-none">
                           ₹{plant.price}
                         </span>
-                        <span className="text-[10px] text-text-muted/50 line-through font-semibold leading-none">
+                        <span className="text-[11px] text-text-muted/60 line-through font-medium leading-none">
                           ₹{plant.originalPrice}
                         </span>
                       </div>
                     </div>
 
                     <div className="flex flex-col items-end">
-                      <span className="text-[9px] text-text-muted uppercase tracking-wider font-bold">Available</span>
-                      <span className="inline-block mt-0.5 bg-white text-primary font-sans font-extrabold text-[10px] px-2 py-0.5 rounded-md shadow-sm border border-white/50">
-                        {plant.stock >= 1000 ? `${(plant.stock / 1000)}k` : plant.stock} items
+                      <span className="text-[9px] text-text-muted uppercase tracking-wider font-semibold">Available</span>
+                      <span className="text-text-dark font-sans font-bold text-xs leading-none mt-1">
+                        {plant.stock >= 1000 ? `${(plant.stock / 1000)}k` : plant.stock}
                       </span>
                     </div>
                   </div>
-
                 </div>
 
               </div>
@@ -187,7 +146,6 @@ export default function Plants() {
         <div className="flex justify-center mt-10">
           <a
             href="#download-badges"
-            onClick={handleMoreClick}
             className="group inline-flex items-center gap-1.5 font-display text-sm font-bold text-primary hover:text-primary-dark transition-colors cursor-pointer focus:outline-none"
           >
             <span>more</span>

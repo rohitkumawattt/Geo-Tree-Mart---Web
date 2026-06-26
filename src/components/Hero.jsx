@@ -1,4 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
+import { MdDiscount } from "react-icons/md";
+import { FaLongArrowAltRight } from "react-icons/fa";
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -6,7 +8,6 @@ import { motion } from "framer-motion";
 
 import { heroSlides } from "../hooks/heroData";
 import backgroundWall from "../assets/background-wall.jpg"
-import { useState, useEffect } from "react";
 
 // Framer Motion variants for the right-side text details
 const containerVariants = {
@@ -124,7 +125,7 @@ const Hero = () => {
                   variants={containerVariants}
                   initial="hidden"
                   animate={isActive ? "visible" : "hidden"}
-                  className="hidden lg:flex flex-col items-center justify-center px-6 py-12 text-center lg:px-12 lg:py-0"
+                  className="hidden lg:flex flex-col justify-center"
                   style={{
                     backgroundImage: `url(${backgroundWall})`,
                     backgroundSize: "cover",
@@ -134,29 +135,50 @@ const Hero = () => {
                 >
                   {/* desktop offer card */}
                   <OfferComponent offer={slide.offer} />
-                  <motion.h2
-                    variants={itemVariants}
-                    className="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-800 leading-tight font-mono"
-                  >
-                    {slide.title}
-                  </motion.h2>
-
-                  <motion.p
-                    variants={itemVariants}
-                    className="mt-2 sm:mt-4 text-xs sm:text-base lg:text-lg text-gray-500 max-w-md"
-                  >
-                    {slide.description}
-                  </motion.p>
-
-                  <motion.div variants={itemVariants}>
-                    <motion.button
-                      whileHover={{ scale: 1.06, y: -2 }}
-                      whileTap={{ scale: 0.97 }}
-                      className="mt-4 sm:mt-8 rounded-full bg-tertiary hover:bg-linear-to-r from-tertiary-dark to-tertiary px-6 py-2.5 sm:px-8 sm:py-3.5 text-white text-xs sm:text-base font-bold tracking-wide shadow-md transition-all duration-300 cursor-pointer"
+                  <div className="px-4">
+                    <motion.h2
+                      variants={itemVariants}
                     >
-                      Shop Now
-                    </motion.button>
-                  </motion.div>
+                      {slide.title.split(" ").map((letter, index) => (
+                        <>
+                          <motion.span
+                            key={index}
+                            variants={itemVariants}
+                            className={`${index === 0 ? "md:text-6xl text-primary-dark ibm-font" : "text-primary text-4xl"} flex flex-col`}
+                          >
+                            {letter}
+                          </motion.span>
+                        </>
+                      ))}
+                    </motion.h2>
+
+                    {/* discount and shop container */}
+                    <div className="flex justify-between items-center mt-6">
+                      <motion.div
+                        variants={itemVariants}
+                        className="inline-flex items-center gap-4 rounded-xl border border-dashed border-primary/50 bg-white/70 backdrop-blur-md px-5 py-3 shadow-md"
+                      >
+                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                          <MdDiscount className="text-primary text-3xl" />
+                        </div>
+
+                        <p className="text-sm lg:text-lg italic font-medium text-gray-700 leading-snug">
+                          {slide.description}
+                        </p>
+                      </motion.div>
+
+                      <motion.div variants={itemVariants}>
+                        <motion.button
+                          whileHover={{ scale: 1.06, y: -2 }}
+                          whileTap={{ scale: 0.97 }}
+                          className="flex gap-2 items-center justify-center rounded-full bg-tertiary hover:bg-linear-to-r from-tertiary-dark to-tertiary px-6 py-2.5 sm:px-8 sm:py-3.5 text-white text-xs sm:text-base font-bold tracking-wide shadow-md transition-all duration-300 cursor-pointer"
+                        >
+                          Shop Now <FaLongArrowAltRight />
+                        </motion.button>
+                      </motion.div>
+
+                    </div>
+                  </div>
                 </motion.div>
               </div>
             )}
