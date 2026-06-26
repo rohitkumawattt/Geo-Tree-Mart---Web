@@ -28,6 +28,6 @@ export const heroSlides = [
         MobileImage: mobileHero3,
         title: "Decoration plants",
         offer: "25%",
-        description: "Limited time offer"
+        description: "Limited time offer. Buy now"
     }
 ];

@@ -19,40 +19,6 @@ export default function Buy() {
   const titleRef = useRef(null);
   const gridRef = useRef(null);
 
-  const handleMoreClick = (e) => {
-    e.preventDefault();
-    const element = document.getElementById('download-badges');
-    if (element) {
-      if (window.lenis) {
-        window.lenis.scrollTo(element, {
-          offset: -80,
-          onComplete: () => {
-            if (typeof window.triggerDownloadBlink === 'function') {
-              window.triggerDownloadBlink();
-            }
-          }
-        });
-      } else {
-        const offset = 80;
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = element.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-
-        setTimeout(() => {
-          if (typeof window.triggerDownloadBlink === 'function') {
-            window.triggerDownloadBlink();
-          }
-        }, 800);
-      }
-    }
-  };
-
   // Stagger entry animations
   useEffect(() => {
     gsap.fromTo(
@@ -102,12 +68,9 @@ export default function Buy() {
 
         {/* Title Area */}
         <div ref={titleRef} className="text-center max-w-2xl mx-auto mb-8 flex flex-col items-center">
-          <h2 className="font-display font-black text-3xl sm:text-5xl text-text-dark leading-tight tracking-tight mb-4">
-            Bring Your First <br /> Green Friend Home
+          <h2 className="font-display md:text-5xl text-4xl sm:text-3xl text-text-dark leading-tight tracking-tight mb-4">
+            Green Deals You <span className="text-primary italic">Can't Miss</span>
           </h2>
-          <p className="font-sans text-sm sm:text-base text-text-muted leading-relaxed">
-            Choose from a wide variety of verified plant species raised by accredited local nurseries. Order high-volume stocks directly via our platform app.
-          </p>
         </div>
 
         {/* Plants Catalog Grid - Responsive layout fitting 6 in a row on desktop */}
@@ -172,7 +135,6 @@ export default function Buy() {
                       </span>
                     </div>
                   </div>
-
                 </div>
 
               </div>
@@ -184,7 +146,6 @@ export default function Buy() {
         <div className="flex justify-center mt-10">
           <a
             href="#download-badges"
-            onClick={handleMoreClick}
             className="group inline-flex items-center gap-1.5 font-display text-sm font-bold text-primary hover:text-primary-dark transition-colors cursor-pointer focus:outline-none"
           >
             <span>more</span>
