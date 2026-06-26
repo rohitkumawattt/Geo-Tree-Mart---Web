@@ -73,7 +73,7 @@ export default function Navbar() {
         const element = document.getElementById(id);
         if (element) {
           if (window.lenis) {
-            window.lenis.scrollTo(element, { 
+            window.lenis.scrollTo(element, {
               offset: -80,
               onComplete: () => {
                 if (id === 'download-badges' && typeof window.triggerDownloadBlink === 'function') {
@@ -108,7 +108,7 @@ export default function Navbar() {
       if (element) {
         // Use window.lenis if available, otherwise fallback to native scroll
         if (window.lenis) {
-          window.lenis.scrollTo(element, { 
+          window.lenis.scrollTo(element, {
             offset: -80,
             onComplete: () => {
               if (id === 'download-badges' && typeof window.triggerDownloadBlink === 'function') {
@@ -196,7 +196,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-4">
             <button
               onClick={() => scrollToSection('download-badges')}
-              className="relative overflow-hidden group px-6 py-2.5 bg-gradient-to-r from-primary to-secondary text-white font-semibold text-sm rounded-full shadow-lg shadow-primary/15 hover:shadow-primary/25 transition-all duration-300 cursor-pointer focus:outline-none"
+              className="relative overflow-hidden group px-6 py-2.5 bg-gradient-to-r from-tertiary-dark to-tertiary text-white font-semibold text-sm rounded-full shadow-lg shadow-primary/15 hover:shadow-primary/25 transition-all duration-300 cursor-pointer focus:outline-none"
             >
               <span className="relative z-10">Download App</span>
               <span className="absolute inset-0 bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out rounded-full" />

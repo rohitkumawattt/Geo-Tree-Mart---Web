@@ -1,22 +1,22 @@
 import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import seed from '../assets/categories/seeds.png'
-import fertilizer from '../assets/categories/fertilizer.png'
-import pots from '../assets/categories/pots.png'
-import tools from '../assets/categories/tools.png'
-import plant from '../assets/categories/plants.png'
-import soil from '../assets/categories/soil.png'
+import vegitables from '../assets/categories/vegitable.png'
+import decorative from '../assets/categories/decorative.png'
+import Medicinal from '../assets/categories/Medicinal.png'
+import outdoor from '../assets/categories/outdoor.png'
+import flowring from '../assets/categories/flowring.png'
+import fruits from '../assets/categories/fruits.png'
 
 gsap.registerPlugin(ScrollTrigger);
 
 const categories = [
-  { name: "Plants", images: plant },
-  { name: "Pots", images: pots },
-  { name: "Fertilisers", images: fertilizer },
-  { name: "Soil", images: soil },
-  { name: "Seeds", images: seed },
-  { name: "Garden Tools", images: tools },
+  { name: "Vegitable", images: vegitables, color: "#ECF7E9" },
+  { name: "Decorative", images: decorative, color: "#fffbf5ff" },
+  { name: "Medicinal", images: Medicinal, color: "#ECF7E9" },
+  { name: "Outdoor", images: outdoor, color: "#fffbf5ff" },
+  { name: "Flowring", images: flowring, color: "#ECF7E9" },
+  { name: "Fruits", images: fruits, color: "#fffbf5ff" },
 ];
 
 const OurCategories = () => {
@@ -61,20 +61,15 @@ const OurCategories = () => {
   }, []);
 
   return (
-    <section id="categories" className="relative overflow-hidden bg-primary-dark py-12">
-      {/* Background Decoration */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute left-20 top-20 h-72 w-72 rounded-full bg-secondary blur-3xl" />
-        <div className="absolute right-20 bottom-20 h-72 w-72 rounded-full bg-accent blur-3xl" />
-      </div>
+    <section id="categories" className="relative overflow-hidden py-12">
 
       <div className="relative mx-auto max-w-7xl px-6">
         {/* Heading */}
-        <div className="mb-8 text-center">
-          <h2 ref={titleRef} className="font-display text-2xl sm:text-3xl font-bold text-white md:text-4xl">
-            Our Categories
+        <div className="mb-8 text-center group">
+          <h2 ref={titleRef} className="font-display md:text-6xl text-4xl sm:text-3xl">
+            <span className='italic'>Explore</span> Collection
           </h2>
-          <div className="mx-auto mt-5 h-1 w-24 rounded-full bg-secondary" />
+          <div className="mx-auto mt-5 h-1 w-24 rounded-full bg-secondary transition-all duration-500 group-hover:scale-x-150" />
         </div>
 
         {/* Categories Grid */}
@@ -88,18 +83,20 @@ const OurCategories = () => {
                 className="group flex flex-col items-center cursor-pointer no-underline"
               >
                 {/* Outer Circle Container (Responsive sizes: h-32 w-32 on mobile, h-40 w-40 on tablet/desktop) */}
-                <div className="flex h-24 w-24 sm:h-32 sm:w-32 items-center justify-center rounded-full border border-white/10 bg-white shadow-xl transition-all duration-500 group-hover:-translate-y-3 group-hover:shadow-2xl group-hover:shadow-secondary/20">
+                <div className="flex h-40 w-32 md:h-46 md:w-38 items-center justify-center rounded-md shadow-xl transition-all duration-500 ease-in-out overflow-hidden group-hover:scale-105 p-2" style={{
+                  backgroundColor: category.color
+                }}>
                   <img
                     src={category.images}
                     alt={category.name}
-                    className="w-12 h-12 sm:w-20 sm:h-20 object-contain transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6"
+                    className="relative object-contain transition-transform duration-500 group-hover:scale-110"
                   />
+                  {/* Title */}
+                  <h3 className="absolute bottom-2 text-primary/60 bg-white rounded-xl px-4 py-1 border border-white/50 shadow-md text-xs sm:text-sm font-semibold transition-colors duration-300 group-hover:text-primary">
+                    {category.name}
+                  </h3>
                 </div>
 
-                {/* Title */}
-                <h3 className="mt-4 sm:mt-5 text-center text-base sm:text-lg font-semibold text-white transition-colors duration-300 group-hover:text-accent">
-                  {category.name}
-                </h3>
               </a>
             );
           })}
