@@ -54,7 +54,7 @@ export default function ProblemSolution() {
     <section
       id="problem-solution"
       ref={containerRef}
-      className="relative w-full py-20 bg-gradient-to-b from-[#F8FFF8] to-[#EEFBEF] px-6 md:px-12 overflow-hidden border-b border-primary/5"
+      className="relative w-full py-20 bg-bg-light px-6 md:px-12 overflow-hidden"
     >
       {/* Huge faded leaf watermark in background */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.02] pointer-events-none select-none">
@@ -71,7 +71,7 @@ export default function ProblemSolution() {
         {/* Title */}
         <div className="text-center max-w-3xl mx-auto mb-20 flex flex-col items-center group">
           <h2 className="font-display text-3xl sm:text-5xl text-[#0f1f10] leading-tight tracking-tight">
-            <span className="italic">Why Choose</span> GeoTree Mart?
+            Why Choose <span className="text-primary italic">GeoTree Mart?</span>
           </h2>
           <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-secondary transition-all duration-500 group-hover:scale-x-150" />
         </div>
@@ -94,15 +94,9 @@ export default function ProblemSolution() {
                   className="flex flex-col items-center group transition-all duration-300"
                 >
                   {/* Soft Round Icon Container with Hover Scale & Rotation */}
-                  <div className="w-16 h-16 rounded-full bg-white text-[#0f1f10] border border-[#e1e2e1] flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-secondary group-hover:text-white group-hover:border-transparent group-hover:shadow-[0_10px_25px_rgba(46,125,50,0.25)] transition-all duration-500 relative">
-                    <IconComponent className="text-xl group-hover:rotate-[360deg] transition-transform duration-700 ease-out" />
+                  <div className="w-16 h-16 rounded-full bg-white border border-[#e1e2e1] flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-secondary group-hover:text-white group-hover:border-transparent group-hover:shadow-[0_10px_25px_rgba(46,125,50,0.25)] transition-all duration-500 relative">
+                    <IconComponent className="text-xl transition-transform duration-700 ease-out" />
                   </div>
-
-                  {/* Step Number Indicator */}
-                  <span className="text-[11px] font-mono font-extrabold text-secondary tracking-widest mb-1.5">
-                    0{idx + 1}
-                  </span>
-
                   {/* Feature Title */}
                   <h4 className="font-display font-extrabold text-lg text-[#0f1f10] mb-1 group-hover:text-primary transition-colors duration-300">
                     {item.title}

@@ -24,7 +24,7 @@ export default function Banner() {
     <section className="w-full py-2 px-6 md:px-12 bg-bg-light overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="relative rounded-[20px] overflow-hidden bg-[#063B2B] text-white min-h-[130px] md:min-h-[160px] flex flex-col md:flex-row items-center justify-between p-0 shadow-md border border-[#053023] group">
-          
+
           {/* Right curved background block (Light green) */}
           <div className="absolute right-0 top-0 bottom-0 w-full md:w-[48%] bg-[#C8ECD1] rounded-t-[30px] md:rounded-t-none md:rounded-l-[80px] lg:rounded-l-[100px] z-0 transition-transform duration-700" />
 

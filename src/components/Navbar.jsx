@@ -174,14 +174,14 @@ export default function Navbar() {
             </button>
 
             {/* Desktop Navigation Link Menu */}
-            <div className="hidden md:flex items-center gap-1 bg-black/[0.02] p-1 rounded-full border border-black/[0.04]">
+            <div className="hidden md:flex items-center gap-1 bg-black/[0.02] p-2 rounded-full border border-black/[0.04]">
               {NAV_ITEMS.map((item) => {
                 const isActive = activeSection === item.id;
                 return (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`relative px-4 py-1.5 text-xs font-bold rounded-full transition-colors duration-300 cursor-pointer focus:outline-none ${isActive ? 'text-primary' : 'text-text-dark/70 hover:text-primary'
+                    className={`relative px-4 py-2 text-xs font-bold rounded-full transition-colors duration-300 cursor-pointer focus:outline-none ${isActive ? 'text-primary' : 'text-text-dark/70 hover:text-primary'
                       }`}
                   >
                     {isActive && (

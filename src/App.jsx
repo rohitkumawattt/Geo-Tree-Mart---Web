@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import useSmoothScroll from './hooks/useSmoothScroll';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import ProblemSolution from './components/ProblemSolution';
+import ProblemSolution from './components/WhyChooseUs';
 import Feedback from './components/Feedback';
 import Plants from './components/Plants';
 import Banner from './components/Banner';

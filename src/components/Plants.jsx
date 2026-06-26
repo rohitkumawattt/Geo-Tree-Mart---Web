@@ -58,7 +58,7 @@ export default function Buy() {
     <section
       id="buy"
       ref={containerRef}
-      className="relative w-full py-12 bg-bg-light px-6 md:px-12 overflow-hidden border-b border-primary/5"
+      className="relative w-full py-12 bg-bg-light px-6 md:px-12 overflow-hidden"
     >
       {/* Blurred background vectors */}
       <div className="absolute top-1/3 left-0 w-[380px] h-[380px] rounded-full bg-secondary/5 blur-[120px] pointer-events-none" />
@@ -79,8 +79,8 @@ export default function Buy() {
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5"
         >
           {PLANTS_DATA.map((plant) => (
-            <div 
-              key={plant.id} 
+            <div
+              key={plant.id}
               className="w-full will-change-[transform,opacity]"
               onClick={() => window.location.hash = `#product/${plant.id}`}
             >
@@ -145,18 +145,6 @@ export default function Buy() {
             </div>
           ))}
         </div>
-
-        {/* Link to Footer */}
-        <div className="flex justify-center mt-10">
-          <a
-            href="#download-badges"
-            className="group inline-flex items-center gap-1.5 font-display text-sm font-bold text-primary hover:text-primary-dark transition-colors cursor-pointer focus:outline-none"
-          >
-            <span>more</span>
-            <span className="transform group-hover:translate-x-1 transition-transform duration-300">&rarr;</span>
-          </a>
-        </div>
-
       </div>
 
     </section>

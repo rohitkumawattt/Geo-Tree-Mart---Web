@@ -63,28 +63,25 @@ function FAQItem({ faq, isOpen, onToggle }) {
   }, [isOpen]);
 
   return (
-    <div className={`mb-4 rounded-2xl border transition-all duration-300 overflow-hidden ${
-      isOpen 
-        ? 'border-primary/30 bg-gradient-to-br from-white to-primary/[0.02] shadow-md shadow-primary/5' 
+    <div className={`mb-4 rounded-2xl border transition-all duration-300 overflow-hidden ${isOpen
+        ? 'border-primary/30 bg-gradient-to-br from-white to-primary/[0.02] shadow-md shadow-primary/5'
         : 'border-primary/10 bg-white hover:border-primary/20 hover:shadow-sm'
-    }`}>
+      }`}>
       <button
         onClick={onToggle}
         className="w-full flex items-center justify-between p-5 sm:p-6 text-left focus:outline-none group cursor-pointer"
       >
         <div className="flex items-start gap-3.5 pr-4">
-          <FiHelpCircle className={`text-xl mt-0.5 flex-shrink-0 transition-colors duration-300 ${
-            isOpen ? 'text-primary' : 'text-primary/40 group-hover:text-primary/75'
-          }`} />
+          <FiHelpCircle className={`text-xl mt-0.5 flex-shrink-0 transition-colors duration-300 ${isOpen ? 'text-primary' : 'text-primary/40 group-hover:text-primary/75'
+            }`} />
           <span className="font-display font-extrabold text-base sm:text-lg text-text-dark leading-snug group-hover:text-primary transition-colors duration-300">
             {faq.question}
           </span>
         </div>
         <span
           ref={iconRef}
-          className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
-            isOpen ? 'bg-primary text-white shadow-sm' : 'bg-primary/5 group-hover:bg-primary/10 text-primary'
-          }`}
+          className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-primary text-white shadow-sm' : 'bg-primary/5 group-hover:bg-primary/10 text-primary'
+            }`}
         >
           <FiChevronDown className="text-lg" />
         </span>
@@ -153,7 +150,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="relative w-full py-20 bg-gradient-to-b from-white to-bg-light px-6 md:px-12 overflow-hidden"
+      className="relative w-full py-20 bg-[#F8FAF8] px-6 md:px-12 overflow-hidden"
     >
       {/* Decorative background blur spots */}
       <div className="absolute top-[20%] left-[-50px] w-72 h-72 bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
@@ -172,7 +169,7 @@ export default function FAQ() {
         {/* Title area */}
         <div ref={titleRef} className="text-center max-w-2xl mb-12 mx-auto flex flex-col items-center group">
           <h2 className="font-display text-3xl sm:text-5xl text-text-dark leading-tight tracking-tight">
-            <span className="italic">Frequently Asked</span> Questions
+            <span className="italic text-primary">Frequently Asked</span> Questions
           </h2>
           <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-secondary transition-all duration-500 group-hover:scale-x-150" />
         </div>

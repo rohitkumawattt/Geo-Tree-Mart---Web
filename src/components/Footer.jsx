@@ -56,10 +56,9 @@ export default function Footer() {
 
   return (
     <footer id="footer" className="w-full bg-[#0f1f10] text-[#F8FFF8]/80 pt-24 pb-8 px-6 md:px-12 relative overflow-hidden">
-
       {/* Modern Wave Divider at the top of the footer */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] pointer-events-none">
-        <svg className="relative block w-full h-[35px] md:h-[55px] text-[#F8FFF8]" viewBox="0 0 1200 120" preserveAspectRatio="none" fill="currentColor">
+        <svg className="relative block w-full h-[35px] md:h-[55px]" viewBox="0 0 1200 120" preserveAspectRatio="none" fill='white'>
           <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V95.8C67.81,111.31,144.29,103.7,214.34,85.22,250.74,75.6,286.27,66.6,321.39,56.44Z"></path>
         </svg>
       </div>
@@ -68,8 +67,8 @@ export default function Footer() {
       <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#66BB6A_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
 
       {/* Botanical Border Background Illustration */}
-      <div 
-        className="absolute bottom-0 left-0 w-full h-[150px] md:h-[200px] bg-bottom bg-repeat-x bg-contain pointer-events-none opacity-40 mix-blend-screen z-0" 
+      <div
+        className="absolute bottom-0 left-0 w-full h-[150px] md:h-[200px] bg-bottom bg-repeat-x bg-contain pointer-events-none opacity-40 mix-blend-screen z-0"
         style={{ backgroundImage: 'url("/footer-bg.png")' }}
       />
 

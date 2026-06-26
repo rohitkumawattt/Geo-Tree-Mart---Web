@@ -198,13 +198,14 @@ html.lenis body {
 
 .swiper-pagination-bullet {
   width: 50px !important;
-  height: 3px !important;
-  border-radius: 0 !important;
-  background: #94a3b8 !important;
+  height: 1px !important;
+  border-radius: 50px !important;
+  background: black !important;
   opacity: 1 !important;
 }
 
 .swiper-pagination-bullet-active {
-  background: #111827 !important;
-  height: 6px !important;
+  background: #2E7D32 !important;
+  height: 4px !important;
+  border-radius: 50px !important;
 }

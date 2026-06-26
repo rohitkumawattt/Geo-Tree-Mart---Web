@@ -135,7 +135,7 @@ export default function Feedback() {
     <section
       id="feedback"
       ref={containerRef}
-      className="relative w-full py-12 overflow-hidden bg-[#F8FFF8] border-b border-primary/5"
+      className="relative w-full py-12 overflow-hidden bg-bg-light"
     >
       {/* Background Soft Gradients */}
       <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] rounded-full bg-primary/5 blur-[80px] pointer-events-none" />
@@ -144,7 +144,7 @@ export default function Feedback() {
       {/* Title area */}
       <div ref={titleRef} className="text-center max-w-3xl mb-8 mx-auto px-6 flex flex-col items-center group">
         <h2 className="font-display text-3xl sm:text-5xl text-text-dark leading-tight tracking-tight">
-          <span className="italic">Voices of the</span> <br /> GeoTree Community
+          Voices of the <span className="italic text-primary">GeoTree</span> Community
         </h2>
         <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-secondary transition-all duration-500 group-hover:scale-x-150" />
       </div>
