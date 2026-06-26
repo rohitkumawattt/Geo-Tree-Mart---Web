@@ -39,12 +39,12 @@ export default function ProblemSolution() {
       {
         opacity: 1,
         y: 0,
-        duration: 0.8,
-        stagger: 0.15,
+        duration: 0.4,
+        stagger: 0.05,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: cardsRef.current,
-          start: 'top 85%',
+          start: 'top 95%',
         }
       }
     );
@@ -69,11 +69,11 @@ export default function ProblemSolution() {
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Title */}
-        <div className="text-center max-w-3xl mx-auto mb-20 flex flex-col items-center">
-          <h2 className="font-display font-black text-3xl sm:text-5xl text-[#0f1f10] leading-tight tracking-tight mb-4">
-            Why Choose <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">GeoTree Mart?</span>
+        <div className="text-center max-w-3xl mx-auto mb-20 flex flex-col items-center group">
+          <h2 className="font-display text-3xl sm:text-5xl text-[#0f1f10] leading-tight tracking-tight">
+            <span className="italic">Why Choose</span> GeoTree Mart?
           </h2>
-          <div className="w-16 h-1.5 bg-gradient-to-r from-primary to-secondary rounded-full mt-2" />
+          <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-secondary transition-all duration-500 group-hover:scale-x-150" />
         </div>
 
         {/* Features Container */}

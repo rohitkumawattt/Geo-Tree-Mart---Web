@@ -4,18 +4,19 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ProblemSolution from './components/ProblemSolution';
 import Feedback from './components/Feedback';
-import Buy from './components/Buy';
+import Plants from './components/Plants';
+import Banner from './components/Banner';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import OurCategories from './components/OurCategories';
 
 // Import pages from the Pages directory
-import PlantsPage from '../Pages/Plants';
-import PotsPage from '../Pages/Pots';
-import FertilisersPage from '../Pages/Fertilisers';
-import SeedsPage from '../Pages/Seeds';
-import GardenToolsPage from '../Pages/GardenTools';
-import SoilPage from '../Pages/Soil';
+import VegitablePage from '../Pages/Vegitable';
+import DecorativePage from '../Pages/Decorative';
+import MedicinalPage from '../Pages/Medicinal';
+import OutdoorPage from '../Pages/Outdoor';
+import FlowringPage from '../Pages/Flowring';
+import FruitsPage from '../Pages/Fruits';
 
 function App() {
   useSmoothScroll();
@@ -28,12 +29,12 @@ function App() {
         const slug = hash.replace('#category/', '');
         // Map slug back to title case category name
         const validCategories = {
-          'plants': 'Plants',
-          'pots': 'Pots',
-          'fertilisers': 'Fertilisers',
-          'seeds': 'Seeds',
-          'garden-tools': 'Garden Tools',
-          'soil': 'Soil'
+          'vegitable': 'Vegitable',
+          'decorative': 'Decorative',
+          'medicinal': 'Medicinal',
+          'outdoor': 'Outdoor',
+          'flowring': 'Flowring',
+          'fruits': 'Fruits'
         };
         const matched = validCategories[slug.toLowerCase()];
         if (matched) {
@@ -64,18 +65,18 @@ function App() {
 
   const renderCategoryPage = () => {
     switch (selectedCategory) {
-      case 'Plants':
-        return <PlantsPage onClose={handleCloseCategory} />;
-      case 'Pots':
-        return <PotsPage onClose={handleCloseCategory} />;
-      case 'Fertilisers':
-        return <FertilisersPage onClose={handleCloseCategory} />;
-      case 'Seeds':
-        return <SeedsPage onClose={handleCloseCategory} />;
-      case 'Garden Tools':
-        return <GardenToolsPage onClose={handleCloseCategory} />;
-      case 'Soil':
-        return <SoilPage onClose={handleCloseCategory} />;
+      case 'Vegitable':
+        return <VegitablePage onClose={handleCloseCategory} />;
+      case 'Decorative':
+        return <DecorativePage onClose={handleCloseCategory} />;
+      case 'Medicinal':
+        return <MedicinalPage onClose={handleCloseCategory} />;
+      case 'Outdoor':
+        return <OutdoorPage onClose={handleCloseCategory} />;
+      case 'Flowring':
+        return <FlowringPage onClose={handleCloseCategory} />;
+      case 'Fruits':
+        return <FruitsPage onClose={handleCloseCategory} />;
       default:
         return null;
     }
@@ -91,7 +92,8 @@ function App() {
           <>
             <Hero />
             <OurCategories />
-            <Buy />
+            <Plants />
+            <Banner />
             <ProblemSolution />
             <Feedback />
             <FAQ />

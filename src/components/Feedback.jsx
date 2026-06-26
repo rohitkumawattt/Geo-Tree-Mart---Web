@@ -78,12 +78,12 @@ export default function Feedback() {
       {
         opacity: 1,
         y: 0,
-        duration: 0.8,
-        stagger: 0.15,
+        duration: 0.4,
+        stagger: 0.05,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: titleRef.current,
-          start: 'top 85%'
+          start: 'top 95%'
         }
       }
     );
@@ -142,10 +142,11 @@ export default function Feedback() {
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-secondary/5 blur-[100px] pointer-events-none" />
 
       {/* Title area */}
-      <div ref={titleRef} className="text-center max-w-3xl mb-8 mx-auto px-6 flex flex-col items-center">
-        <h2 className="font-display font-black text-3xl sm:text-5xl text-text-dark leading-tight tracking-tight mb-4">
-          Voices of the <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">GeoTree Community</span>
+      <div ref={titleRef} className="text-center max-w-3xl mb-8 mx-auto px-6 flex flex-col items-center group">
+        <h2 className="font-display text-3xl sm:text-5xl text-text-dark leading-tight tracking-tight">
+          <span className="italic">Voices of the</span> <br /> GeoTree Community
         </h2>
+        <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-secondary transition-all duration-500 group-hover:scale-x-150" />
       </div>
 
       {/* Scrolling Feedback Container */}

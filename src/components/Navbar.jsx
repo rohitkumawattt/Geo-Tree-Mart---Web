@@ -75,6 +75,7 @@ export default function Navbar() {
           if (window.lenis) {
             window.lenis.scrollTo(element, {
               offset: -80,
+              duration: 0.7,
               onComplete: () => {
                 if (id === 'download-badges' && typeof window.triggerDownloadBlink === 'function') {
                   window.triggerDownloadBlink();
@@ -110,6 +111,7 @@ export default function Navbar() {
         if (window.lenis) {
           window.lenis.scrollTo(element, {
             offset: -80,
+            duration: 0.7,
             onComplete: () => {
               if (id === 'download-badges' && typeof window.triggerDownloadBlink === 'function') {
                 window.triggerDownloadBlink();
@@ -142,100 +144,103 @@ export default function Navbar() {
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 py-4 px-6 md:px-12 ${isScrolled
-          ? 'glassmorphism shadow-sm'
-          : 'bg-white/30 backdrop-blur-[6px] border-b border-white/20'
-          }`}
-      >
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <nav className="fixed top-0 left-0 w-full z-50 pointer-events-none">
+        <motion.div
+          layout
+          className={`mx-auto pointer-events-auto ${isScrolled
+            ? 'mt-3 w-[92%] max-w-7xl rounded-full bg-white/75 backdrop-blur-md shadow-[0_10px_35px_rgba(0,0,0,0.05)] border border-white/50 py-3 px-6 md:px-8'
+            : 'mt-0 w-full rounded-none bg-white/40 backdrop-blur-[6px] border-b border-white/20 py-4 px-6 md:px-12'
+            }`}
+          transition={{ type: 'spring', stiffness: 220, damping: 28 }}
+        >
+          <div className="flex items-center justify-between">
 
-          {/* Logo Section */}
-          <button
-            onClick={() => scrollToSection('home')}
-            className="flex items-center gap-2.5 group cursor-pointer text-left focus:outline-none"
-          >
-            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-md shadow-primary/20 transform transition-transform group-hover:scale-105 duration-300">
-              <img src="./favicon.png" alt="" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-display font-extrabold text-lg leading-none tracking-tight text-text-dark">
-                GeoTree <span className="text-primary font-bold">Mart</span>
-              </span>
-              <span className="text-[10px] text-primary font-semibold tracking-widest uppercase">
-                <span className='text-black'>By</span> Geo Planet Solution Pvt. Ltd.
-              </span>
-            </div>
-          </button>
-
-          {/* Desktop Navigation Link Menu */}
-          <div className="hidden md:flex items-center gap-1 bg-primary/5 p-1 rounded-full border border-primary/10">
-            {NAV_ITEMS.map((item) => {
-              const isActive = activeSection === item.id;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`relative px-4 py-2 text-sm font-semibold rounded-full transition-colors duration-300 cursor-pointer focus:outline-none ${isActive ? 'text-primary-dark font-bold' : 'text-text-dark/70 hover:text-primary'
-                    }`}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="active-pill"
-                      className="absolute inset-0 bg-primary/10 border border-primary/25 rounded-full"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                  <span className="relative z-10">{item.label}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Call To Action Buttons (Right) */}
-          <div className="hidden md:flex items-center gap-4">
+            {/* Logo Section */}
             <button
-              onClick={() => scrollToSection('download-badges')}
-              className="relative overflow-hidden group px-6 py-2.5 bg-gradient-to-r from-tertiary-dark to-tertiary text-white font-semibold text-sm rounded-full shadow-lg shadow-primary/15 hover:shadow-primary/25 transition-all duration-300 cursor-pointer focus:outline-none"
+              onClick={() => scrollToSection('home')}
+              className="flex items-center gap-2.5 group cursor-pointer text-left focus:outline-none"
             >
-              <span className="relative z-10">Download App</span>
-              <span className="absolute inset-0 bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out rounded-full" />
+              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-md shadow-primary/10 transform transition-all group-hover:scale-105 group-hover:rotate-6 duration-300 border border-primary/5">
+                <img src="./favicon.png" alt="" className="w-6 h-6 object-contain" />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-display font-black text-base md:text-lg leading-none tracking-tight text-text-dark">
+                  GeoTree <span className="text-primary">Mart</span>
+                </span>
+                <span className="text-[9px] text-primary font-bold tracking-wider uppercase mt-0.5">
+                  <span className='text-text-muted font-normal lowercase'>by</span> Geo Planet Solution
+                </span>
+              </div>
+            </button>
+
+            {/* Desktop Navigation Link Menu */}
+            <div className="hidden md:flex items-center gap-1 bg-black/[0.02] p-1 rounded-full border border-black/[0.04]">
+              {NAV_ITEMS.map((item) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className={`relative px-4 py-1.5 text-xs font-bold rounded-full transition-colors duration-300 cursor-pointer focus:outline-none ${isActive ? 'text-primary' : 'text-text-dark/70 hover:text-primary'
+                      }`}
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="active-pill"
+                        className="absolute inset-0 bg-primary/10 border border-primary/20 rounded-full shadow-sm"
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                    <span className="relative z-10">{item.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Call To Action Buttons (Right) */}
+            <div className="hidden md:flex items-center gap-4">
+              <button
+                onClick={() => scrollToSection('download-badges')}
+                className="relative overflow-hidden group px-5 py-2 bg-gradient-to-r from-primary to-primary-dark text-white font-bold text-xs rounded-full shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/35 hover:scale-[1.03] active:scale-[0.97] transition-all duration-300 cursor-pointer focus:outline-none"
+              >
+                <span className="relative z-10">Download App</span>
+              </button>
+            </div>
+
+            {/* Hamburger Icon for Mobile */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 rounded-xl text-text-dark hover:bg-primary/5 transition-colors focus:outline-none"
+              aria-label="Toggle Menu"
+            >
+              {isMobileMenuOpen ? <HiX className="text-xl" /> : <HiMenu className="text-xl" />}
             </button>
           </div>
-
-          {/* Hamburger Icon for Mobile */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-text-dark hover:bg-primary/10 transition-colors focus:outline-none"
-            aria-label="Toggle Menu"
-          >
-            {isMobileMenuOpen ? <HiX className="text-2xl" /> : <HiMenu className="text-2xl" />}
-          </button>
-        </div>
+        </motion.div>
       </nav>
 
       {/* Mobile Sidebar overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 top-[72px] z-40 bg-bg-light/95 backdrop-blur-lg md:hidden flex flex-col p-6 border-b border-primary/10"
+            initial={{ opacity: 0, y: -10, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.98 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-x-4 z-40 bg-white/95 backdrop-blur-xl md:hidden flex flex-col p-6 rounded-3xl border border-primary/10 shadow-xl top-20"
           >
-            <div className="flex flex-col gap-4 my-auto">
+            <div className="flex flex-col gap-3 my-4">
               {NAV_ITEMS.map((item, idx) => {
                 const isActive = activeSection === item.id;
                 return (
                   <motion.button
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.05 }}
+                    transition={{ delay: idx * 0.04 }}
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`text-left py-3 px-4 rounded-xl text-xl font-bold transition-all ${isActive
-                      ? 'bg-primary text-white shadow-md shadow-primary/20'
+                    className={`text-left py-2.5 px-4 rounded-xl text-base font-extrabold transition-all ${isActive
+                      ? 'bg-primary/10 text-primary border border-primary/20'
                       : 'text-text-dark hover:bg-primary/5 hover:text-primary'
                       }`}
                   >
@@ -244,10 +249,10 @@ export default function Navbar() {
                 );
               })}
             </div>
-            <div className="mt-auto flex flex-col gap-4">
+            <div className="mt-4 flex flex-col gap-4">
               <button
                 onClick={() => scrollToSection('download-badges')}
-                className="w-full text-center py-4 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 focus:outline-none"
+                className="w-full text-center py-3 bg-gradient-to-r from-primary to-primary-dark text-white font-extrabold text-sm rounded-xl shadow-md shadow-primary/20 focus:outline-none"
               >
                 Download App
               </button>

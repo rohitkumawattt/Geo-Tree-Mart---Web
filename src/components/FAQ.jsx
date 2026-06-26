@@ -118,12 +118,12 @@ export default function FAQ() {
       {
         opacity: 1,
         y: 0,
-        duration: 0.8,
-        stagger: 0.15,
+        duration: 0.4,
+        stagger: 0.05,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: titleRef.current,
-          start: 'top 85%'
+          start: 'top 95%'
         }
       }
     );
@@ -135,12 +135,12 @@ export default function FAQ() {
       {
         opacity: 1,
         y: 0,
-        duration: 0.8,
-        stagger: 0.1,
+        duration: 0.4,
+        stagger: 0.05,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: listRef.current,
-          start: 'top 80%',
+          start: 'top 95%',
         }
       }
     );
@@ -170,12 +170,11 @@ export default function FAQ() {
       <div className="max-w-4xl mx-auto relative z-10">
 
         {/* Title area */}
-        <div ref={titleRef} className="text-center max-w-2xl mb-12 mx-auto flex flex-col items-center">
-          <h2 className="font-display font-black text-3xl sm:text-5xl text-text-dark leading-tight tracking-tight mb-4">
-            Frequently Asked
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"> Questions</span>
+        <div ref={titleRef} className="text-center max-w-2xl mb-12 mx-auto flex flex-col items-center group">
+          <h2 className="font-display text-3xl sm:text-5xl text-text-dark leading-tight tracking-tight">
+            <span className="italic">Frequently Asked</span> Questions
           </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mt-2" />
+          <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-secondary transition-all duration-500 group-hover:scale-x-150" />
         </div>
 
         {/* FAQ Accordion List */}

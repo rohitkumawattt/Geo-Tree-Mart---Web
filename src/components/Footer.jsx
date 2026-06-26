@@ -166,12 +166,12 @@ export default function Footer() {
             </h5>
             <ul className="flex flex-col gap-3.5 text-sm font-semibold">
               {[
-                { label: 'Healthy Plants', slug: 'plants' },
-                { label: 'Premium Pots', slug: 'pots' },
-                { label: 'Organic Fertilisers', slug: 'fertilisers' },
-                { label: 'Certified Seeds', slug: 'seeds' },
-                { label: 'Garden Equipment', slug: 'garden-tools' },
-                { label: 'Enriched Soils', slug: 'soil' }
+                { label: 'Organic Vegitables', slug: 'vegitable' },
+                { label: 'Ornamental Decors', slug: 'decorative' },
+                { label: 'Ayurvedic Medicinal', slug: 'medicinal' },
+                { label: 'Hardy Outdoors', slug: 'outdoor' },
+                { label: 'Flowering Perennials', slug: 'flowring' },
+                { label: 'Grafted Fruits', slug: 'fruits' }
               ].map((cat, idx) => (
                 <li key={idx}>
                   <button

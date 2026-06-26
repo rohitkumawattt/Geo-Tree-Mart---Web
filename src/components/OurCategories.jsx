@@ -31,12 +31,12 @@ const OurCategories = () => {
       {
         opacity: 1,
         y: 0,
-        duration: 0.8,
-        stagger: 0.15,
+        duration: 0.4,
+        stagger: 0.05,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: titleRef.current,
-          start: 'top 85%'
+          start: 'top 95%'
         }
       }
     );
@@ -49,12 +49,12 @@ const OurCategories = () => {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 0.8,
-        stagger: 0.12,
+        duration: 0.4,
+        stagger: 0.05,
         ease: 'back.out(1.5)',
         scrollTrigger: {
           trigger: gridRef.current,
-          start: 'top 80%'
+          start: 'top 95%'
         }
       }
     );
