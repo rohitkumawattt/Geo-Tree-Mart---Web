@@ -18,16 +18,28 @@ import OutdoorPage from '../Pages/Outdoor';
 import FlowringPage from '../Pages/Flowring';
 import FruitsPage from '../Pages/Fruits';
 import ProductDetailPage from '../Pages/ProductDetail';
+import BlogPage from '../Pages/Blog';
 
 function App() {
   useSmoothScroll();
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedProductId, setSelectedProductId] = useState(null);
+  const [showBlog, setShowBlog] = useState(false);
 
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
-      if (hash.startsWith('#category/')) {
+      if (hash === '#blog') {
+        setShowBlog(true);
+        setSelectedCategory(null);
+        setSelectedProductId(null);
+        if (window.lenis) {
+          window.lenis.scrollTo(0, { immediate: true });
+        } else {
+          window.scrollTo(0, 0);
+        }
+      } else if (hash.startsWith('#category/')) {
+        setShowBlog(false);
         const slug = hash.replace('#category/', '');
         // Map slug back to title case category name
         const validCategories = {
@@ -53,6 +65,7 @@ function App() {
           setSelectedProductId(null);
         }
       } else if (hash.startsWith('#product/')) {
+        setShowBlog(false);
         const id = hash.replace('#product/', '');
         setSelectedProductId(id);
         setSelectedCategory(null);
@@ -62,6 +75,7 @@ function App() {
           window.scrollTo(0, 0);
         }
       } else {
+        setShowBlog(false);
         setSelectedCategory(null);
         setSelectedProductId(null);
       }
@@ -78,6 +92,10 @@ function App() {
   };
 
   const handleCloseProduct = () => {
+    window.location.hash = '';
+  };
+
+  const handleCloseBlog = () => {
     window.location.hash = '';
   };
 
@@ -106,6 +124,8 @@ function App() {
       <main className="w-full">
         {selectedProductId ? (
           <ProductDetailPage productId={selectedProductId} onClose={handleCloseProduct} />
+        ) : showBlog ? (
+          <BlogPage onClose={handleCloseBlog} />
         ) : selectedCategory ? (
           renderCategoryPage()
         ) : (

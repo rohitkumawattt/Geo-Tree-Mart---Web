@@ -146,16 +146,18 @@ export default function Feedback() {
         <h2 className="font-display text-3xl sm:text-5xl text-text-dark leading-tight tracking-tight">
           Voices of the <span className="italic text-primary">GeoTree</span> Community
         </h2>
-        <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-secondary transition-all duration-500 group-hover:scale-x-150" />
       </div>
 
       {/* Scrolling Feedback Container */}
       <div className="w-full overflow-hidden py-4 select-none">
         <div
           ref={rowRef}
-          className="flex gap-6 w-max px-6 will-change-transform cursor-pointer"
-          onMouseEnter={handleMouseEnter}
+          className="flex gap-6 w-max px-6 will-change-transform cursor-grab active:cursor-grabbing"
+          onMouseDown={handleMouseEnter}
+          onMouseUp={handleMouseLeave}
           onMouseLeave={handleMouseLeave}
+          onTouchStart={handleMouseEnter}
+          onTouchEnd={handleMouseLeave}
         >
           {duplicatedTestimonials.map((item, idx) => (
             <FeedbackCard key={`${item.id}-${idx}`} item={item} />

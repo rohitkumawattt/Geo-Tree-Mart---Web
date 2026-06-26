@@ -57,16 +57,26 @@ export default function ProductDetail({ productId, onClose }) {
     setSelectedQuantityOption(1);
   }, [productId]);
 
-  // Programmatically generate additional thumbnail variations using query params
+  // Programmatically generate additional thumbnail variations by mixing parent category photos
   const productImages = useMemo(() => {
     if (!product) return [];
-    return [
-      product.image,
-      `${product.image}&q=80&w=500&auto=format&fit=crop&sig=1`,
-      `${product.image}&q=80&w=500&auto=format&fit=crop&sig=2`,
-      `${product.image}&q=80&w=500&auto=format&fit=crop&sig=3`,
-      `${product.image}&q=80&w=500&auto=format&fit=crop&sig=4`
+
+    // Fallback list of high quality plant images
+    const varImages = [
+      'https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1520302630591-fd1c66edc19d?auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1463936575829-25148e1db1b8?auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1509587584298-0f3b3a3a1797?auto=format&fit=crop&w=600&q=80'
     ];
+
+    // Find products under the same category to use their images as variations
+    const categoryRelated = PRODUCTS_DB
+      .filter(p => p.parentCategory === product.parentCategory && p.id !== product.id)
+      .map(p => p.image);
+
+    const combined = [product.image, ...categoryRelated, ...varImages];
+    return [...new Set(combined)].slice(0, 5);
   }, [product]);
 
   // Similar Products in same category

@@ -8,7 +8,8 @@ import {
   FiCheckCircle, 
   FiX, 
   FiMapPin, 
-  FiPackage
+  FiPackage,
+  FiChevronRight
 } from 'react-icons/fi';
 import { FaLeaf } from 'react-icons/fa';
 import { PRODUCTS_DB } from '../src/data/products';
@@ -187,7 +188,7 @@ export default function CategoryBase({ categoryName, onClose }) {
     <div className="w-full min-h-screen pt-[72px] md:pt-[76px] pb-20 bg-[#FAF9F6] text-text-dark font-sans relative">
       
       {/* Category Banner/Header */}
-      <section className="relative w-full overflow-hidden py-10 md:py-12 px-6 md:px-12 bg-[#F3F6F2] border-b border-primary/5">
+      <section className="relative w-full overflow-hidden py-5 md:py-6 px-6 md:px-12 bg-[#F3F6F2] border-b border-primary/5">
         {/* Soft botanical background image with low opacity overlay */}
         <div 
           className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-15 mix-blend-overlay pointer-events-none" 
@@ -195,34 +196,41 @@ export default function CategoryBase({ categoryName, onClose }) {
         
         {/* Decorative botanical floating element */}
         <div className="absolute right-10 bottom-0 opacity-10 pointer-events-none hidden lg:block">
-          <FaLeaf className="text-primary text-[80px] rotate-45" />
+          <FaLeaf className="text-primary text-[55px] rotate-45" />
         </div>
 
-        <div className="max-w-7xl mx-auto relative z-10">
-          {/* Back Navigation Button */}
-          <button
-            onClick={onClose}
-            className="group inline-flex items-center gap-1.5 mb-3 text-xs font-semibold text-primary hover:text-primary-dark bg-white border border-primary/10 hover:border-primary/30 px-3.5 py-1.5 rounded-full transition-all duration-300 cursor-pointer shadow-sm hover:shadow focus:outline-none"
-          >
-            <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" />
-            Back to Home
-          </button>
-
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div className="max-w-2xl">
-              <span className="inline-block text-[10px] font-bold tracking-widest uppercase bg-primary/10 text-primary border border-primary/20 px-2.5 py-0.5 rounded-full mb-2">
-                {categoryInfo.subtitle}
+        <div className="max-w-7xl mx-auto relative z-10 text-left">
+          {/* Breadcrumbs & Back Button Inline */}
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex flex-wrap items-center gap-1 text-[10px] font-bold text-text-muted/70 tracking-wide">
+              <button onClick={onClose} className="hover:text-primary transition-colors cursor-pointer uppercase">Home</button>
+              <FiChevronRight />
+              <span className="text-text-dark uppercase tracking-tight">
+                {categoryName === "Flowring" ? "Flowering" : categoryName}
               </span>
-              <h1 className="font-display font-black text-2xl sm:text-4xl tracking-tight text-text-dark mb-2">
+            </div>
+            
+            <button
+              onClick={onClose}
+              className="group inline-flex items-center gap-1.5 text-[10px] font-semibold text-primary hover:text-primary-dark bg-white border border-primary/10 px-3 py-1 rounded-full transition-all duration-300 cursor-pointer shadow-sm hover:shadow focus:outline-none"
+            >
+              <FiArrowLeft className="group-hover:-translate-x-0.5 transition-transform" />
+              Back
+            </button>
+          </div>
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
+            <div className="max-w-2xl">
+              <h1 className="font-display font-black text-xl sm:text-2xl tracking-tight text-text-dark mb-1">
                 {categoryName === "Vegetables" ? "Vegetable Saplings" : categoryName === "Flowring" ? "Flowering Plants" : `${categoryName} Plants`}
               </h1>
-              <p className="font-sans text-xs sm:text-sm text-text-muted max-w-xl leading-relaxed">
+              <p className="font-sans text-xs text-text-muted max-w-xl leading-relaxed">
                 {categoryInfo.tagline}
               </p>
             </div>
             
-            <div className="text-text-muted text-xs font-semibold border-l border-primary/20 pl-4 py-1">
-              <span className="text-2xl font-black text-primary block">
+            <div className="text-text-muted text-[10px] font-semibold border-l border-primary/20 pl-4 py-0.5">
+              <span className="text-xl font-black text-primary block leading-none mb-1">
                 {filteredProducts.length}
               </span>
               grower items ready
@@ -608,7 +616,7 @@ export default function CategoryBase({ categoryName, onClose }) {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { id: "moneyplant", name: "Golden Pothos (Air Purifier)", price: "45", unit: "plant", image: "https://images.unsplash.com/photo-1597055181300-e3633a207518?auto=format&fit=crop&w=400&q=80", tag: "Easy Care" },
-              { id: "stringofbanana", name: "Senecio radicans (String of banana)", price: "99", unit: "plant", image: "https://images.unsplash.com/photo-1545167622-3a6ac756afa4?auto=format&fit=crop&w=400&q=80", tag: "Succulents" },
+              { id: "stringofbanana", name: "Senecio radicans (String of banana)", price: "99", unit: "plant", image: "https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?auto=format&fit=crop&w=400&q=80", tag: "Succulents" },
               { id: "snakeplant", name: "Snake Plant (Sansevieria)", price: "90", unit: "plant", image: "https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?auto=format&fit=crop&w=400&q=80", tag: "Air Purifier" },
               { id: "succulentcombo", name: "Succulent Combo A3 (Set of 6)", price: "599", unit: "combo", image: "https://images.unsplash.com/photo-1509587584298-0f3b3a3a1797?auto=format&fit=crop&w=400&q=80", tag: "Combo Pack" }
             ].map((item, idx) => (

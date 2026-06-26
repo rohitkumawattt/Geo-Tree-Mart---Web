@@ -171,7 +171,6 @@ export default function FAQ() {
           <h2 className="font-display text-3xl sm:text-5xl text-text-dark leading-tight tracking-tight">
             <span className="italic text-primary">Frequently Asked</span> Questions
           </h2>
-          <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-secondary transition-all duration-500 group-hover:scale-x-150" />
         </div>
 
         {/* FAQ Accordion List */}

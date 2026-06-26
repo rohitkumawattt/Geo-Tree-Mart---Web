@@ -4,20 +4,7 @@ import bannerLineArtLeaves from '../assets/banner_line_art_leaves.png';
 export default function Banner() {
   const handleCTAClick = (e) => {
     e.preventDefault();
-    const element = document.getElementById('download-badges');
-    if (element) {
-      if (window.lenis) {
-        window.lenis.scrollTo(element, {
-          offset: -80,
-          duration: 0.7,
-        });
-      } else {
-        window.scrollTo({
-          top: element.offsetTop - 80,
-          behavior: 'smooth'
-        });
-      }
-    }
+    window.location.hash = '#category/decorative';
   };
 
   return (

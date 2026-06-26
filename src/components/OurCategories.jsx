@@ -69,7 +69,6 @@ const OurCategories = () => {
           <h2 ref={titleRef} className="font-display md:text-6xl text-4xl sm:text-3xl">
             <span className='italic text-primary'>Explore</span> Collection
           </h2>
-          <div className="mx-auto mt-5 h-1 w-24 rounded-full bg-secondary transition-all duration-500 group-hover:scale-x-150" />
         </div>
 
         {/* Categories Grid */}

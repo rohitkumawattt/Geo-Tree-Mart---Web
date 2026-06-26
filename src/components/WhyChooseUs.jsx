@@ -73,7 +73,6 @@ export default function ProblemSolution() {
           <h2 className="font-display text-3xl sm:text-5xl text-[#0f1f10] leading-tight tracking-tight">
             Why Choose <span className="text-primary italic">GeoTree Mart?</span>
           </h2>
-          <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-secondary transition-all duration-500 group-hover:scale-x-150" />
         </div>
 
         {/* Features Container */}

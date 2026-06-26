@@ -8,7 +8,8 @@ const NAV_ITEMS = [
   { label: 'Plants', id: 'buy' },
   { label: 'Why GeoTree Mart?', id: 'problem-solution' },
   { label: 'Feedback', id: 'feedback' },
-  { label: 'FAQs', id: 'faq' }
+  { label: 'FAQs', id: 'faq' },
+  { label: 'Blog', id: 'blog' }
 ];
 
 export default function Navbar() {
@@ -30,7 +31,12 @@ export default function Navbar() {
   // Monitor scroll position to highlight active nav item
   useEffect(() => {
     const handleScrollActive = () => {
-      if (window.location.hash.startsWith('#category/')) {
+      const hash = window.location.hash;
+      if (hash === '#blog') {
+        setActiveSection('blog');
+        return;
+      }
+      if (hash.startsWith('#category/')) {
         setActiveSection('categories');
         return;
       }
@@ -38,6 +44,7 @@ export default function Navbar() {
       const scrollPosition = window.scrollY + 140; // 140px offset for top navbar height and early highlight
 
       for (const item of NAV_ITEMS) {
+        if (item.id === 'blog') continue;
         const el = document.getElementById(item.id);
         if (el) {
           const top = el.offsetTop;
@@ -62,9 +69,16 @@ export default function Navbar() {
 
   const scrollToSection = (id) => {
     setIsMobileMenuOpen(false);
-    const isCategoryPage = window.location.hash.startsWith('#category/');
 
-    if (isCategoryPage) {
+    if (id === 'blog') {
+      window.location.hash = '#blog';
+      return;
+    }
+
+    const currentHash = window.location.hash;
+    const isSpecialPage = currentHash.startsWith('#category/') || currentHash === '#blog' || currentHash.startsWith('#product/');
+
+    if (isSpecialPage) {
       // Return to landing page hash context
       window.location.hash = '';
 
