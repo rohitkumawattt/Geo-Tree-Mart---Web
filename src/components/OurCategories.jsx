@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import vegitables from '../assets/categories/vegitable.png'
+import vegetables from '../assets/categories/vegitable.png'
 import decorative from '../assets/categories/decorative.png'
 import Medicinal from '../assets/categories/Medicinal.png'
 import outdoor from '../assets/categories/outdoor.png'
@@ -11,7 +11,7 @@ import fruits from '../assets/categories/fruits.png'
 gsap.registerPlugin(ScrollTrigger);
 
 const categories = [
-  { name: "Vegitable", images: vegitables, color: "#ECF7E9" },
+  { name: "Vegetables", images: vegetables, color: "#ECF7E9" },
   { name: "Decorative", images: decorative, color: "#fffbf5ff" },
   { name: "Medicinal", images: Medicinal, color: "#ECF7E9" },
   { name: "Outdoor", images: outdoor, color: "#fffbf5ff" },

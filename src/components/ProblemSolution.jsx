@@ -19,7 +19,7 @@ const FEATURES_DATA = [
   {
     icon: FaTag,
     title: "Best Market Rates",
-    desc: "Buy high-quality plants, seeds, and organic fertilizers at genuine nursery prices with zero middleman markup."
+    desc: "Buy high-quality plants directly at genuine nursery prices with zero middleman markup."
   },
   {
     icon: FaShieldAlt,

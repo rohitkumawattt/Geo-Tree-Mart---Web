@@ -11,62 +11,11 @@ import {
   FiPackage
 } from 'react-icons/fi';
 import { FaLeaf } from 'react-icons/fa';
-
-// Rich Mockup Database for categories
-const MOCK_PRODUCTS = {
-  "Vegitable": [
-    { id: 'tomato', name: 'Organic Tomato Sapling', category: 'Vegetable', price: 12, unit: 'sapling', stock: 25000, origin: 'Jaipur Organic Greens', rating: 4.8, reviews: 122, image: 'https://images.unsplash.com/photo-1592417817098-8f3d6eb19675?auto=format&fit=crop&w=600&q=80', desc: 'High-yield organic tomato seedlings, ready for home pots or garden beds.' },
-    { id: 'chilli', name: 'Spicy Chilli Sapling', category: 'Vegetable', price: 10, unit: 'sapling', stock: 18000, origin: 'Malviya Nagar Growers', rating: 4.7, reviews: 94, image: 'https://images.unsplash.com/photo-1588252398678-30a5ad1f6120?auto=format&fit=crop&w=600&q=80', desc: 'Produces hot, pungent green chillies. Very easy to maintain.' },
-    { id: 'bellpepper', name: 'Premium Bell Pepper Sapling', category: 'Vegetable', price: 15, unit: 'sapling', stock: 12000, origin: 'Amer Forest Growers', rating: 4.5, reviews: 56, image: 'https://images.unsplash.com/photo-1563565082-66178e48a25f?auto=format&fit=crop&w=600&q=80', desc: 'Hybrid variety of sweet bell peppers. Thrives in moderate sunlight.' },
-    { id: 'brinjal', name: 'Organic Brinjal Sapling', category: 'Vegetable', price: 12, unit: 'sapling', stock: 15000, origin: 'Sanganer Seedlings Hub', rating: 4.6, reviews: 78, image: 'https://images.unsplash.com/photo-1528137871380-60b6a782f9ef?auto=format&fit=crop&w=600&q=80', desc: 'Eggplant sapling, grows glossy dark-purple fruits organically.' },
-    { id: 'coriander', name: 'Fresh Coriander Pot', category: 'Herbs', price: 18, unit: 'pot', stock: 8000, origin: 'Jagatpura Flora Farm', rating: 4.9, reviews: 142, image: 'https://images.unsplash.com/photo-1608797178974-15b35a61d121?auto=format&fit=crop&w=600&q=80', desc: 'Fully rooted coriander plant pot, ready for instant harvesting.' },
-    { id: 'spinach', name: 'Organic Spinach Tray', category: 'Leafy Green', price: 25, unit: 'tray', stock: 5000, origin: 'Organic Life Nursery', rating: 4.7, reviews: 63, image: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=600&q=80', desc: 'Nutrient-rich green spinach seedlings grown in biodegradable trays.' }
-  ],
-  "Decorative": [
-    { id: 'moneyplant', name: 'Golden Pothos (Money Plant)', category: 'Indoor', price: 45, unit: 'plant', stock: 32000, origin: 'Jagatpura Flora Farm', rating: 4.8, reviews: 310, image: 'https://images.unsplash.com/photo-1597055181300-e3633a207518?auto=format&fit=crop&w=600&q=80', desc: 'Trailing air-purifying vine with beautiful golden-variegated green leaves.' },
-    { id: 'snakeplant', name: 'Snake Plant (Sansevieria)', category: 'Air Purifier', price: 90, unit: 'plant', stock: 15000, origin: 'Clay & Co.', rating: 4.9, reviews: 204, image: 'https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?auto=format&fit=crop&w=600&q=80', desc: 'Extremely hardy indoor plant, releases oxygen at night and filters air toxins.' },
-    { id: 'arecapalm', name: 'Lush Areca Palm', category: 'Outdoor/Indoor', price: 180, unit: 'plant', stock: 8500, origin: 'Malviya Nagar Growers', rating: 4.7, reviews: 112, image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80', desc: 'Feathery, arching fronds that add a tropical vibe to houses and lobbies.' },
-    { id: 'monstera', name: 'Monstera Deliciosa', category: 'Ornamental', price: 250, unit: 'plant', stock: 4000, origin: 'Green Gardeners', rating: 4.8, reviews: 89, image: 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=600&q=80', desc: 'Famous split-leaf Swiss cheese plant. Extremely trendy aesthetic plant.' },
-    { id: 'peacelily', name: 'Peace Lily', category: 'Flowering Indoor', price: 120, unit: 'plant', stock: 10000, origin: 'Amer Forest Growers', rating: 4.6, reviews: 145, image: 'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&w=600&q=80', desc: 'Glossy dark green leaves and brilliant white spathes. Cleans indoor air.' },
-    { id: 'zzplant', name: 'ZZ Plant (Zamioculcas)', category: 'Hardy Indoor', price: 140, unit: 'plant', stock: 6000, origin: 'Organic Life Nursery', rating: 4.7, reviews: 76, image: 'https://images.unsplash.com/photo-1632207691143-643e2a9a9361?auto=format&fit=crop&w=600&q=80', desc: 'Shiny, waxy leaves. Thrives in low light and requires very little watering.' }
-  ],
-  "Medicinal": [
-    { id: 'aloevera', name: 'Pure Aloe Vera Plant', category: 'Skin Care', price: 20, unit: 'plant', stock: 42000, origin: 'Organic Life Nursery', rating: 4.8, reviews: 290, image: 'https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?auto=format&fit=crop&w=600&q=80', desc: 'Succulent therapeutic plant, great for skin treatments and healing gel.' },
-    { id: 'tulsi', name: 'Holy Basil (Tulsi)', category: 'Sacred Herb', price: 15, unit: 'plant', stock: 35000, origin: 'Jaipur Organic Greens', rating: 4.9, reviews: 450, image: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80', desc: 'Serrated green leaves with exceptional immunity-boosting properties.' },
-    { id: 'neem', name: 'Neem Sapling', category: 'Herbal Tree', price: 25, unit: 'sapling', stock: 24000, origin: 'Amer Forest Growers', rating: 4.8, reviews: 152, image: 'https://images.unsplash.com/photo-1661776358099-38f6daea7752?auto=format&fit=crop&w=600&q=80', desc: 'Traditional ayurvedic medicinal tree, naturally purifies soil and air.' },
-    { id: 'lemongrass', name: 'Fragrant Lemongrass', category: 'Aromatic', price: 18, unit: 'plant', stock: 16000, origin: 'Sanganer Seedlings Hub', rating: 4.6, reviews: 98, image: 'https://images.unsplash.com/photo-1528137871380-60b6a782f9ef?auto=format&fit=crop&w=600&q=80', desc: 'Zesty lemon aroma leaves, popular for brewing active herbal tea.' },
-    { id: 'giloy', name: 'Giloy (Amrita) Vine', category: 'Immunity', price: 22, unit: 'creeper', stock: 12000, origin: 'Malviya Nagar Growers', rating: 4.7, reviews: 81, image: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=600&q=80', desc: 'Traditional ayurvedic climbing herb known for boosting active immunity.' },
-    { id: 'mint', name: 'Mint (Pudina) Pot', category: 'Kitchen Herb', price: 12, unit: 'pot', stock: 22000, origin: 'Jagatpura Flora Farm', rating: 4.8, reviews: 189, image: 'https://images.unsplash.com/photo-1608797178974-15b35a61d121?auto=format&fit=crop&w=600&q=80', desc: 'Fast-growing fresh aromatic mint herb, ready for culinary use.' }
-  ],
-  "Outdoor": [
-    { id: 'bougainvillea', name: 'Vibrant Bougainvillea', category: 'Flowering Vine', price: 60, unit: 'plant', stock: 14000, origin: 'Amer Forest Growers', rating: 4.8, reviews: 110, image: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=600&q=80', desc: 'Thrives in direct sunlight, producing stunning, papery pink-purple blooms.' },
-    { id: 'bamboo', name: 'Golden Bamboo', category: 'Privacy Screen', price: 190, unit: 'clump', stock: 4500, origin: 'Sanganer Seedlings Hub', rating: 4.7, reviews: 76, image: 'https://images.unsplash.com/photo-1589927986089-35812388d1f4?auto=format&fit=crop&w=600&q=80', desc: 'Elegant golden stalks, perfect for boundary avenues and natural screening.' },
-    { id: 'croton', name: 'Croton Petra', category: 'Colorful Foliage', price: 85, unit: 'plant', stock: 9500, origin: 'Malviya Nagar Growers', rating: 4.6, reviews: 104, image: 'https://images.unsplash.com/photo-1509937528035-ad76254b0356?auto=format&fit=crop&w=600&q=80', desc: 'Thick, bold leaves with bright yellow, red, and orange veins. Needs full sun.' },
-    { id: 'ashoka', name: 'Ashoka Tree Sapling', category: 'Avenue Tree', price: 120, unit: 'sapling', stock: 8000, origin: 'Jaipur Organic Greens', rating: 4.8, reviews: 115, image: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=600&q=80', desc: 'Tall evergreen tree with drooping branches, ideal for driveway paths.' },
-    { id: 'ixora', name: 'Ixora (Rukmini)', category: 'Hardy Shrub', price: 70, unit: 'plant', stock: 13000, origin: 'Jagatpura Flora Farm', rating: 4.5, reviews: 62, image: 'https://images.unsplash.com/photo-1717748903944-8232cdf47a65?auto=format&fit=crop&w=600&q=80', desc: 'Dense clusters of small star-shaped red-orange flowers. High sun tolerance.' },
-    { id: 'hibiscus', name: 'Hibiscus (Gudhal)', category: 'Flowering Shrub', price: 55, unit: 'plant', stock: 15000, origin: 'Green Gardeners', rating: 4.7, reviews: 142, image: 'https://images.unsplash.com/photo-1663315110779-ffaa2fde4f0b?auto=format&fit=crop&w=600&q=80', desc: 'Classic outdoor shrub producing large, showy bell-shaped red flowers.' }
-  ],
-  "Flowring": [
-    { id: 'rose', name: 'Fragrant Desi Rose', category: 'Rose', price: 40, unit: 'plant', stock: 25000, origin: 'Jagatpura Flora Farm', rating: 4.9, reviews: 215, image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80', desc: 'Traditional organic rose plant with rich fragrance and pink blooms.' },
-    { id: 'mogra', name: 'Jasmine (Mogra)', category: 'Fragrant Climber', price: 50, unit: 'plant', stock: 18000, origin: 'Amer Forest Growers', rating: 4.8, reviews: 198, image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80', desc: 'Highly fragrant small white flowers, popular climber for balconies.' },
-    { id: 'marigold', name: 'Marigold (Genda)', category: 'Seasonal Flower', price: 15, unit: 'plant', stock: 40000, origin: 'Jaipur Organic Greens', rating: 4.7, reviews: 310, image: 'https://images.unsplash.com/photo-1592417817098-8f3d6eb19675?auto=format&fit=crop&w=600&q=80', desc: 'Golden orange flowers, natural insect repellent, ideal for home temples.' },
-    { id: 'champa', name: 'Plumeria (Champa)', category: 'Tree Shrub', price: 180, unit: 'sapling', stock: 5500, origin: 'Malviya Nagar Growers', rating: 4.9, reviews: 88, image: 'https://images.unsplash.com/photo-1717748903944-8232cdf47a65?auto=format&fit=crop&w=600&q=80', desc: 'Sturdy sapling bearing fragrant white flowers with yellow centers.' },
-    { id: 'adenium', name: 'Adenium Desert Rose', category: 'Succulent Flower', price: 220, unit: 'plant', stock: 3200, origin: 'Sanganer Seedlings Hub', rating: 4.8, reviews: 76, image: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80', desc: 'Exotic succulent plant with thick trunk and gorgeous pink trumpet flowers.' },
-    { id: 'vinca', name: 'Vinca (Sadabahar)', category: 'Perennial Flower', price: 12, unit: 'plant', stock: 30000, origin: 'Organic Life Nursery', rating: 4.7, reviews: 142, image: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=600&q=80', desc: 'Evergreen flowering plant that blooms all year round with low care.' }
-  ],
-  "Fruits": [
-    { id: 'mango', name: 'Grafted Kesar Mango', category: 'Fruit Tree', price: 150, unit: 'sapling', stock: 8000, origin: 'Jaipur Organic Greens', rating: 4.9, reviews: 142, image: 'https://images.unsplash.com/photo-1732472581875-89ff83f18439?auto=format&fit=crop&w=600&q=80', desc: 'Grafted Kesar mango tree sapling, certified for fast growth and fruiting.' },
-    { id: 'guava', name: 'Hybrid Guava (Amrud)', category: 'Fruit Tree', price: 90, unit: 'sapling', stock: 12000, origin: 'Amer Forest Growers', rating: 4.7, reviews: 89, image: 'https://images.unsplash.com/photo-1663315110779-ffaa2fde4f0b?auto=format&fit=crop&w=600&q=80', desc: 'Produces sweet, white-fleshed guavas. Pot-friendly variety.' },
-    { id: 'lemon', name: 'Lemon (Nimbu) Plant', category: 'Citrus Tree', price: 65, unit: 'plant', stock: 15000, origin: 'Jagatpura Flora Farm', rating: 4.8, reviews: 204, image: 'https://images.unsplash.com/photo-1592417817098-8f3d6eb19675?auto=format&fit=crop&w=600&q=80', desc: 'Juicy, high-yielding local lemon plant, grows easily in balcony pots.' },
-    { id: 'pomegranate', name: 'Pomegranate (Anar)', category: 'Fruit Tree', price: 110, unit: 'sapling', stock: 6000, origin: 'Malviya Nagar Growers', rating: 4.6, reviews: 82, image: 'https://images.unsplash.com/photo-1589927986089-35812388d1f4?auto=format&fit=crop&w=600&q=80', desc: 'Robust sapling yielding sweet red pomegranates within 1-2 years.' },
-    { id: 'papaya', name: 'Sweet Papaya Sapling', category: 'Fruit Tree', price: 40, unit: 'sapling', stock: 14000, origin: 'Sanganer Seedlings Hub', rating: 4.8, reviews: 105, image: 'https://images.unsplash.com/photo-1509937528035-ad76254b0356?auto=format&fit=crop&w=600&q=80', desc: 'Fast-growing dwarf papaya variety yielding large, sweet fruits.' },
-    { id: 'chikoo', name: 'Grafted Chikoo Plant', category: 'Fruit Tree', price: 130, unit: 'plant', stock: 5000, origin: 'Organic Life Nursery', rating: 4.7, reviews: 62, image: 'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?auto=format&fit=crop&w=600&q=80', desc: 'Sweet sapodilla/chikoo plant, grafted for maximum harvest.' }
-  ]
-};
+import { PRODUCTS_DB } from '../src/data/products';
 
 // Slogan mapping to give each page a premium green theme feeling
 const CATEGORY_DETAILS = {
-  "Vegitable": {
+  "Vegetables": {
     subtitle: "Organic Vegetable Seedlings",
     tagline: "Grow your own fresh, organic kitchen garden with certified vegetable saplings.",
     gradient: "from-green-700 to-emerald-950",
@@ -106,7 +55,9 @@ const CATEGORY_DETAILS = {
 
 export default function CategoryBase({ categoryName, onClose }) {
   const categoryInfo = CATEGORY_DETAILS[categoryName] || CATEGORY_DETAILS["Medicinal"];
-  const products = MOCK_PRODUCTS[categoryName] || [];
+  const products = useMemo(() => {
+    return PRODUCTS_DB.filter(p => p.parentCategory === categoryName);
+  }, [categoryName]);
   const isPlants = false;
 
   // Filter States
@@ -263,7 +214,7 @@ export default function CategoryBase({ categoryName, onClose }) {
                 {categoryInfo.subtitle}
               </span>
               <h1 className="font-display font-black text-2xl sm:text-4xl tracking-tight text-text-dark mb-2">
-                {categoryName === "Vegitable" ? "Vegetable Saplings" : categoryName === "Flowring" ? "Flowering Plants" : `${categoryName} Plants`}
+                {categoryName === "Vegetables" ? "Vegetable Saplings" : categoryName === "Flowring" ? "Flowering Plants" : `${categoryName} Plants`}
               </h1>
               <p className="font-sans text-xs sm:text-sm text-text-muted max-w-xl leading-relaxed">
                 {categoryInfo.tagline}
@@ -531,7 +482,8 @@ export default function CategoryBase({ categoryName, onClose }) {
                       exit={{ opacity: 0, scale: 0.95 }}
                       transition={{ duration: 0.3 }}
                       key={product.id}
-                      className="group rounded-2xl bg-white border border-primary/5 shadow-sm hover:shadow-lg hover:border-primary/10 transition-all duration-300 overflow-hidden flex flex-col"
+                      onClick={() => window.location.hash = `#product/${product.id}`}
+                      className="group rounded-2xl bg-white border border-primary/5 shadow-sm hover:shadow-lg hover:border-primary/10 transition-all duration-300 overflow-hidden flex flex-col cursor-pointer"
                     >
                       {/* Product Image Container */}
                       <div className="relative aspect-square w-full overflow-hidden bg-gray-50">
@@ -599,7 +551,10 @@ export default function CategoryBase({ categoryName, onClose }) {
                             </div>
 
                             <button
-                              onClick={() => setInquiryProduct(product)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setInquiryProduct(product);
+                              }}
                               className="px-3 py-1.5 bg-primary hover:bg-primary-dark text-white font-bold text-[10px] md:text-xs rounded-full shadow-sm hover:shadow transition-all cursor-pointer focus:outline-none"
                             >
                               Get Quote
@@ -652,12 +607,16 @@ export default function CategoryBase({ categoryName, onClose }) {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { name: "Organic Earthworm Vermicompost", price: "50", unit: "5kg bag", image: "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&w=400&q=80", tag: "Soil Feed" },
-              { name: "Matte White Terracotta Pot", price: "80", unit: "piece", image: "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?auto=format&fit=crop&w=400&q=80", tag: "Premium Pot" },
-              { name: "Golden Pothos (Air Purifier)", price: "45", unit: "plant", image: "https://images.unsplash.com/photo-1597055181300-e3633a207518?auto=format&fit=crop&w=400&q=80", tag: "Easy Care" },
-              { name: "Organic Neem Cake Powder", price: "60", unit: "2kg bag", image: "https://images.unsplash.com/photo-1592417817098-8f3d6eb19675?auto=format&fit=crop&w=400&q=80", tag: "Bio Pesticide" }
+              { id: "moneyplant", name: "Golden Pothos (Air Purifier)", price: "45", unit: "plant", image: "https://images.unsplash.com/photo-1597055181300-e3633a207518?auto=format&fit=crop&w=400&q=80", tag: "Easy Care" },
+              { id: "stringofbanana", name: "Senecio radicans (String of banana)", price: "99", unit: "plant", image: "https://images.unsplash.com/photo-1545167622-3a6ac756afa4?auto=format&fit=crop&w=400&q=80", tag: "Succulents" },
+              { id: "snakeplant", name: "Snake Plant (Sansevieria)", price: "90", unit: "plant", image: "https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?auto=format&fit=crop&w=400&q=80", tag: "Air Purifier" },
+              { id: "succulentcombo", name: "Succulent Combo A3 (Set of 6)", price: "599", unit: "combo", image: "https://images.unsplash.com/photo-1509587584298-0f3b3a3a1797?auto=format&fit=crop&w=400&q=80", tag: "Combo Pack" }
             ].map((item, idx) => (
-              <div key={idx} className="bg-white rounded-2xl border border-gray-100 p-3 flex flex-col justify-between hover:shadow-lg transition-all group">
+              <div 
+                key={idx} 
+                onClick={() => window.location.hash = `#product/${item.id}`}
+                className="bg-white rounded-2xl border border-gray-100 p-3 flex flex-col justify-between hover:shadow-lg transition-all group cursor-pointer"
+              >
                 <div>
                   <div className="aspect-square rounded-xl overflow-hidden mb-2 bg-gray-50 relative">
                     <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 animate-fade-in" />
@@ -665,14 +624,17 @@ export default function CategoryBase({ categoryName, onClose }) {
                       {item.tag}
                     </span>
                   </div>
-                  <h4 className="font-display font-extrabold text-xs text-text-dark line-clamp-2 mb-1 font-sans">
+                  <h4 className="font-display font-extrabold text-xs text-text-dark line-clamp-2 mb-1 font-sans group-hover:text-primary transition-colors">
                     {item.name}
                   </h4>
                 </div>
                 <div className="flex items-center justify-between mt-2 pt-2 border-t border-gray-50">
                   <span className="font-display font-black text-xs md:text-sm text-primary">₹{item.price}<span className="text-[9px] md:text-[10px] text-text-muted font-normal font-sans">/{item.unit}</span></span>
                   <button 
-                    onClick={() => setInquiryProduct({ name: item.name, origin: "GeoTree Bestsellers Hub", price: item.price, unit: item.unit, stock: 5000, desc: "Bestseller nursery item." })} 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setInquiryProduct({ name: item.name, origin: "GeoTree Bestsellers Hub", price: item.price, unit: item.unit, stock: 5000, desc: "Bestseller nursery item." });
+                    }} 
                     className="text-[9px] md:text-[10px] font-bold text-primary hover:text-primary-dark underline cursor-pointer"
                   >
                     Quick Quote

@@ -110,7 +110,7 @@ export default function Footer() {
                   href="#"
                   className="flex items-center gap-3 bg-white/5 border border-white/10 hover:border-secondary/40 hover:bg-white/10 rounded-xl px-3.5 py-1.5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group"
                 >
-                  <FaGooglePlay className="text-lg text-secondary group-hover:scale-110 transition-transform duration-300" />
+                  <FaGooglePlay className="text-lg text-white group-hover:scale-110 transition-transform duration-300" />
                   <div className="flex flex-col text-left">
                     <span className="text-[8px] text-white/40 font-semibold uppercase tracking-wider leading-none">GET IT ON</span>
                     <span className="text-xs font-bold text-white tracking-wide mt-0.5">Google Play</span>
@@ -166,7 +166,7 @@ export default function Footer() {
             </h5>
             <ul className="flex flex-col gap-3.5 text-sm font-semibold">
               {[
-                { label: 'Organic Vegitables', slug: 'vegitable' },
+                { label: 'Organic Vegetables', slug: 'vegetables' },
                 { label: 'Ornamental Decors', slug: 'decorative' },
                 { label: 'Ayurvedic Medicinal', slug: 'medicinal' },
                 { label: 'Hardy Outdoors', slug: 'outdoor' },

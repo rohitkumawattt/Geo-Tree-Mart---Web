@@ -6,12 +6,12 @@ import { FaStore } from 'react-icons/fa';
 gsap.registerPlugin(ScrollTrigger);
 
 const PLANTS_DATA = [
-  { id: 'neem', name: 'Neem Sapling', category: 'Medicinal', price: 15, originalPrice: 25, stock: 42000, origin: 'Jaipur Organic Greens', image: 'https://images.unsplash.com/photo-1661776358099-38f6daea7752?auto=format&fit=crop&w=400&q=80', desc: 'Hardy native species, ideal for hot climates.' },
-  { id: 'mango', name: 'Mango (Aam)', category: 'Fruit Tree', price: 30, originalPrice: 45, stock: 12000, origin: 'Malviya Nagar Growers', image: 'https://images.unsplash.com/photo-1732472581875-89ff83f18439?auto=format&fit=crop&w=400&q=80', desc: 'Young mango sapling tree in nursery bag.' },
-  { id: 'guava', name: 'Guava (Amrud)', category: 'Fruit Tree', price: 22, originalPrice: 35, stock: 18000, origin: 'Amer Forest Growers', image: 'https://images.unsplash.com/photo-1663315110779-ffaa2fde4f0b?auto=format&fit=crop&w=400&q=80', desc: 'Organic potted guava plant sapling.' },
-  { id: 'ashoka', name: 'Ashoka Tree', category: 'Ornamental', price: 28, originalPrice: 40, stock: 15000, origin: 'Sanganer Seedlings Hub', image: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=400&q=80', desc: 'Tall evergreen foliage, perfect for boundary avenues.' },
-  { id: 'plumeria', name: 'Plumeria (Champa)', category: 'Flowering', price: 25, originalPrice: 35, stock: 9500, origin: 'Jagatpura Flora Farm', image: 'https://images.unsplash.com/photo-1717748903944-8232cdf47a65?auto=format&fit=crop&w=400&q=80', desc: 'Potted plumeria champa sapling.' },
-  { id: 'peepal', name: 'Peepal Sapling', category: 'Forest Tree', price: 18, originalPrice: 28, stock: 15000, origin: 'Amer Forest Growers', image: 'https://images.unsplash.com/photo-1709314879220-d1619e91bb61?auto=format&fit=crop&w=400&q=80', desc: 'High oxygen output, vital ecological value.' }
+  { id: 'stringofbanana', name: 'Senecio radicans (String of banana)', category: 'Succulents', price: 99, originalPrice: 199, stock: 1500, origin: 'Jaipur Succulent Nurseries', image: 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?auto=format&fit=crop&w=400&q=80', desc: 'Senecio radicans is a fast-growing succulent vine with banana-shaped leaves.' },
+  { id: 'stringoftears', name: 'Senecio herreianus (String of tears)', category: 'Succulents', price: 89, originalPrice: 149, stock: 1200, origin: 'Organic Life Nursery', image: 'https://images.unsplash.com/photo-1520302630591-fd1c66edc19d?auto=format&fit=crop&w=400&q=80', desc: 'Senecio herreianus is an elegant trailing succulent with bead-like teardrop leaves.' },
+  { id: 'seneciovitalis', name: 'Senecio vitalis (Bare Rooted)', category: 'Succulents', price: 119, originalPrice: 199, stock: 800, origin: 'Clay & Co.', image: 'https://images.unsplash.com/photo-1463936575829-25148e1db1b8?auto=format&fit=crop&w=400&q=80', desc: 'Senecio vitalis is a blue-green decorative succulent resembling spread fingers.' },
+  { id: 'crassula', name: 'Crassula sarmentosa (Bare Rooted)', category: 'Succulents', price: 99, originalPrice: 159, stock: 950, origin: 'Sanganer Seedlings Hub', image: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=400&q=80', desc: 'Crassula sarmentosa is a scrambling succulent with green-and-cream variegated foliage.' },
+  { id: 'succulentcombo', name: 'Succulent Combo A3 (Set of 6)', category: 'Succulents', price: 599, originalPrice: 899, stock: 500, origin: 'Jagatpura Flora Farm', image: 'https://images.unsplash.com/photo-1509587584298-0f3b3a3a1797?auto=format&fit=crop&w=400&q=80', desc: 'A curated starter pack of 6 hardy, beautiful live succulents in nursery pots.' },
+  { id: 'moneyplant', name: 'Golden Pothos (Money Plant)', category: 'Indoor', price: 45, originalPrice: 65, stock: 32000, origin: 'Jagatpura Flora Farm', image: 'https://images.unsplash.com/photo-1597055181300-e3633a207518?auto=format&fit=crop&w=400&q=80', desc: 'Trailing air-purifying vine with beautiful golden-variegated green leaves.' }
 ];
 
 export default function Buy() {
@@ -79,7 +79,11 @@ export default function Buy() {
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5"
         >
           {PLANTS_DATA.map((plant) => (
-            <div key={plant.id} className="w-full will-change-[transform,opacity]">
+            <div 
+              key={plant.id} 
+              className="w-full will-change-[transform,opacity]"
+              onClick={() => window.location.hash = `#product/${plant.id}`}
+            >
               <div className="w-full h-full rounded-[20px] bg-white border border-black/[0.04] shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.08)] hover:border-primary/20 transition-all duration-300 flex flex-col overflow-hidden group text-left cursor-pointer transform hover:-translate-y-1.5">
 
                 {/* Plant Image Container */}

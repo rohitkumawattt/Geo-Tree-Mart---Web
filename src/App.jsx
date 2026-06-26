@@ -11,16 +11,18 @@ import Footer from './components/Footer';
 import OurCategories from './components/OurCategories';
 
 // Import pages from the Pages directory
-import VegitablePage from '../Pages/Vegitable';
+import VegetablesPage from '../Pages/Vegetables';
 import DecorativePage from '../Pages/Decorative';
 import MedicinalPage from '../Pages/Medicinal';
 import OutdoorPage from '../Pages/Outdoor';
 import FlowringPage from '../Pages/Flowring';
 import FruitsPage from '../Pages/Fruits';
+import ProductDetailPage from '../Pages/ProductDetail';
 
 function App() {
   useSmoothScroll();
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -29,7 +31,7 @@ function App() {
         const slug = hash.replace('#category/', '');
         // Map slug back to title case category name
         const validCategories = {
-          'vegitable': 'Vegitable',
+          'vegetables': 'Vegetables',
           'decorative': 'Decorative',
           'medicinal': 'Medicinal',
           'outdoor': 'Outdoor',
@@ -39,6 +41,7 @@ function App() {
         const matched = validCategories[slug.toLowerCase()];
         if (matched) {
           setSelectedCategory(matched);
+          setSelectedProductId(null);
           // Scroll back to top immediately upon switching page
           if (window.lenis) {
             window.lenis.scrollTo(0, { immediate: true });
@@ -47,9 +50,20 @@ function App() {
           }
         } else {
           setSelectedCategory(null);
+          setSelectedProductId(null);
+        }
+      } else if (hash.startsWith('#product/')) {
+        const id = hash.replace('#product/', '');
+        setSelectedProductId(id);
+        setSelectedCategory(null);
+        if (window.lenis) {
+          window.lenis.scrollTo(0, { immediate: true });
+        } else {
+          window.scrollTo(0, 0);
         }
       } else {
         setSelectedCategory(null);
+        setSelectedProductId(null);
       }
     };
 
@@ -63,10 +77,14 @@ function App() {
     window.location.hash = '#categories';
   };
 
+  const handleCloseProduct = () => {
+    window.location.hash = '';
+  };
+
   const renderCategoryPage = () => {
     switch (selectedCategory) {
-      case 'Vegitable':
-        return <VegitablePage onClose={handleCloseCategory} />;
+      case 'Vegetables':
+        return <VegetablesPage onClose={handleCloseCategory} />;
       case 'Decorative':
         return <DecorativePage onClose={handleCloseCategory} />;
       case 'Medicinal':
@@ -86,7 +104,9 @@ function App() {
     <div className="w-full min-h-screen bg-bg-light text-text-dark font-sans antialiased overflow-x-hidden">
       <Navbar />
       <main className="w-full">
-        {selectedCategory ? (
+        {selectedProductId ? (
+          <ProductDetailPage productId={selectedProductId} onClose={handleCloseProduct} />
+        ) : selectedCategory ? (
           renderCategoryPage()
         ) : (
           <>
