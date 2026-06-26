@@ -7,7 +7,6 @@ import "swiper/css/pagination";
 import { motion } from "framer-motion";
 
 import { heroSlides } from "../hooks/heroData";
-import backgroundWall from "../assets/background-wall.jpg"
 
 // Framer Motion variants for the right-side text details
 const containerVariants = {
@@ -64,17 +63,19 @@ const Hero = () => {
         {heroSlides.map((slide) => (
           <SwiperSlide key={slide.id}>
             {({ isActive }) => (
-              <div className="grid h-[55vh] lg:h-[65vh] w-full grid-cols-1 lg:grid-cols-[60%_40%] overflow-hidden bg-gray-50">
-
-                {/* Left Side (Animated Image with Slide Overlay) */}
+              <div className="h-[55vh] lg:h-[65vh] w-full overflow-hidden bg-gray-50">
                 <div className="relative overflow-hidden h-full w-full bg-green-950">
+
+                  {/* Slide Transition Overlay */}
                   <motion.div
                     initial={{ scaleX: 1 }}
                     animate={isActive ? { scaleX: 0 } : { scaleX: 1 }}
                     transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
                     style={{ transformOrigin: "right center" }}
-                    className="absolute inset-0 z-10 bg-green-700"
+                    className="absolute inset-0 z-30 bg-green-700"
                   />
+
+                  {/* Hero Background Image */}
                   <motion.picture
                     initial={{
                       scale: 1.3,
@@ -84,7 +85,7 @@ const Hero = () => {
                       isActive
                         ? {
                           scale: 1,
-                          filter: "blur(0px) brightness(1)",
+                          filter: "blur(0px) brightness(0.75)",
                         }
                         : {
                           scale: 1.3,
@@ -109,77 +110,72 @@ const Hero = () => {
                       className="h-full w-full object-cover"
                     />
                   </motion.picture>
-                  {/* shop button for mobile  */}
-                  <motion.div variants={itemVariants}>
-                    <motion.button
-                      whileHover={{ scale: 1.06, y: -2 }}
-                      whileTap={{ scale: 0.97 }}
-                      className="lg:hidden absolute bottom-8 right-8 rounded-full bg-tertiary hover:bg-tertiary/80 px-6 py-2.5 sm:px-8 sm:py-3.5 text-white text-s sm:text-base font-bold tracking-wide shadow-md transition-all duration-300 cursor-pointer"
-                    >
-                      Shop Now
-                    </motion.button>
-                  </motion.div>
-                </div>
-                {/* Right Side (Framer Motion Staggered Content) */}
-                <motion.div
-                  variants={containerVariants}
-                  initial="hidden"
-                  animate={isActive ? "visible" : "hidden"}
-                  className="hidden lg:flex flex-col justify-center"
-                  style={{
-                    backgroundImage: `url(${backgroundWall})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                  }}
-                >
-                  {/* desktop offer card */}
-                  <OfferComponent offer={slide.offer} />
-                  <div className="px-4">
+
+                  {/* Dark fog component */}
+                  <div className="absolute inset-0 bg-black/20 md:bg-gradient-to-r md:from-black/60 md:via-black/25 md:to-transparent z-10 pointer-events-none" />
+
+                  {/* Hanging Offer carrd */}
+                  <div className="hidden md:block absolute top-20 right-8 sm:right-16 md:right-28 z-20 pointer-events-none">
+                    <OfferComponent offer={slide.offer} />
+                  </div>
+
+                  {/* Slide Details Content Overlay */}
+                  <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate={isActive ? "visible" : "hidden"}
+                    className="hidden absolute inset-0 z-20 md:flex flex-col justify-center items-start px-6 sm:px-12 md:px-20 lg:px-32 text-left"
+                  >
+                    {/* Title */}
                     <motion.h2
                       variants={itemVariants}
+                      className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white drop-shadow-md leading-tight max-w-2xl"
                     >
-                      {slide.title.split(" ").map((letter, index) => (
-                        <>
-                          <motion.span
-                            key={index}
-                            variants={itemVariants}
-                            className={`${index === 0 ? "md:text-6xl text-primary-dark ibm-font" : "text-primary text-4xl"} flex flex-col`}
-                          >
-                            {letter}
-                          </motion.span>
-                        </>
+                      {slide.title.split(" ").map((word, index) => (
+                        <span
+                          key={index}
+                          className={`${index === 0
+                            ? "text-accent ibm-font italic font-medium"
+                            : "text-white font-extrabold"
+                            } mr-3 inline-block`}
+                        >
+                          {word}
+                        </span>
                       ))}
                     </motion.h2>
 
-                    {/* discount and shop container */}
-                    <div className="flex justify-between items-center mt-6">
-                      <motion.div
-                        variants={itemVariants}
-                        className="inline-flex items-center gap-4 rounded-xl border border-dashed border-primary/50 bg-white/70 backdrop-blur-md px-5 py-3 shadow-md"
+                    {/* Dynamic Description */}
+                    <motion.p
+                      variants={itemVariants}
+                      className="mt-3 text-sm sm:text-base md:text-lg lg:text-xl text-gray-200/95 max-w-md sm:max-w-lg font-light tracking-wide leading-relaxed drop-shadow-sm"
+                    >
+                      {slide.description}
+                    </motion.p>
+
+                    {/* Unified Shop Now Button */}
+                    <motion.div variants={itemVariants} className="mt-6 sm:mt-8">
+                      <motion.button
+                        whileHover={{ scale: 1.05, y: -2 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="group flex items-center gap-2.5 rounded-full  px-6 py-3 sm:px-8 sm:py-4 text-white text-sm sm:text-base font-bold shadow-lg transition-all duration-300 cursor-pointer bg-gradient-to-r from-primary-dark to-primary"
                       >
-                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                          <MdDiscount className="text-primary text-3xl" />
-                        </div>
+                        <span>Shop Now</span>
+                        <FaLongArrowAltRight className="text-lg sm:text-xl transition-transform duration-300 group-hover:translate-x-1.5" />
+                      </motion.button>
+                    </motion.div>
+                  </motion.div>
+                  {/* mobile button  */}
+                  <motion.button
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="absolute md:hidden bottom-10 right-10 group flex items-center gap-2.5 rounded-full  px-6 py-3 sm:px-8 sm:py-4 text-white text-sm sm:text-base font-bold shadow-lg transition-all duration-300 cursor-pointer bg-gradient-to-r from-primary-dark to-primary"
+                  >
+                    <span>Shop Now</span>
+                    <FaLongArrowAltRight className="text-lg sm:text-xl transition-transform duration-300 group-hover:translate-x-1.5" />
+                  </motion.button>
 
-                        <p className="text-sm lg:text-lg italic font-medium text-gray-700 leading-snug">
-                          {slide.description}
-                        </p>
-                      </motion.div>
 
-                      <motion.div variants={itemVariants}>
-                        <motion.button
-                          whileHover={{ scale: 1.06, y: -2 }}
-                          whileTap={{ scale: 0.97 }}
-                          className="flex gap-2 items-center justify-center rounded-full bg-tertiary hover:bg-linear-to-r from-tertiary-dark to-tertiary px-6 py-2.5 sm:px-8 sm:py-3.5 text-white text-xs sm:text-base font-bold tracking-wide shadow-md transition-all duration-300 cursor-pointer"
-                        >
-                          Shop Now <FaLongArrowAltRight />
-                        </motion.button>
-                      </motion.div>
-
-                    </div>
-                  </div>
-                </motion.div>
+                </div>
               </div>
             )}
           </SwiperSlide>
