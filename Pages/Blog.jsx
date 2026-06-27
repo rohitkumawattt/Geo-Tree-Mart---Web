@@ -19,12 +19,12 @@ const BLOG_POSTS = [
         <p className="lead text-lg text-text-dark font-medium mb-4">
           If you have ever loved a succulent to death, you are not alone. When you buy premium, geotagged succulents from verified local nurseries on <strong>GeoTree Mart</strong>, they arrive healthy and pre-rooted. However, to keep them thriving at home, you must master their specific watering needs.
         </p>
-        
+
         <h3 className="text-xl font-bold text-text-dark mt-6 mb-3">1. The 'Soak and Dry' Method</h3>
         <p className="mb-4">
           The single most important rule is to water the soil, not the leaves, and to soak it thoroughly until water runs out of the bottom drainage hole. Then, <strong>do not water it again until the soil is completely dry</strong> all the way to the bottom of the pot. Do not just rely on testing the surface; stick a wooden skewer or your finger 2 inches into the soil to check for moisture.
         </p>
-        
+
         <blockquote className="border-l-4 border-primary pl-4 py-2 my-6 bg-primary/5 italic text-text-dark font-medium">
           "In the desert, rain comes in heavy downpours followed by long dry spells. Your watering routine should mimic this exact natural cycle."
         </blockquote>
@@ -200,21 +200,21 @@ export default function Blog({ onClose }) {
     return BLOG_POSTS.filter(post => {
       const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
       const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                            post.summary.toLowerCase().includes(searchQuery.toLowerCase());
+        post.summary.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesSearch;
     });
   }, [selectedCategory, searchQuery]);
 
   return (
     <section className="w-full min-h-screen pt-[72px] md:pt-[76px] pb-24 bg-[#FAF9F6] text-text-dark font-sans relative">
-      
+
       {/* Category-Style Header Banner (Light Theme, matches CategoryBase.jsx) */}
       <div className="relative w-full overflow-hidden py-5 md:py-6 px-6 md:px-12 bg-[#F3F6F2] border-b border-primary/5">
         {/* Soft botanical background image with low opacity overlay */}
-        <div 
-          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-15 mix-blend-overlay pointer-events-none" 
+        <div
+          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-15 mix-blend-overlay pointer-events-none"
         />
-        
+
         {/* Decorative botanical floating element */}
         <div className="absolute right-10 bottom-0 opacity-10 pointer-events-none hidden lg:block">
           <FaLeaf className="text-primary text-[55px] rotate-45" />
@@ -228,7 +228,7 @@ export default function Blog({ onClose }) {
               <FiChevronRight />
               <span className="text-text-dark uppercase tracking-tight">Blog</span>
             </div>
-            
+
             <button
               onClick={onClose}
               className="group inline-flex items-center gap-1.5 text-[10px] font-semibold text-primary hover:text-primary-dark bg-white border border-primary/10 px-3 py-1 rounded-full transition-all duration-300 cursor-pointer shadow-sm hover:shadow focus:outline-none"
@@ -247,7 +247,7 @@ export default function Blog({ onClose }) {
                 Welcome to our nursery advice blog! Explore expert tips and gardening guides directly from local nursery botanists.
               </p>
             </div>
-            
+
             <div className="text-text-muted text-[10px] font-semibold border-l border-primary/20 pl-4 py-0.5">
               <span className="text-xl font-black text-primary block leading-none mb-1">
                 {filteredPosts.length}
@@ -267,11 +267,10 @@ export default function Blog({ onClose }) {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border ${
-                  selectedCategory === cat
+                className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border ${selectedCategory === cat
                     ? "bg-primary text-white border-primary shadow-sm"
                     : "bg-white text-text-dark border-gray-200 hover:border-gray-400"
-                }`}
+                  }`}
               >
                 {cat}
               </button>
@@ -289,8 +288,8 @@ export default function Blog({ onClose }) {
               className="w-full pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-text-dark placeholder-gray-400 focus:outline-none focus:border-primary shadow-sm transition-all"
             />
             {searchQuery && (
-              <button 
-                onClick={() => setSearchQuery("")} 
+              <button
+                onClick={() => setSearchQuery("")}
                 className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-text-dark focus:outline-none"
               >
                 <FiX className="text-sm" />

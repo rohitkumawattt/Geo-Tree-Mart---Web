@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  FiArrowLeft, 
-  FiSearch, 
-  FiFilter, 
-  FiStar, 
-  FiCheckCircle, 
-  FiX, 
-  FiMapPin, 
+import {
+  FiArrowLeft,
+  FiSearch,
+  FiFilter,
+  FiStar,
+  FiCheckCircle,
+  FiX,
+  FiMapPin,
   FiPackage,
   FiChevronRight
 } from 'react-icons/fi';
@@ -125,13 +125,13 @@ export default function CategoryBase({ categoryName, onClose }) {
 
   // Toggle filter lists
   const toggleSubcategory = (sub) => {
-    setSelectedSubcategories(prev => 
+    setSelectedSubcategories(prev =>
       prev.includes(sub) ? prev.filter(item => item !== sub) : [...prev, sub]
     );
   };
 
   const toggleNursery = (nursery) => {
-    setSelectedNurseries(prev => 
+    setSelectedNurseries(prev =>
       prev.includes(nursery) ? prev.filter(item => item !== nursery) : [...prev, nursery]
     );
   };
@@ -143,9 +143,9 @@ export default function CategoryBase({ categoryName, onClose }) {
     // Search query filter
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
-      result = result.filter(p => 
-        p.name.toLowerCase().includes(q) || 
-        p.desc.toLowerCase().includes(q) || 
+      result = result.filter(p =>
+        p.name.toLowerCase().includes(q) ||
+        p.desc.toLowerCase().includes(q) ||
         p.origin.toLowerCase().includes(q)
       );
     }
@@ -186,14 +186,14 @@ export default function CategoryBase({ categoryName, onClose }) {
 
   return (
     <div className="w-full min-h-screen pt-[72px] md:pt-[76px] pb-20 bg-[#FAF9F6] text-text-dark font-sans relative">
-      
+
       {/* Category Banner/Header */}
       <section className="relative w-full overflow-hidden py-5 md:py-6 px-6 md:px-12 bg-[#F3F6F2] border-b border-primary/5">
         {/* Soft botanical background image with low opacity overlay */}
-        <div 
-          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-15 mix-blend-overlay pointer-events-none" 
+        <div
+          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-15 mix-blend-overlay pointer-events-none"
         />
-        
+
         {/* Decorative botanical floating element */}
         <div className="absolute right-10 bottom-0 opacity-10 pointer-events-none hidden lg:block">
           <FaLeaf className="text-primary text-[55px] rotate-45" />
@@ -209,7 +209,7 @@ export default function CategoryBase({ categoryName, onClose }) {
                 {categoryName === "Flowring" ? "Flowering" : categoryName}
               </span>
             </div>
-            
+
             <button
               onClick={onClose}
               className="group inline-flex items-center gap-1.5 text-[10px] font-semibold text-primary hover:text-primary-dark bg-white border border-primary/10 px-3 py-1 rounded-full transition-all duration-300 cursor-pointer shadow-sm hover:shadow focus:outline-none"
@@ -228,7 +228,7 @@ export default function CategoryBase({ categoryName, onClose }) {
                 {categoryInfo.tagline}
               </p>
             </div>
-            
+
             <div className="text-text-muted text-[10px] font-semibold border-l border-primary/20 pl-4 py-0.5">
               <span className="text-xl font-black text-primary block leading-none mb-1">
                 {filteredProducts.length}
@@ -242,24 +242,22 @@ export default function CategoryBase({ categoryName, onClose }) {
       {/* Main Browse Catalog Section */}
       <section className="max-w-7xl mx-auto px-6 md:px-12 mt-12">
         <div className="flex flex-col lg:flex-row gap-8">
-          
+
           {/* Sidebar Filters - Desktop */}
           <aside className="hidden lg:block w-72 shrink-0">
-            <div className={`sticky top-28 border shadow-sm rounded-3xl p-6 transition-all ${
-              isPlants
+            <div className={`sticky top-28 border shadow-sm rounded-3xl p-6 transition-all ${isPlants
                 ? "bg-white/10 backdrop-blur-md border-white/10 text-white shadow-xl"
                 : "bg-white border-primary/5 text-text-dark"
-            }`}>
-              
+              }`}>
+
               <div className={`flex items-center justify-between mb-6 pb-4 border-b ${isPlants ? "border-white/10" : "border-gray-100"}`}>
                 <h3 className={`font-display font-bold text-lg flex items-center gap-2 ${isPlants ? "text-white" : "text-text-dark"}`}>
                   <FiFilter className={`${isPlants ? "text-emerald-400" : "text-primary"} text-sm`} /> Filters
                 </h3>
                 <button
                   onClick={clearFilters}
-                  className={`text-xs font-bold transition-colors cursor-pointer focus:outline-none ${
-                    isPlants ? "text-emerald-300 hover:text-emerald-200" : "text-primary hover:text-primary-dark"
-                  }`}
+                  className={`text-xs font-bold transition-colors cursor-pointer focus:outline-none ${isPlants ? "text-emerald-300 hover:text-emerald-200" : "text-primary hover:text-primary-dark"
+                    }`}
                 >
                   Clear All
                 </button>
@@ -275,15 +273,14 @@ export default function CategoryBase({ categoryName, onClose }) {
                       <button
                         key={sub}
                         onClick={() => toggleSubcategory(sub)}
-                        className={`text-left px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
-                          isChecked 
+                        className={`text-left px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${isChecked
                             ? isPlants
                               ? 'bg-emerald-400/20 text-emerald-300 border border-emerald-400/30'
-                              : 'bg-primary/10 text-primary border border-primary/20' 
+                              : 'bg-primary/10 text-primary border border-primary/20'
                             : isPlants
                               ? 'bg-white/5 text-white/70 hover:bg-white/10 border border-transparent'
                               : 'bg-gray-50 text-text-muted hover:bg-gray-100 border border-transparent'
-                        }`}
+                          }`}
                       >
                         {sub}
                       </button>
@@ -304,9 +301,8 @@ export default function CategoryBase({ categoryName, onClose }) {
                   max={priceLimits.max}
                   value={maxPrice}
                   onChange={(e) => setMaxPrice(Number(e.target.value))}
-                  className={`w-full h-1.5 rounded-lg appearance-none cursor-pointer accent-primary focus:outline-none ${
-                    isPlants ? "bg-white/20" : "bg-gray-200"
-                  }`}
+                  className={`w-full h-1.5 rounded-lg appearance-none cursor-pointer accent-primary focus:outline-none ${isPlants ? "bg-white/20" : "bg-gray-200"
+                    }`}
                 />
                 <div className={`flex justify-between text-[10px] mt-1 font-semibold ${isPlants ? "text-white/60" : "text-text-muted"}`}>
                   <span>₹{priceLimits.min}</span>
@@ -321,19 +317,17 @@ export default function CategoryBase({ categoryName, onClose }) {
                   {nurseries.map(nursery => {
                     const isChecked = selectedNurseries.includes(nursery);
                     return (
-                      <label 
-                        key={nursery} 
-                        className={`flex items-center gap-2 text-xs font-medium cursor-pointer transition-colors ${
-                          isPlants ? "text-white/70 hover:text-white" : "text-text-muted hover:text-text-dark"
-                        }`}
+                      <label
+                        key={nursery}
+                        className={`flex items-center gap-2 text-xs font-medium cursor-pointer transition-colors ${isPlants ? "text-white/70 hover:text-white" : "text-text-muted hover:text-text-dark"
+                          }`}
                       >
                         <input
                           type="checkbox"
                           checked={isChecked}
                           onChange={() => toggleNursery(nursery)}
-                          className={`w-4 h-4 rounded focus:ring-primary/20 accent-primary cursor-pointer ${
-                            isPlants ? "border-white/25 bg-white/5" : "border-gray-300 text-primary"
-                          }`}
+                          className={`w-4 h-4 rounded focus:ring-primary/20 accent-primary cursor-pointer ${isPlants ? "border-white/25 bg-white/5" : "border-gray-300 text-primary"
+                            }`}
                         />
                         <span className="truncate">{nursery}</span>
                       </label>
@@ -347,14 +341,13 @@ export default function CategoryBase({ categoryName, onClose }) {
 
           {/* Catalog Content Area */}
           <div className="flex-1">
-            
+
             {/* Search, Mobile Filter Trigger, Sort bar */}
-            <div className={`border shadow-sm rounded-3xl p-4 mb-6 flex flex-col sm:flex-row items-center gap-4 transition-all duration-300 ${
-              isPlants
+            <div className={`border shadow-sm rounded-3xl p-4 mb-6 flex flex-col sm:flex-row items-center gap-4 transition-all duration-300 ${isPlants
                 ? "bg-white/10 backdrop-blur-md border-white/10 text-white shadow-xl"
                 : "bg-white border-primary/5 text-text-dark"
-            }`}>
-              
+              }`}>
+
               {/* Search input */}
               <div className="relative w-full sm:flex-1">
                 <FiSearch className={`absolute left-4 top-1/2 -translate-y-1/2 text-lg ${isPlants ? "text-white/60" : "text-text-muted"}`} />
@@ -363,18 +356,16 @@ export default function CategoryBase({ categoryName, onClose }) {
                   placeholder={`Search in ${categoryName}...`}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className={`w-full border rounded-2xl py-3 pl-12 pr-4 text-sm transition-all focus:outline-none ${
-                    isPlants
+                  className={`w-full border rounded-2xl py-3 pl-12 pr-4 text-sm transition-all focus:outline-none ${isPlants
                       ? 'bg-white/5 border-white/10 text-white placeholder-white/40 focus:bg-white/10 focus:ring-white/20 focus:border-white/30'
                       : 'bg-gray-50 border-gray-100 text-text-dark placeholder-text-muted focus:bg-white focus:ring-primary/10 focus:border-primary/30'
-                  }`}
+                    }`}
                 />
                 {searchQuery && (
-                  <button 
+                  <button
                     onClick={() => setSearchQuery('')}
-                    className={`absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer focus:outline-none ${
-                      isPlants ? "text-white/60 hover:text-white" : "text-text-muted hover:text-text-dark"
-                    }`}
+                    className={`absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer focus:outline-none ${isPlants ? "text-white/60 hover:text-white" : "text-text-muted hover:text-text-dark"
+                      }`}
                   >
                     <FiX />
                   </button>
@@ -383,32 +374,29 @@ export default function CategoryBase({ categoryName, onClose }) {
 
               {/* Sort and Mobile Filters */}
               <div className="flex items-center gap-3 w-full sm:w-auto shrink-0 justify-between sm:justify-start">
-                
+
                 {/* Mobile Filter Toggle */}
                 <button
                   onClick={() => setShowFiltersMobile(true)}
-                  className={`flex items-center gap-2 border px-4 py-3 rounded-2xl text-sm font-semibold transition-colors cursor-pointer focus:outline-none ${
-                    isPlants
+                  className={`flex items-center gap-2 border px-4 py-3 rounded-2xl text-sm font-semibold transition-colors cursor-pointer focus:outline-none ${isPlants
                       ? "border-white/10 bg-white/5 hover:bg-white/10 text-white"
                       : "border-gray-100 bg-gray-50 hover:bg-gray-100 text-text-dark"
-                  }`}
+                    }`}
                 >
                   <FiFilter className={isPlants ? "text-emerald-400" : "text-primary"} /> Filters
                 </button>
 
                 {/* Sort dropdown */}
-                <div className={`relative flex items-center gap-2 border rounded-2xl px-4 py-3 text-sm ${
-                  isPlants
+                <div className={`relative flex items-center gap-2 border rounded-2xl px-4 py-3 text-sm ${isPlants
                     ? "border-white/10 bg-white/5 text-white"
                     : "border-gray-100 bg-gray-50 text-text-dark"
-                }`}>
+                  }`}>
                   <span className={`hidden md:inline font-medium ${isPlants ? "text-white/60" : "text-text-muted"}`}>Sort by:</span>
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className={`bg-transparent font-bold border-none focus:outline-none cursor-pointer pr-1 ${
-                      isPlants ? "text-white [&>option]:text-text-dark" : "text-text-dark"
-                    }`}
+                    className={`bg-transparent font-bold border-none focus:outline-none cursor-pointer pr-1 ${isPlants ? "text-white [&>option]:text-text-dark" : "text-text-dark"
+                      }`}
                   >
                     <option value="rating">Top Rated</option>
                     <option value="price-low">Price: Low to High</option>
@@ -424,13 +412,12 @@ export default function CategoryBase({ categoryName, onClose }) {
             {(selectedSubcategories.length > 0 || selectedNurseries.length > 0 || searchQuery) && (
               <div className="flex flex-wrap items-center gap-2 mb-6">
                 <span className={`text-xs font-semibold ${isPlants ? "text-white/60" : "text-text-muted"}`}>Active:</span>
-                
+
                 {searchQuery && (
-                  <span className={`inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full border ${
-                    isPlants
+                  <span className={`inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full border ${isPlants
                       ? "bg-white/10 text-white border-white/20"
                       : "bg-primary/5 text-primary border-primary/10"
-                  }`}>
+                    }`}>
                     "{searchQuery}"
                     <button onClick={() => setSearchQuery('')} className="cursor-pointer focus:outline-none">
                       <FiX />
@@ -439,11 +426,10 @@ export default function CategoryBase({ categoryName, onClose }) {
                 )}
 
                 {selectedSubcategories.map(sub => (
-                  <span key={sub} className={`inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full border ${
-                    isPlants
+                  <span key={sub} className={`inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full border ${isPlants
                       ? "bg-white/10 text-white border-white/20"
                       : "bg-primary/5 text-primary border-primary/10"
-                  }`}>
+                    }`}>
                     {sub}
                     <button onClick={() => toggleSubcategory(sub)} className="cursor-pointer focus:outline-none">
                       <FiX />
@@ -452,11 +438,10 @@ export default function CategoryBase({ categoryName, onClose }) {
                 ))}
 
                 {selectedNurseries.map(nursery => (
-                  <span key={nursery} className={`inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full border ${
-                    isPlants
+                  <span key={nursery} className={`inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full border ${isPlants
                       ? "bg-white/10 text-white border-white/20"
                       : "bg-primary/5 text-primary border-primary/10"
-                  }`}>
+                    }`}>
                     {nursery}
                     <button onClick={() => toggleNursery(nursery)} className="cursor-pointer focus:outline-none">
                       <FiX />
@@ -464,11 +449,10 @@ export default function CategoryBase({ categoryName, onClose }) {
                   </span>
                 ))}
 
-                <button 
+                <button
                   onClick={clearFilters}
-                  className={`text-xs font-bold ml-1 transition-colors cursor-pointer focus:outline-none ${
-                    isPlants ? "text-red-300 hover:text-red-200" : "text-red-500 hover:text-red-600"
-                  }`}
+                  className={`text-xs font-bold ml-1 transition-colors cursor-pointer focus:outline-none ${isPlants ? "text-red-300 hover:text-red-200" : "text-red-500 hover:text-red-600"
+                    }`}
                 >
                   Clear all
                 </button>
@@ -477,7 +461,7 @@ export default function CategoryBase({ categoryName, onClose }) {
 
             {/* Products Grid */}
             {filteredProducts.length > 0 ? (
-              <motion.div 
+              <motion.div
                 layout
                 className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4"
               >
@@ -512,7 +496,7 @@ export default function CategoryBase({ categoryName, onClose }) {
                       {/* Details Box */}
                       <div className="p-3.5 flex-1 flex flex-col justify-between">
                         <div>
-                          
+
                           {/* Rating and Reviews */}
                           <div className="flex items-center gap-1 mb-1.5">
                             <div className="flex text-amber-400">
@@ -535,7 +519,7 @@ export default function CategoryBase({ categoryName, onClose }) {
                         </div>
 
                         <div>
-                          
+
                           {/* Stock and Nursery */}
                           <div className="flex flex-col gap-1 mb-3 border-t border-gray-50 pt-2 text-[10px] font-semibold text-text-muted">
                             <div className="flex items-center gap-1">
@@ -620,8 +604,8 @@ export default function CategoryBase({ categoryName, onClose }) {
               { id: "snakeplant", name: "Snake Plant (Sansevieria)", price: "90", unit: "plant", image: "https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?auto=format&fit=crop&w=400&q=80", tag: "Air Purifier" },
               { id: "succulentcombo", name: "Succulent Combo A3 (Set of 6)", price: "599", unit: "combo", image: "https://images.unsplash.com/photo-1509587584298-0f3b3a3a1797?auto=format&fit=crop&w=400&q=80", tag: "Combo Pack" }
             ].map((item, idx) => (
-              <div 
-                key={idx} 
+              <div
+                key={idx}
                 onClick={() => window.location.hash = `#product/${item.id}`}
                 className="bg-white rounded-2xl border border-gray-100 p-3 flex flex-col justify-between hover:shadow-lg transition-all group cursor-pointer"
               >
@@ -638,11 +622,11 @@ export default function CategoryBase({ categoryName, onClose }) {
                 </div>
                 <div className="flex items-center justify-between mt-2 pt-2 border-t border-gray-50">
                   <span className="font-display font-black text-xs md:text-sm text-primary">₹{item.price}<span className="text-[9px] md:text-[10px] text-text-muted font-normal font-sans">/{item.unit}</span></span>
-                  <button 
+                  <button
                     onClick={(e) => {
                       e.stopPropagation();
                       setInquiryProduct({ name: item.name, origin: "GeoTree Bestsellers Hub", price: item.price, unit: item.unit, stock: 5000, desc: "Bestseller nursery item." });
-                    }} 
+                    }}
                     className="text-[9px] md:text-[10px] font-bold text-primary hover:text-primary-dark underline cursor-pointer"
                   >
                     Quick Quote
@@ -697,11 +681,10 @@ export default function CategoryBase({ categoryName, onClose }) {
                         <button
                           key={sub}
                           onClick={() => toggleSubcategory(sub)}
-                          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
-                            isChecked 
-                              ? 'bg-primary/10 text-primary border border-primary/20' 
+                          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${isChecked
+                              ? 'bg-primary/10 text-primary border border-primary/20'
                               : 'bg-gray-50 text-text-muted border border-transparent'
-                          }`}
+                            }`}
                         >
                           {sub}
                         </button>
@@ -737,8 +720,8 @@ export default function CategoryBase({ categoryName, onClose }) {
                     {nurseries.map(nursery => {
                       const isChecked = selectedNurseries.includes(nursery);
                       return (
-                        <label 
-                          key={nursery} 
+                        <label
+                          key={nursery}
                           className="flex items-center gap-2.5 text-xs font-medium text-text-muted cursor-pointer hover:text-text-dark"
                         >
                           <input
@@ -778,7 +761,7 @@ export default function CategoryBase({ categoryName, onClose }) {
       <AnimatePresence>
         {inquiryProduct && (
           <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
-            
+
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -818,7 +801,7 @@ export default function CategoryBase({ categoryName, onClose }) {
                   </div>
 
                   <form onSubmit={handleInquirySubmit} className="flex flex-col gap-4">
-                    
+
                     {/* Name */}
                     <div className="flex flex-col gap-1.5">
                       <label className="text-xs font-bold text-text-dark">Your Name</label>
@@ -891,7 +874,7 @@ export default function CategoryBase({ categoryName, onClose }) {
                   <p className="text-sm text-text-muted max-w-sm mx-auto mb-6 leading-relaxed">
                     Thank you <span className="font-bold text-text-dark">{inquiryForm.name}</span>. The grower at <span className="font-bold text-text-dark">{inquiryProduct.origin}</span> has been notified of your interest. They will contact you shortly on <span className="font-bold text-text-dark">{inquiryForm.phone}</span>.
                   </p>
-                  
+
                   <div className="bg-primary/5 border border-primary/10 rounded-2xl p-4 mb-6">
                     <span className="text-xs font-bold text-primary block mb-1">Want instant bookings and live tracking?</span>
                     <p className="text-[11px] text-text-muted">Download the GeoTree Mart App to directly communicate with growers and verify nursery credentials.</p>

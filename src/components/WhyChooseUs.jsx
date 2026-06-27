@@ -67,7 +67,7 @@ export default function ProblemSolution() {
       <div className="absolute top-[20%] left-[-100px] w-96 h-96 bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[20%] right-[-100px] w-96 h-96 bg-secondary/5 blur-[150px] rounded-full pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="mx-auto relative z-10">
         {/* Title */}
         <div className="text-center max-w-3xl mx-auto mb-20 flex flex-col items-center group">
           <h2 className="font-display text-3xl sm:text-5xl text-[#0f1f10] leading-tight tracking-tight">
@@ -76,7 +76,7 @@ export default function ProblemSolution() {
         </div>
 
         {/* Features Container */}
-        <div className="relative max-w-6xl mx-auto">
+        <div className="relative mx-auto">
           {/* Dashed Connecting Line behind icons (Desktop only) */}
           <div className="hidden lg:block absolute top-8 left-[12%] right-[12%] h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent border-t border-dashed border-primary/30 z-0 pointer-events-none" />
 

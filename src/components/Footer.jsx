@@ -77,7 +77,7 @@ export default function Footer() {
       <div className="absolute bottom-[-100px] left-[-100px] w-[500px] h-[500px] bg-primary/10 blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute top-[-50px] right-[-50px] w-[400px] h-[400px] bg-secondary/8 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto pb-16 relative z-10">
+      <div className="mx-auto pb-16 relative z-10">
 
         {/* Main Links Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">

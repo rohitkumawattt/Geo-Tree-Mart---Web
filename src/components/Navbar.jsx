@@ -162,7 +162,7 @@ export default function Navbar() {
         <motion.div
           layout
           className={`mx-auto pointer-events-auto ${isScrolled
-            ? 'mt-3 w-[92%] max-w-7xl rounded-full bg-white/75 backdrop-blur-md shadow-[0_10px_35px_rgba(0,0,0,0.05)] border border-white/50 py-3 px-6 md:px-8'
+            ? 'mt-3 w-[95%] max-w-9xl rounded-full bg-white/75 backdrop-blur-md shadow-[0_10px_35px_rgba(0,0,0,0.05)] border border-white/50 py-3 px-6 md:px-8'
             : 'mt-0 w-full rounded-none bg-white/40 backdrop-blur-[6px] border-b border-white/20 py-4 px-6 md:px-12'
             }`}
           transition={{ type: 'spring', stiffness: 220, damping: 28 }}
@@ -177,7 +177,7 @@ export default function Navbar() {
               <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-md shadow-primary/10 transform transition-all group-hover:scale-105 group-hover:rotate-6 duration-300 border border-primary/5">
                 <img src="./favicon.png" alt="" className="w-6 h-6 object-contain" />
               </div>
-              <div className="flex flex-col">
+              <div className="md:hidden lg:flex flex flex-col">
                 <span className="font-display font-black text-base md:text-lg leading-none tracking-tight text-text-dark">
                   GeoTree <span className="text-primary">Mart</span>
                 </span>

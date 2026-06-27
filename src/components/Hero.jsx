@@ -63,7 +63,7 @@ const Hero = () => {
         {heroSlides.map((slide) => (
           <SwiperSlide key={slide.id}>
             {({ isActive }) => (
-              <div className="h-[55vh] lg:h-[65vh] w-full overflow-hidden bg-gray-50">
+              <div className="h-[55vh] lg:h-[65vh] w-full mx-auto overflow-hidden bg-gray-50">
                 <div className="relative overflow-hidden h-full w-full bg-green-950">
 
                   {/* Slide Transition Overlay */}
@@ -124,7 +124,7 @@ const Hero = () => {
                     variants={containerVariants}
                     initial="hidden"
                     animate={isActive ? "visible" : "hidden"}
-                    className="hidden absolute inset-0 z-20 md:flex flex-col justify-center items-start px-6 sm:px-12 md:px-20 lg:px-32 text-left"
+                    className="w-full hidden absolute inset-0 z-20 md:flex flex-col justify-center items-start text-left md:px-10 "
                   >
                     {/* Title */}
                     <motion.h2

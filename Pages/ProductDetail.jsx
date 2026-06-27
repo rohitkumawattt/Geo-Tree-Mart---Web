@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  FiArrowLeft, 
-  FiStar, 
-  FiMapPin, 
-  FiPackage, 
-  FiCheckCircle, 
+import {
+  FiArrowLeft,
+  FiStar,
+  FiMapPin,
+  FiPackage,
+  FiCheckCircle,
   FiChevronRight,
   FiChevronDown,
   FiChevronUp,
@@ -20,7 +20,7 @@ export default function ProductDetail({ productId, onClose }) {
   const [selectedPot, setSelectedPot] = useState('Bare Rooted');
   const [selectedQuantityOption, setSelectedQuantityOption] = useState(1); // 1, 2, 5, 10
   const [activeImageIdx, setActiveImageIdx] = useState(0);
-  
+
   // Accordion toggle states
   const [openAccordions, setOpenAccordions] = useState({
     howWeWork: false,
@@ -198,7 +198,7 @@ export default function ProductDetail({ productId, onClose }) {
       {/* Main Showcase Layout */}
       <section className="max-w-6xl mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start bg-white rounded-3xl border border-primary/5 p-4 md:p-8 shadow-sm">
-          
+
           {/* Left Column: Image Gallery */}
           <div className="md:col-span-6 w-full flex flex-col gap-4">
             <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-gray-50 border border-gray-100 group shadow-inner">
@@ -218,9 +218,8 @@ export default function ProductDetail({ productId, onClose }) {
                 <button
                   key={idx}
                   onClick={() => setActiveImageIdx(idx)}
-                  className={`relative w-16 md:w-20 aspect-square rounded-xl overflow-hidden border-2 bg-gray-50 transition-all flex-shrink-0 cursor-pointer ${
-                    activeImageIdx === idx ? 'border-primary shadow-sm scale-95' : 'border-transparent hover:border-gray-300'
-                  }`}
+                  className={`relative w-16 md:w-20 aspect-square rounded-xl overflow-hidden border-2 bg-gray-50 transition-all flex-shrink-0 cursor-pointer ${activeImageIdx === idx ? 'border-primary shadow-sm scale-95' : 'border-transparent hover:border-gray-300'
+                    }`}
                 >
                   <img src={img} alt={`view-${idx}`} className="w-full h-full object-cover" />
                 </button>
@@ -230,13 +229,13 @@ export default function ProductDetail({ productId, onClose }) {
 
           {/* Right Column: Specifications & Checkout Selection */}
           <div className="md:col-span-6 flex flex-col gap-6 text-left">
-            
+
             {/* Title & Reviews */}
             <div>
               <h1 className="font-display font-black text-2xl lg:text-3xl text-text-dark tracking-tight leading-tight">
                 {product.name}
               </h1>
-              
+
               <div className="flex items-center gap-2 mt-2">
                 <span className="text-xs font-bold text-text-muted">Rating ({product.rating || '4.8'})</span>
                 <div className="flex gap-0.5">
@@ -303,11 +302,10 @@ export default function ProductDetail({ productId, onClose }) {
                     <label
                       key={option.qty}
                       onClick={() => setSelectedQuantityOption(option.qty)}
-                      className={`relative flex items-center justify-between border rounded-xl p-3 cursor-pointer transition-all ${
-                        selectedQuantityOption === option.qty
+                      className={`relative flex items-center justify-between border rounded-xl p-3 cursor-pointer transition-all ${selectedQuantityOption === option.qty
                           ? 'border-primary bg-primary/[0.02] shadow-sm'
                           : 'border-gray-200 hover:border-gray-300 bg-white'
-                      }`}
+                        }`}
                     >
                       <div className="flex items-center gap-2.5">
                         <input
@@ -365,7 +363,7 @@ export default function ProductDetail({ productId, onClose }) {
 
             {/* Accordion Specification Details */}
             <div className="border-t border-gray-100 pt-4 flex flex-col gap-2">
-              
+
               {/* How we work */}
               <div className="border-b border-gray-100 pb-2">
                 <button
@@ -513,8 +511,8 @@ export default function ProductDetail({ productId, onClose }) {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {similarProducts.map((item) => (
-              <div 
-                key={item.id} 
+              <div
+                key={item.id}
                 onClick={() => {
                   window.location.hash = `#product/${item.id}`;
                 }}
@@ -522,10 +520,10 @@ export default function ProductDetail({ productId, onClose }) {
               >
                 <div>
                   <div className="aspect-square rounded-xl overflow-hidden mb-2 bg-gray-50 relative">
-                    <img 
-                      src={item.image} 
-                      alt={item.name} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <span className="absolute top-2 left-2 bg-amber-100 text-amber-800 text-[8px] font-black px-1.5 py-0.5 rounded shadow-sm">
                       Sale
@@ -644,7 +642,7 @@ export default function ProductDetail({ productId, onClose }) {
                   <p className="text-xs text-text-muted max-w-sm mx-auto mb-6 leading-relaxed">
                     Thank you <span className="font-bold text-text-dark">{inquiryForm.name}</span>. The accredited grower at <span className="font-bold text-text-dark">{product.origin}</span> has received your booking request for <span className="font-bold text-text-dark">{selectedQuantityOption}x {product.name}</span>. They will respond shortly.
                   </p>
-                  
+
                   <button
                     onClick={() => {
                       setShowInquiryModal(false);

@@ -9,7 +9,7 @@ export default function Banner() {
 
   return (
     <section className="w-full py-2 px-6 md:px-12 bg-bg-light overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+      <div className="mx-auto">
         <div className="relative rounded-[20px] overflow-hidden bg-[#063B2B] text-white min-h-[130px] md:min-h-[160px] flex flex-col md:flex-row items-center justify-between p-0 shadow-md border border-[#053023] group">
 
           {/* Right curved background block (Light green) */}

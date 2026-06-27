@@ -64,7 +64,7 @@ export default function Buy() {
       <div className="absolute top-1/3 left-0 w-[380px] h-[380px] rounded-full bg-secondary/5 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-10 right-0 w-[450px] h-[450px] rounded-full bg-primary/10 blur-[130px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto">
+      <div className="mx-auto">
 
         {/* Title Area */}
         <div ref={titleRef} className="text-center max-w-2xl mx-auto mb-8 flex flex-col items-center">

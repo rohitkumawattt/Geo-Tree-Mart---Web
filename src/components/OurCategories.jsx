@@ -63,7 +63,7 @@ const OurCategories = () => {
   return (
     <section id="categories" className="relative overflow-hidden py-12">
 
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto">
         {/* Heading */}
         <div className="mb-8 text-center group">
           <h2 ref={titleRef} className="font-display md:text-6xl text-4xl sm:text-3xl">
