@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useTheme } from '../context/ThemeContext'
 import vegetables from '../assets/categories/vegitable.png'
 import decorative from '../assets/categories/decorative.png'
 import Medicinal from '../assets/categories/Medicinal.png'
@@ -22,6 +23,7 @@ const categories = [
 const OurCategories = () => {
   const titleRef = useRef(null);
   const gridRef = useRef(null);
+  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     // Title & description entrance animation
@@ -60,6 +62,11 @@ const OurCategories = () => {
     );
   }, []);
 
+  const getCategoryBgColor = (lightColor) => {
+    if (!isDarkMode) return lightColor;
+    return lightColor === "#ECF7E9" ? "#0c1f13" : "#17181c";
+  };
+
   return (
     <section id="categories" className="relative overflow-hidden pt-6 pb-4">
       <style dangerouslySetInnerHTML={{__html: `
@@ -75,7 +82,7 @@ const OurCategories = () => {
       <div className="relative mx-auto">
         {/* Heading */}
         <div className="mb-8 text-center group">
-          <h2 ref={titleRef} className="font-display md:text-6xl text-4xl sm:text-3xl">
+          <h2 ref={titleRef} className="font-display md:text-6xl text-4xl sm:text-3xl text-text-dark dark:text-gray-100">
             <span className='italic text-primary'>Explore</span> Collection
           </h2>
         </div>
@@ -84,15 +91,16 @@ const OurCategories = () => {
         <div ref={gridRef} className="grid grid-cols-2 gap-3 sm:gap-4 lg:gap-5 sm:grid-cols-3 lg:grid-cols-6 justify-items-center">
           {categories.map((category, index) => {
             const categorySlug = category.name.toLowerCase().replace(/\s+/g, '-');
+            const bgColor = getCategoryBgColor(category.color);
             return (
               <a
                 href={`#category/${categorySlug}`}
                 key={index}
                 className="group flex flex-col items-center cursor-pointer no-underline"
               >
-                {/* Outer Circle Container (Responsive sizes: h-32 w-32 on mobile, h-40 w-40 on tablet/desktop) */}
-                <div className="relative flex h-44 w-40 md:h-52 md:w-48 items-center justify-center rounded-2xl shadow-xl transition-all duration-500 ease-in-out overflow-hidden group-hover:scale-105 p-1" style={{
-                  backgroundColor: category.color,
+                {/* Outer Circle Container */}
+                <div className="relative flex h-44 w-40 md:h-52 md:w-48 items-center justify-center rounded-2xl shadow-xl transition-all duration-500 ease-in-out overflow-hidden group-hover:scale-105 p-1 border border-black/[0.02] dark:border-zinc-800" style={{
+                  backgroundColor: bgColor,
                   '--base-scale': String(category.scale),
                   '--hover-scale': String(category.scale * 1.15)
                 }}>
@@ -103,7 +111,7 @@ const OurCategories = () => {
                     loading="lazy"
                   />
                   {/* Title */}
-                  <h3 className="absolute bottom-3 text-primary/60 bg-white rounded-xl px-4 py-1.5 border border-white/50 shadow-md text-xs sm:text-sm font-semibold transition-colors duration-300 group-hover:text-primary">
+                  <h3 className="absolute bottom-3 text-primary/60 dark:text-primary/70 bg-white dark:bg-zinc-900 rounded-xl px-4 py-1.5 border border-white/50 dark:border-zinc-800 shadow-md text-xs sm:text-sm font-semibold transition-colors duration-300 group-hover:text-primary">
                     {category.name}
                   </h3>
                 </div>

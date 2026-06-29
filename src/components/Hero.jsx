@@ -213,7 +213,7 @@ const OfferComponent = ({ offer }) => {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="relative rounded-xl border-[2px] border-primary bg-white/95 md:px-4 md:py-2 px-2.5 py-1 shadow-[0_15px_30px_rgba(46,125,50,0.15)]"
+          className="relative rounded-xl border-[2px] border-primary bg-white/95 dark:bg-zinc-950/95 md:px-4 md:py-2 px-2.5 py-1 shadow-[0_15px_30px_rgba(46,125,50,0.15)]"
         >
           <h3 className="md:text-3xl text-2xl font-black text-primary">
             <span style={{

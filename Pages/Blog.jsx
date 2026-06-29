@@ -16,30 +16,30 @@ const BLOG_POSTS = [
     image: "https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?auto=format&fit=crop&w=600&q=80",
     content: (
       <>
-        <p className="lead text-lg text-text-dark font-medium mb-4">
+        <p className="lead text-lg text-text-dark dark:text-gray-150 font-medium mb-4">
           If you have ever loved a succulent to death, you are not alone. When you buy premium, geotagged succulents from verified local nurseries on <strong>GeoTree Mart</strong>, they arrive healthy and pre-rooted. However, to keep them thriving at home, you must master their specific watering needs.
         </p>
 
-        <h3 className="text-xl font-bold text-text-dark mt-6 mb-3">1. The 'Soak and Dry' Method</h3>
-        <p className="mb-4">
+        <h3 className="text-xl font-bold text-text-dark dark:text-gray-100 mt-6 mb-3">1. The 'Soak and Dry' Method</h3>
+        <p className="mb-4 text-text-muted dark:text-gray-400">
           The single most important rule is to water the soil, not the leaves, and to soak it thoroughly until water runs out of the bottom drainage hole. Then, <strong>do not water it again until the soil is completely dry</strong> all the way to the bottom of the pot. Do not just rely on testing the surface; stick a wooden skewer or your finger 2 inches into the soil to check for moisture.
         </p>
 
-        <blockquote className="border-l-4 border-primary pl-4 py-2 my-6 bg-primary/5 italic text-text-dark font-medium">
+        <blockquote className="border-l-4 border-primary pl-4 py-2 my-6 bg-primary/5 dark:bg-primary/10 italic text-text-dark dark:text-gray-200 font-medium">
           "In the desert, rain comes in heavy downpours followed by long dry spells. Your watering routine should mimic this exact natural cycle."
         </blockquote>
 
-        <h3 className="text-xl font-bold text-text-dark mt-6 mb-3">2. Signs of Overwatering vs. Underwatering</h3>
-        <p className="mb-4">
+        <h3 className="text-xl font-bold text-text-dark dark:text-gray-100 mt-6 mb-3">2. Signs of Overwatering vs. Underwatering</h3>
+        <p className="mb-4 text-text-muted dark:text-gray-400">
           It is crucial to look at your plant's leaves. They will tell you exactly what they need:
         </p>
-        <ul className="list-disc pl-6 mb-4 flex flex-col gap-2">
+        <ul className="list-disc pl-6 mb-4 flex flex-col gap-2 text-text-muted dark:text-gray-400">
           <li><strong>Overwatered Succulent:</strong> Leaves become soft, translucent, yellow, and may drop off easily at the slightest touch.</li>
           <li><strong>Underwatered Succulent:</strong> Leaves look wrinkled, shriveled, and lose their plump texture, starting from the bottom of the stem.</li>
         </ul>
 
-        <h3 className="text-xl font-bold text-text-dark mt-6 mb-3">3. The Importance of Drainage</h3>
-        <p className="mb-4">
+        <h3 className="text-xl font-bold text-text-dark dark:text-gray-100 mt-6 mb-3">3. The Importance of Drainage</h3>
+        <p className="mb-4 text-text-muted dark:text-gray-400">
           Succulents hate sitting in soggy soil. Always use a well-draining gritty mix (adding perlite or coarse sand) and plant them in pots with drainage holes. If you are planting in a decorative pot without drainage, keep the plant in its plastic nursery container inside the decorative pot.
         </p>
       </>
@@ -57,26 +57,26 @@ const BLOG_POSTS = [
     image: "https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?auto=format&fit=crop&w=600&q=80",
     content: (
       <>
-        <p className="lead text-lg text-text-dark font-medium mb-4">
+        <p className="lead text-lg text-text-dark dark:text-gray-150 font-medium mb-4">
           Poor indoor air quality can affect your sleep, focus, and overall well-being. Adding living plants to your bedroom is a natural, low-cost way to filter out toxins. You can find all these healthy, clean-air houseplants from certified growers right here on <strong>GeoTree Mart</strong>.
         </p>
 
-        <h3 className="text-xl font-bold text-text-dark mt-6 mb-3">1. Snake Plant (Sansevieria)</h3>
-        <p className="mb-4">
+        <h3 className="text-xl font-bold text-text-dark dark:text-gray-100 mt-6 mb-3">1. Snake Plant (Sansevieria)</h3>
+        <p className="mb-4 text-text-muted dark:text-gray-400">
           Unlike most plants that consume oxygen at night, the Snake Plant converts CO2 into fresh oxygen during the dark hours. It is also extremely low maintenance, thriving in almost total neglect.
         </p>
 
-        <h3 className="text-xl font-bold text-text-dark mt-6 mb-3">2. ZZ Plant (Zamioculcas zamiifolia)</h3>
-        <p className="mb-4">
+        <h3 className="text-xl font-bold text-text-dark dark:text-gray-100 mt-6 mb-3">2. ZZ Plant (Zamioculcas zamiifolia)</h3>
+        <p className="mb-4 text-text-muted dark:text-gray-400">
           With its glossy, dark-green waxy leaves, the ZZ plant looks elegant and survives easily in windowless rooms or dark corners. Water it only once a month.
         </p>
 
-        <h3 className="text-xl font-bold text-text-dark mt-6 mb-3">3. Peace Lily (Spathiphyllum)</h3>
-        <p className="mb-4">
+        <h3 className="text-xl font-bold text-text-dark dark:text-gray-100 mt-6 mb-3">3. Peace Lily (Spathiphyllum)</h3>
+        <p className="mb-4 text-text-muted dark:text-gray-400">
           A powerhouse air purifier, the Peace Lily filters out mold spores and common allergens. It will gracefully droop its leaves when it needs water, taking away the guessing game.
         </p>
 
-        <blockquote className="border-l-4 border-primary pl-4 py-2 my-6 bg-primary/5 italic text-text-dark font-medium">
+        <blockquote className="border-l-4 border-primary pl-4 py-2 my-6 bg-primary/5 dark:bg-primary/10 italic text-text-dark dark:text-gray-200 font-medium">
           "Placing 2 or 3 of these clean air champions near your bed can significantly boost humidity levels, reducing dry throat and congestion in air-conditioned rooms."
         </blockquote>
       </>
@@ -94,28 +94,28 @@ const BLOG_POSTS = [
     image: "https://images.unsplash.com/photo-1589927986089-35812388d1f4?auto=format&fit=crop&w=600&q=80",
     content: (
       <>
-        <p className="lead text-lg text-text-dark font-medium mb-4">
+        <p className="lead text-lg text-text-dark dark:text-gray-150 font-medium mb-4">
           Growing vegetables from seed can be challenging and slow. Transplanting pre-rooted organic saplings from <strong>GeoTree Mart</strong> nurseries is the fastest route to harvesting your own pesticide-free vegetables directly from your balcony or backyard.
         </p>
 
-        <h3 className="text-xl font-bold text-text-dark mt-6 mb-3">1. Choosing the Right Pots</h3>
-        <p className="mb-4">
+        <h3 className="text-xl font-bold text-text-dark dark:text-gray-100 mt-6 mb-3">1. Choosing the Right Pots</h3>
+        <p className="mb-4 text-text-muted dark:text-gray-400">
           Tomatoes and chillies require space for deep root growth. Ensure you use pots that are at least 10–12 inches in diameter with plenty of drainage. Leafy greens like spinach or coriander can grow in shallower, wider rectangular trays.
         </p>
 
-        <h3 className="text-xl font-bold text-text-dark mt-6 mb-3">2. Potting Soil Mix Recipe</h3>
-        <p className="mb-4">
+        <h3 className="text-xl font-bold text-text-dark dark:text-gray-100 mt-6 mb-3">2. Potting Soil Mix Recipe</h3>
+        <p className="mb-4 text-text-muted dark:text-gray-400">
           Commercial garden soil gets compacted too quickly. For container vegetable gardening, mix:
         </p>
-        <ul className="list-disc pl-6 mb-4 flex flex-col gap-1">
+        <ul className="list-disc pl-6 mb-4 flex flex-col gap-1 text-text-muted dark:text-gray-400">
           <li>40% cocopeat (to retain moisture)</li>
           <li>30% vermicompost or organic compost (for nutrition)</li>
           <li>20% garden soil</li>
           <li>10% sand or perlite (for drainage)</li>
         </ul>
 
-        <h3 className="text-xl font-bold text-text-dark mt-6 mb-3">3. Sunlight and Harvest</h3>
-        <p className="mb-4">
+        <h3 className="text-xl font-bold text-text-dark dark:text-gray-100 mt-6 mb-3">3. Sunlight and Harvest</h3>
+        <p className="mb-4 text-text-muted dark:text-gray-400">
           Vegetables are sun-lovers. Place your containers where they receive at least 5–6 hours of direct sunlight daily. Feed your plants organic fertilizer once every two weeks during the growing season for maximum yield.
         </p>
       </>
@@ -133,21 +133,21 @@ const BLOG_POSTS = [
     image: "https://images.unsplash.com/photo-1597055181300-e3633a207518?auto=format&fit=crop&w=600&q=80",
     content: (
       <>
-        <p className="lead text-lg text-text-dark font-medium mb-4">
+        <p className="lead text-lg text-text-dark dark:text-gray-150 font-medium mb-4">
           In Feng Shui, plants represent the wood element, signifying growth, vitality, and new beginnings. Decorating your home with healthy feng shui plants from <strong>GeoTree Mart</strong> is a wonderful way to attract positive vibes, balance energy levels, and clear blockages.
         </p>
 
-        <h3 className="text-xl font-bold text-text-dark mt-6 mb-3">1. The Southeast Corner (Wealth & Prosperity)</h3>
-        <p className="mb-4">
+        <h3 className="text-xl font-bold text-text-dark dark:text-gray-100 mt-6 mb-3">1. The Southeast Corner (Wealth & Prosperity)</h3>
+        <p className="mb-4 text-text-muted dark:text-gray-400">
           Traditionally, the southeast quadrant of your living room is connected to abundance. Place round-leaved plants like Money Plant (Pothos) or Jade Plants here. Avoid cacti or sharp-leaved plants in this area.
         </p>
 
-        <h3 className="text-xl font-bold text-text-dark mt-6 mb-3">2. The East Zone (Health & Family)</h3>
-        <p className="mb-4">
+        <h3 className="text-xl font-bold text-text-dark dark:text-gray-100 mt-6 mb-3">2. The East Zone (Health & Family)</h3>
+        <p className="mb-4 text-text-muted dark:text-gray-400">
           Promote health and harmony among family members by placing lush, tall leafy plants like Areca Palms or Bamboo in the east. It keeps the energy circulating and refreshed.
         </p>
 
-        <blockquote className="border-l-4 border-primary pl-4 py-2 my-6 bg-primary/5 italic text-text-dark font-medium">
+        <blockquote className="border-l-4 border-primary pl-4 py-2 my-6 bg-primary/5 dark:bg-primary/10 italic text-text-dark dark:text-gray-200 font-medium">
           "Dead or dying leaves create stale energy. Regularly prune brown edges and keep leaves clean from dust to maintain active, positive vibes."
         </blockquote>
       </>
@@ -165,22 +165,22 @@ const BLOG_POSTS = [
     image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80",
     content: (
       <>
-        <p className="lead text-lg text-text-dark font-medium mb-4">
+        <p className="lead text-lg text-text-dark dark:text-gray-150 font-medium mb-4">
           For thousands of years, household gardens in India have double-hatted as pharmacies. Set up a dedicated wellness garden with fresh ayurvedic herbal saplings ordered from local growers via <strong>GeoTree Mart</strong> to have fresh, organic ingredients for daily immune support.
         </p>
 
-        <h3 className="text-xl font-bold text-text-dark mt-6 mb-3">1. Holy Basil (Tulsi)</h3>
-        <p className="mb-4">
+        <h3 className="text-xl font-bold text-text-dark dark:text-gray-100 mt-6 mb-3">1. Holy Basil (Tulsi)</h3>
+        <p className="mb-4 text-text-muted dark:text-gray-400">
           A sacred plant in every Indian household. Consuming 4-5 fresh Tulsi leaves daily boosts respiratory health and helps the body manage stress. It prefers bright sunlight and moist, well-aerated soil.
         </p>
 
-        <h3 className="text-xl font-bold text-text-dark mt-6 mb-3">2. Giloy (Amrita Vine)</h3>
-        <p className="mb-4">
+        <h3 className="text-xl font-bold text-text-dark dark:text-gray-100 mt-6 mb-3">2. Giloy (Amrita Vine)</h3>
+        <p className="mb-4 text-text-muted dark:text-gray-400">
           Known as the 'root of immortality', Giloy is a hardy creeper. Boiling its stems in water creates a powerful decoction (kadha) that is exceptional for boosting platelet counts and curing chronic fevers.
         </p>
 
-        <h3 className="text-xl font-bold text-text-dark mt-6 mb-3">3. Lemongrass & Mint</h3>
-        <p className="mb-4">
+        <h3 className="text-xl font-bold text-text-dark dark:text-gray-100 mt-6 mb-3">3. Lemongrass & Mint</h3>
+        <p className="mb-4 text-text-muted dark:text-gray-400">
           Extremely easy to grow in medium pots, lemongrass and mint leaves contain strong aromatic oils. Excellent for digestion, relieving headaches, and brewing cooling afternoon beverages.
         </p>
       </>
@@ -218,10 +218,10 @@ export default function Blog({ onClose }) {
   }, [selectedCategory, searchQuery]);
 
   return (
-    <section className="w-full min-h-screen pt-[72px] md:pt-[76px] pb-24 bg-[#FAF9F6] text-text-dark font-sans relative">
+    <section className="w-full min-h-screen pt-[72px] md:pt-[76px] pb-24 bg-bg-light text-text-dark dark:text-gray-105 font-sans relative transition-colors duration-300">
 
-      {/* Category-Style Header Banner (Light Theme, matches CategoryBase.jsx) */}
-      <div className="relative w-full overflow-hidden py-5 md:py-6 px-6 md:px-12 bg-[#F3F6F2] border-b border-primary/5">
+      {/* Category-Style Header Banner (Light/Dark Theme matching CategoryBase) */}
+      <div className="relative w-full overflow-hidden py-5 md:py-6 px-6 md:px-12 bg-[#F3F6F2] dark:bg-zinc-900 border-b border-primary/5 dark:border-zinc-800 transition-colors duration-300">
         {/* Soft botanical background image with low opacity overlay */}
         <div
           className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-15 mix-blend-overlay pointer-events-none"
@@ -235,15 +235,15 @@ export default function Blog({ onClose }) {
         <div className="max-w-7xl mx-auto relative z-10 text-left">
           {/* Breadcrumbs & Back Button Inline */}
           <div className="flex items-center justify-between mb-3">
-            <div className="flex flex-wrap items-center gap-1 text-[10px] font-bold text-text-muted/70 tracking-wide">
+            <div className="flex flex-wrap items-center gap-1 text-[10px] font-bold text-text-muted/70 dark:text-gray-400 tracking-wide">
               <button onClick={onClose} className="hover:text-primary transition-colors cursor-pointer uppercase">Home</button>
               <FiChevronRight />
-              <span className="text-text-dark uppercase tracking-tight">Blog</span>
+              <span className="text-text-dark dark:text-gray-200 uppercase tracking-tight">Blog</span>
             </div>
 
             <button
               onClick={onClose}
-              className="group inline-flex items-center gap-1.5 text-[10px] font-semibold text-primary hover:text-primary-dark bg-white border border-primary/10 px-3 py-1 rounded-full transition-all duration-300 cursor-pointer shadow-sm hover:shadow focus:outline-none"
+              className="group inline-flex items-center gap-1.5 text-[10px] font-semibold text-primary hover:text-primary-dark bg-white dark:bg-zinc-950 border border-primary/10 dark:border-zinc-855 px-3 py-1 rounded-full transition-all duration-300 cursor-pointer shadow-sm hover:shadow focus:outline-none"
             >
               <FiArrowLeft className="group-hover:-translate-x-0.5 transition-transform" />
               Back
@@ -252,15 +252,15 @@ export default function Blog({ onClose }) {
 
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
             <div className="max-w-2xl">
-              <h1 className="font-display font-black text-xl sm:text-2xl tracking-tight text-text-dark mb-1">
+              <h1 className="font-display font-black text-xl sm:text-2xl tracking-tight text-text-dark dark:text-gray-100 mb-1">
                 The Green <span className="text-primary italic">Chronicles</span>
               </h1>
-              <p className="font-sans text-xs text-text-muted max-w-xl leading-relaxed">
+              <p className="font-sans text-xs text-text-muted dark:text-gray-400 max-w-xl leading-relaxed">
                 Welcome to our nursery advice blog! Explore expert tips and gardening guides directly from local nursery botanists.
               </p>
             </div>
 
-            <div className="text-text-muted text-[10px] font-semibold border-l border-primary/20 pl-4 py-0.5">
+            <div className="text-text-muted dark:text-gray-400 text-[10px] font-semibold border-l border-primary/20 dark:border-zinc-800 pl-4 py-0.5">
               <span className="text-xl font-black text-primary block leading-none mb-1">
                 {filteredPosts.length}
               </span>
@@ -272,7 +272,7 @@ export default function Blog({ onClose }) {
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 mt-12">
         {/* Controls: Search and Filters */}
-        <div className="flex flex-col md:flex-row gap-6 justify-between items-center mb-10 pb-6 border-b border-black/[0.04]">
+        <div className="flex flex-col md:flex-row gap-6 justify-between items-center mb-10 pb-6 border-b border-black/[0.04] dark:border-zinc-900">
           {/* Categories Pills */}
           <div className="flex flex-wrap gap-2 justify-start w-full md:w-auto">
             {CATEGORIES.map(cat => (
@@ -281,7 +281,7 @@ export default function Blog({ onClose }) {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border ${selectedCategory === cat
                     ? "bg-primary text-white border-primary shadow-sm"
-                    : "bg-white text-text-dark border-gray-200 hover:border-gray-400"
+                    : "bg-white dark:bg-zinc-900 text-text-dark dark:text-gray-250 border-gray-200 dark:border-zinc-800 hover:border-gray-400 dark:hover:border-zinc-700"
                   }`}
               >
                 {cat}
@@ -291,18 +291,18 @@ export default function Blog({ onClose }) {
 
           {/* Search bar */}
           <div className="relative w-full md:w-80">
-            <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+            <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-450 text-sm" />
             <input
               type="text"
               placeholder="Search articles..."
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-text-dark placeholder-gray-400 focus:outline-none focus:border-primary shadow-sm transition-all"
+              className="w-full pl-10 pr-4 py-2 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-850 rounded-full text-xs font-bold text-text-dark dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-primary shadow-sm transition-all"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-text-dark focus:outline-none"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-450 hover:text-text-dark focus:outline-none"
               >
                 <FiX className="text-sm" />
               </button>
@@ -312,12 +312,12 @@ export default function Blog({ onClose }) {
 
         {/* Empty state */}
         {filteredPosts.length === 0 && (
-          <div className="w-full text-center py-20 bg-white rounded-3xl border border-black/[0.03] shadow-sm">
-            <div className="w-12 h-12 rounded-full bg-amber-50 flex items-center justify-center mx-auto mb-4 text-amber-500">
+          <div className="w-full text-center py-20 bg-white dark:bg-zinc-950 rounded-3xl border border-black/[0.03] dark:border-zinc-900 shadow-sm transition-colors duration-300">
+            <div className="w-12 h-12 rounded-full bg-amber-50 dark:bg-amber-950/40 flex items-center justify-center mx-auto mb-4 text-amber-500">
               <FaLeaf className="text-lg" />
             </div>
-            <h4 className="font-display font-bold text-lg text-text-dark mb-1">No Articles Found</h4>
-            <p className="text-xs text-text-muted">Try adjusting your filters or search query to find posts.</p>
+            <h4 className="font-display font-bold text-lg text-text-dark dark:text-gray-100 mb-1">No Articles Found</h4>
+            <p className="text-xs text-text-muted dark:text-gray-400">Try adjusting your filters or search query to find posts.</p>
           </div>
         )}
 
@@ -327,25 +327,25 @@ export default function Blog({ onClose }) {
             <article
               key={post.id}
               onClick={() => setActivePost(post)}
-              className="bg-white rounded-3xl border border-black/[0.03] overflow-hidden flex flex-col justify-between hover:shadow-lg transition-all group cursor-pointer text-left"
+              className="bg-white dark:bg-zinc-955 rounded-3xl border border-black/[0.03] dark:border-zinc-900/60 overflow-hidden flex flex-col justify-between hover:shadow-lg transition-all group cursor-pointer text-left transition-colors duration-300"
             >
               <div>
                 {/* Image */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-50">
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-50 dark:bg-zinc-900">
                   <img
                     src={post.image}
                     alt={post.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                   />
-                  <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-[9px] font-black px-2.5 py-0.5 rounded-full text-primary border border-white/40 shadow-sm">
+                  <span className="absolute top-3 left-3 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm text-[9px] font-black px-2.5 py-0.5 rounded-full text-primary border border-white/40 dark:border-zinc-800 shadow-sm">
                     {post.category}
                   </span>
                 </div>
 
                 {/* Details */}
                 <div className="p-5">
-                  <div className="flex items-center gap-4 text-[10px] text-text-muted font-bold mb-3">
+                  <div className="flex items-center gap-4 text-[10px] text-text-muted dark:text-gray-400 font-bold mb-3">
                     <span className="flex items-center gap-1">
                       <FiCalendar /> {post.date}
                     </span>
@@ -353,18 +353,18 @@ export default function Blog({ onClose }) {
                       <FiClock /> {post.readTime}
                     </span>
                   </div>
-                  <h3 className="font-display font-black text-base text-text-dark leading-snug group-hover:text-primary transition-colors line-clamp-2 mb-3">
+                  <h3 className="font-display font-black text-base text-text-dark dark:text-gray-100 leading-snug group-hover:text-primary transition-colors line-clamp-2 mb-3">
                     {post.title}
                   </h3>
-                  <p className="text-xs text-text-muted/80 leading-relaxed line-clamp-3 font-medium">
+                  <p className="text-xs text-text-muted/80 dark:text-gray-400 leading-relaxed line-clamp-3 font-medium">
                     {post.summary}
                   </p>
                 </div>
               </div>
 
               {/* Footer */}
-              <div className="px-5 pb-5 pt-3 border-t border-gray-50 flex items-center justify-between">
-                <span className="text-[10px] font-bold text-text-dark truncate flex items-center gap-1.5">
+              <div className="px-5 pb-5 pt-3 border-t border-gray-50 dark:border-zinc-900 flex items-center justify-between">
+                <span className="text-[10px] font-bold text-text-dark dark:text-gray-200 truncate flex items-center gap-1.5">
                   <FiUser className="text-primary text-xs" /> {post.author}
                 </span>
                 <span className="text-[10px] font-bold text-primary flex items-center gap-0.5 hover:underline group-hover:translate-x-1 transition-transform">
@@ -376,7 +376,7 @@ export default function Blog({ onClose }) {
         </div>
       </div>
 
-      {/* Full Blog Post Detail Modal (Retained for backup support if needed) */}
+      {/* Full Blog Post Detail Modal */}
       <AnimatePresence>
         {activePost && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -395,7 +395,7 @@ export default function Blog({ onClose }) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 50, scale: 0.95 }}
               transition={{ type: "spring", damping: 25, stiffness: 250 }}
-              className="relative w-full max-w-2xl max-h-[90vh] bg-white rounded-3xl shadow-2xl flex flex-col z-10"
+              className="relative w-full max-w-2xl max-h-[90vh] bg-white dark:bg-zinc-950 rounded-3xl shadow-2xl border border-primary/5 dark:border-zinc-900 flex flex-col z-10"
             >
               {/* Close Button */}
               <button
@@ -408,7 +408,7 @@ export default function Blog({ onClose }) {
               {/* Scrollable Container */}
               <div className="w-full overflow-y-auto rounded-3xl flex-grow" data-lenis-prevent>
                 {/* Modal Cover Image */}
-                <div className="relative h-44 sm:h-52 w-full bg-gray-100 overflow-hidden">
+                <div className="relative h-44 sm:h-52 w-full bg-gray-100 dark:bg-zinc-900 overflow-hidden">
                   <img src={activePost.image} alt={activePost.title} className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <span className="absolute bottom-4 left-6 bg-primary text-white text-[9px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full">
@@ -419,26 +419,26 @@ export default function Blog({ onClose }) {
                 {/* Modal Content */}
                 <div className="p-6 sm:p-8 text-left">
                   {/* Meta details */}
-                  <div className="flex flex-wrap items-center gap-4 text-xs font-bold text-text-muted mb-4 border-b border-gray-100 pb-4">
+                  <div className="flex flex-wrap items-center gap-4 text-xs font-bold text-text-muted dark:text-gray-400 mb-4 border-b border-gray-100 dark:border-zinc-900 pb-4">
                     <span className="flex items-center gap-1"><FiCalendar /> {activePost.date}</span>
                     <span className="flex items-center gap-1"><FiClock /> {activePost.readTime}</span>
                     <span className="flex items-center gap-1"><FiUser className="text-primary" /> {activePost.author}</span>
                   </div>
 
-                  <h2 className="font-display font-black text-2xl sm:text-3xl text-text-dark tracking-tight leading-tight mb-6">
+                  <h2 className="font-display font-black text-2xl sm:text-3xl text-text-dark dark:text-gray-100 tracking-tight leading-tight mb-6">
                     {activePost.title}
                   </h2>
 
                   {/* Article Body */}
-                  <div className="font-sans text-sm text-text-muted leading-relaxed flex flex-col gap-4">
+                  <div className="font-sans text-sm text-text-muted dark:text-gray-400 leading-relaxed flex flex-col gap-4">
                     {activePost.content}
                   </div>
 
                   {/* Return CTA */}
-                  <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                  <div className="mt-8 pt-6 border-t border-gray-100 dark:border-zinc-900 flex flex-col sm:flex-row justify-between items-center gap-4">
                     <div className="text-left">
-                      <span className="text-[10px] font-bold text-text-muted uppercase block">Written By</span>
-                      <span className="text-xs font-black text-text-dark">{activePost.author}</span>
+                      <span className="text-[10px] font-bold text-text-muted dark:text-gray-450 uppercase block">Written By</span>
+                      <span className="text-xs font-black text-text-dark dark:text-gray-200">{activePost.author}</span>
                     </div>
                     <button
                       onClick={() => setActivePost(null)}

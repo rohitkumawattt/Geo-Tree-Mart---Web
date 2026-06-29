@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&family=Syne+Mono&family=IBM+Plex+Serif');
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-primary: #2E7D32;
   --color-primary-dark: #1B5E20;
@@ -46,6 +48,14 @@
   }
 }
 
+/* Dark theme overrides for custom properties */
+.dark {
+  --color-bg-light: #06090c;
+  --color-text-dark: #f0f3f6;
+  --color-text-muted: #95a1ac;
+  --color-card-border: rgba(255, 255, 255, 0.08);
+}
+
 /* font families  */
 
 .ibm-font {
@@ -59,12 +69,13 @@ html {
 }
 
 body {
-  background-color: #F8FFF8;
-  color: #1A1A1A;
+  background-color: var(--color-bg-light);
+  color: var(--color-text-dark);
   font-family: var(--font-sans);
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #root {
@@ -78,7 +89,8 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #F8FFF8;
+  background: var(--color-bg-light);
+  transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -91,12 +103,26 @@ body {
   background: #81C784;
 }
 
+.dark ::-webkit-scrollbar-thumb {
+  background: #1b5e20;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #2e7d32;
+}
+
 /* Glassmorphism utility */
 .glassmorphism {
   background: rgba(248, 255, 248, 0.75);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(46, 125, 50, 0.08);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.dark .glassmorphism {
+  background: rgba(6, 9, 12, 0.75);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glassmorphism-card {
@@ -105,6 +131,13 @@ body {
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(46, 125, 50, 0.08);
   box-shadow: 0 8px 32px 0 rgba(46, 125, 50, 0.03);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark .glassmorphism-card {
+  background: rgba(14, 20, 27, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
 }
 
 /* Lenis Custom Integration classes */
@@ -146,6 +179,11 @@ html.lenis body {
 ::selection {
   background-color: #C8E6C9;
   color: #1B5E20;
+}
+
+.dark ::selection {
+  background-color: #1B5E20;
+  color: #C8E6C9;
 }
 
 /* Custom App Download Badge Highlight/Blink Animation */

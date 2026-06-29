@@ -104,13 +104,13 @@ export default function ProductDetail({ productId, onClose }) {
 
   if (!product) {
     return (
-      <div className="w-full min-h-screen pt-[120px] pb-20 px-6 text-center bg-[#FAF9F6]">
-        <div className="max-w-md mx-auto bg-white border border-primary/10 rounded-3xl p-8 shadow-sm">
+      <div className="w-full min-h-screen pt-[120px] pb-20 px-6 text-center bg-bg-light dark:bg-zinc-950 transition-colors duration-300">
+        <div className="max-w-md mx-auto bg-white dark:bg-zinc-900 border border-primary/10 dark:border-zinc-800 rounded-3xl p-8 shadow-sm">
           <div className="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center mx-auto mb-4 text-red-500">
             <FaLeaf className="text-2xl" />
           </div>
-          <h3 className="font-display font-black text-xl text-text-dark mb-2">Product Not Found</h3>
-          <p className="text-sm text-text-muted mb-6">
+          <h3 className="font-display font-black text-xl text-text-dark dark:text-gray-100 mb-2">Product Not Found</h3>
+          <p className="text-sm text-text-muted dark:text-gray-400 mb-6">
             The plant you are looking for does not exist or has been removed from our catalog.
           </p>
           <button
@@ -196,26 +196,26 @@ export default function ProductDetail({ productId, onClose }) {
   };
 
   return (
-    <div className="w-full min-h-screen pt-[72px] md:pt-[76px] pb-20 bg-[#FAF9F6] text-text-dark font-sans relative">
+    <div className="w-full min-h-screen pt-[72px] md:pt-[76px] pb-20 bg-bg-light text-text-dark dark:text-gray-105 font-sans relative transition-colors duration-300">
       {/* Background Ornaments */}
       <div className="absolute top-1/4 right-0 w-[300px] h-[300px] rounded-full bg-secondary/5 blur-[100px] pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-[300px] h-[300px] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
 
       {/* Navigation & Breadcrumbs */}
       <div className="max-w-6xl mx-auto px-4 md:px-8 mt-6">
-        <div className="flex flex-wrap items-center gap-1.5 text-[10px] font-bold text-text-muted/70 tracking-wide mb-6">
+        <div className="flex flex-wrap items-center gap-1.5 text-[10px] font-bold text-text-muted/70 dark:text-gray-400 tracking-wide mb-6">
           <button onClick={onClose} className="hover:text-primary transition-colors cursor-pointer uppercase">Home</button>
           <FiChevronRight />
           <button onClick={handleCategoryNav} className="hover:text-primary transition-colors cursor-pointer uppercase">
             {product.parentCategory === "Flowring" ? "Flowering" : product.parentCategory}
           </button>
           <FiChevronRight />
-          <span className="text-text-dark truncate uppercase tracking-tight">{product.name}</span>
+          <span className="text-text-dark dark:text-gray-200 truncate uppercase tracking-tight">{product.name}</span>
         </div>
 
         <button
           onClick={handleCategoryNav}
-          className="group inline-flex items-center gap-2 mb-6 text-xs font-black text-primary hover:text-primary-dark bg-white border border-primary/10 hover:border-primary/20 px-4 py-2 rounded-full transition-all duration-300 shadow-sm hover:shadow cursor-pointer"
+          className="group inline-flex items-center gap-2 mb-6 text-xs font-black text-primary hover:text-primary-dark bg-white dark:bg-zinc-950 border border-primary/10 dark:border-zinc-850 hover:border-primary/20 px-4 py-2 rounded-full transition-all duration-300 shadow-sm hover:shadow cursor-pointer"
         >
           <FiArrowLeft className="group-hover:-translate-x-0.5 transition-transform" />
           BACK TO PRODUCTS
@@ -224,17 +224,17 @@ export default function ProductDetail({ productId, onClose }) {
 
       {/* Main Showcase Layout */}
       <section className="max-w-6xl mx-auto px-4 md:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start bg-white rounded-3xl border border-primary/5 p-4 md:p-8 shadow-sm">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start bg-white dark:bg-zinc-950 rounded-3xl border border-primary/5 dark:border-zinc-850/70 p-4 md:p-8 shadow-sm transition-colors duration-300">
 
           {/* Left Column: Image Gallery */}
           <div className="md:col-span-6 w-full flex flex-col gap-4">
-            <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-gray-50 border border-gray-100 group shadow-inner">
+            <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-850 group shadow-inner">
               <img
                 src={productImages[activeImageIdx]}
                 alt={product.name}
                 className="w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105"
               />
-              <span className="absolute top-3 left-3 bg-[#e8f5e9] text-[#2e7d32] text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded shadow-sm border border-[#c8e6c9]">
+              <span className="absolute top-3 left-3 bg-[#e8f5e9] dark:bg-emerald-950/90 text-[#2e7d32] dark:text-emerald-300 text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded shadow-sm border border-[#c8e6c9] dark:border-emerald-900/60">
                 {product.category}
               </span>
             </div>
@@ -245,7 +245,7 @@ export default function ProductDetail({ productId, onClose }) {
                 <button
                   key={idx}
                   onClick={() => setActiveImageIdx(idx)}
-                  className={`relative w-16 md:w-20 aspect-square rounded-xl overflow-hidden border-2 bg-gray-50 transition-all flex-shrink-0 cursor-pointer ${activeImageIdx === idx ? 'border-primary shadow-sm scale-95' : 'border-transparent hover:border-gray-300'
+                  className={`relative w-16 md:w-20 aspect-square rounded-xl overflow-hidden border-2 bg-gray-50 dark:bg-zinc-900 transition-all flex-shrink-0 cursor-pointer ${activeImageIdx === idx ? 'border-primary shadow-sm scale-95' : 'border-transparent hover:border-zinc-700'
                     }`}
                 >
                   <img src={img} alt={`view-${idx}`} className="w-full h-full object-cover" />
@@ -259,12 +259,12 @@ export default function ProductDetail({ productId, onClose }) {
 
             {/* Title & Reviews */}
             <div>
-              <h1 className="font-display font-black text-2xl lg:text-3xl text-text-dark tracking-tight leading-tight">
+              <h1 className="font-display font-black text-2xl lg:text-3xl text-text-dark dark:text-gray-100 tracking-tight leading-tight">
                 {product.name}
               </h1>
 
               <div className="flex items-center gap-2 mt-2">
-                <span className="text-xs font-bold text-text-muted">Rating ({product.rating || '4.8'})</span>
+                <span className="text-xs font-bold text-text-muted dark:text-gray-400">Rating ({product.rating || '4.8'})</span>
                 <div className="flex gap-0.5">
                   {[...Array(5)].map((_, i) => (
                     <span key={i} className="w-4 h-4 bg-primary text-white flex items-center justify-center rounded-sm text-[8px]">
@@ -276,23 +276,23 @@ export default function ProductDetail({ productId, onClose }) {
             </div>
 
             {/* Pricing Section */}
-            <div className="border-b border-gray-100 pb-4">
+            <div className="border-b border-gray-100 dark:border-zinc-900 pb-4">
               <div className="flex items-center gap-3">
-                <span className="text-gray-400 line-through text-base font-semibold">
+                <span className="text-gray-400 dark:text-gray-500 line-through text-base font-semibold">
                   Rs. {originalBasePrice.toFixed(2)}
                 </span>
                 <span className="text-primary font-display font-black text-2xl">
                   ₹{basePrice.toFixed(2)}
                 </span>
-                <span className="bg-amber-100 text-amber-800 text-[9px] font-black uppercase px-2 py-0.5 rounded tracking-wider">
+                <span className="bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-200 text-[9px] font-black uppercase px-2 py-0.5 rounded tracking-wider border dark:border-amber-900/40">
                   Sale
                 </span>
               </div>
-              <p className="text-[10px] text-text-muted/70 mt-1">Shipping calculated at checkout.</p>
+              <p className="text-[10px] text-text-muted/70 dark:text-gray-400 mt-1">Shipping calculated at checkout.</p>
             </div>
 
             {/* Key Benefits List */}
-            <div className="flex flex-col gap-2.5 text-xs text-text-muted font-bold pl-1">
+            <div className="flex flex-col gap-2.5 text-xs text-text-muted dark:text-gray-400 font-bold pl-1">
               <div className="flex items-center gap-2">
                 <FaTruck className="text-primary text-sm" />
                 <span>Free Shipping on all orders over ₹249</span>
@@ -312,10 +312,10 @@ export default function ProductDetail({ productId, onClose }) {
             </div>
 
             {/* Buy More & Save More Bulk Pricing Box */}
-            <div className="border border-gray-200 rounded-2xl p-4 flex flex-col gap-3">
-              <div className="text-center font-bold text-xs text-text-muted flex items-center justify-center gap-2">
+            <div className="border border-gray-200 dark:border-zinc-800 rounded-2xl p-4 flex flex-col gap-3">
+              <div className="text-center font-bold text-xs text-text-muted dark:text-gray-400 flex items-center justify-center gap-2">
                 <span>───</span>
-                <span className="font-display font-black tracking-wider text-text-dark">Buy More & Save More 🌿</span>
+                <span className="font-display font-black tracking-wider text-text-dark dark:text-gray-100">Buy More & Save More 🌿</span>
                 <span>───</span>
               </div>
 
@@ -333,8 +333,8 @@ export default function ProductDetail({ productId, onClose }) {
                       <label
                         onClick={() => setSelectedQuantityOption(option.qty)}
                         className={`relative flex items-center justify-between border rounded-xl p-3 cursor-pointer transition-all ${selectedQuantityOption === option.qty
-                            ? 'border-primary bg-primary/[0.02] shadow-sm'
-                            : 'border-gray-200 hover:border-gray-300 bg-white'
+                            ? 'border-primary bg-primary/[0.02] dark:bg-primary/5 shadow-sm'
+                            : 'border-gray-200 dark:border-zinc-800 hover:border-gray-300 dark:hover:border-zinc-700 bg-white dark:bg-zinc-950'
                           }`}
                       >
                         <div className="flex items-center gap-2.5">
@@ -346,7 +346,7 @@ export default function ProductDetail({ productId, onClose }) {
                             className="w-3.5 h-3.5 accent-primary cursor-pointer"
                           />
                           <div className="flex flex-col text-left">
-                            <span className="text-xs font-extrabold text-text-dark">{option.label}</span>
+                            <span className="text-xs font-extrabold text-text-dark dark:text-gray-200">{option.label}</span>
                             {optDiscount > 0 && (
                               <span className="absolute -top-2 right-2 bg-primary text-white text-[8px] font-black uppercase px-2 py-0.5 rounded-full tracking-wider">
                                 Save {optDiscount}%
@@ -358,7 +358,7 @@ export default function ProductDetail({ productId, onClose }) {
                         <div className="text-right">
                           <div className="flex items-baseline gap-1.5 justify-end">
                             {optDiscount > 0 && (
-                              <span className="text-[10px] text-gray-400 line-through font-semibold">
+                              <span className="text-[10px] text-gray-400 dark:text-gray-500 line-through font-semibold">
                                 ₹{optOriginalTotal.toFixed(2)}
                               </span>
                             )}
@@ -370,8 +370,8 @@ export default function ProductDetail({ productId, onClose }) {
                       </label>
 
                       {isOptCustom && selectedQuantityOption === 'custom' && (
-                        <div className="mt-2.5 p-3 bg-gray-50 border border-gray-150 rounded-xl flex items-center justify-between animate-fadeIn text-left">
-                          <span className="text-[10px] font-bold text-text-muted">Enter Quantity:</span>
+                        <div className="mt-2.5 p-3 bg-gray-50 dark:bg-zinc-900 border border-gray-150 dark:border-zinc-800 rounded-xl flex items-center justify-between animate-fadeIn text-left">
+                          <span className="text-[10px] font-bold text-text-muted dark:text-gray-400">Enter Quantity:</span>
                           <div className="flex items-center gap-2">
                             <input
                               type="number"
@@ -379,7 +379,7 @@ export default function ProductDetail({ productId, onClose }) {
                               max="10000"
                               value={customQuantityVal}
                               onChange={(e) => setCustomQuantityVal(Math.min(10000, Math.max(1, parseInt(e.target.value) || 1)))}
-                              className="w-20 bg-white border border-gray-250 rounded-lg px-2.5 py-1 text-xs font-bold text-text-dark text-center focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all font-sans"
+                              className="w-20 bg-white dark:bg-zinc-950 border border-gray-250 dark:border-zinc-750 rounded-lg px-2.5 py-1 text-xs font-bold text-text-dark dark:text-gray-100 text-center focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all font-sans"
                             />
                             <span className="text-[10px] font-black text-primary uppercase">Plants</span>
                           </div>
@@ -407,7 +407,7 @@ export default function ProductDetail({ productId, onClose }) {
 
               <button
                 onClick={handleShare}
-                className="inline-flex items-center justify-center gap-2 text-xs font-bold text-text-muted hover:text-primary transition-colors cursor-pointer py-1.5 w-fit mx-auto"
+                className="inline-flex items-center justify-center gap-2 text-xs font-bold text-text-muted dark:text-gray-400 hover:text-primary transition-colors cursor-pointer py-1.5 w-fit mx-auto"
               >
                 <FiShare2 />
                 <span>Share</span>
@@ -415,13 +415,13 @@ export default function ProductDetail({ productId, onClose }) {
             </div>
 
             {/* Accordion Specification Details */}
-            <div className="border-t border-gray-100 pt-4 flex flex-col gap-2">
+            <div className="border-t border-gray-100 dark:border-zinc-900 pt-4 flex flex-col gap-2">
 
               {/* How we work */}
-              <div className="border-b border-gray-100 pb-2">
+              <div className="border-b border-gray-100 dark:border-zinc-900 pb-2">
                 <button
                   onClick={() => toggleAccordion('howWeWork')}
-                  className="w-full py-2 flex items-center justify-between text-xs font-extrabold uppercase text-text-dark tracking-wide hover:text-primary transition-colors cursor-pointer text-left"
+                  className="w-full py-2 flex items-center justify-between text-xs font-extrabold uppercase text-text-dark dark:text-gray-200 tracking-wide hover:text-primary transition-colors cursor-pointer text-left"
                 >
                   <span>How we work?</span>
                   {openAccordions.howWeWork ? <FiChevronUp /> : <FiChevronDown />}
@@ -432,7 +432,7 @@ export default function ProductDetail({ productId, onClose }) {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      className="overflow-hidden text-[11px] text-text-muted/90 leading-relaxed py-1 flex flex-col gap-2"
+                      className="overflow-hidden text-[11px] text-text-muted/90 dark:text-gray-400 leading-relaxed py-1 flex flex-col gap-2"
                     >
                       <p>1. We coordinate directly with regional nurseries near you to ensure fresh plant collection.</p>
                       <p>2. Plants are selected manually by expert growers to match standard height and rooting benchmarks.</p>
@@ -443,10 +443,10 @@ export default function ProductDetail({ productId, onClose }) {
               </div>
 
               {/* Care Tips */}
-              <div className="border-b border-gray-100 pb-2">
+              <div className="border-b border-gray-100 dark:border-zinc-900 pb-2">
                 <button
                   onClick={() => toggleAccordion('careTips')}
-                  className="w-full py-2 flex items-center justify-between text-xs font-extrabold uppercase text-text-dark tracking-wide hover:text-primary transition-colors cursor-pointer text-left"
+                  className="w-full py-2 flex items-center justify-between text-xs font-extrabold uppercase text-text-dark dark:text-gray-200 tracking-wide hover:text-primary transition-colors cursor-pointer text-left"
                 >
                   <span>Care Tips</span>
                   {openAccordions.careTips ? <FiChevronUp /> : <FiChevronDown />}
@@ -457,7 +457,7 @@ export default function ProductDetail({ productId, onClose }) {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      className="overflow-hidden text-[11px] text-text-muted/90 leading-relaxed py-1 flex flex-col gap-2"
+                      className="overflow-hidden text-[11px] text-text-muted/90 dark:text-gray-400 leading-relaxed py-1 flex flex-col gap-2"
                     >
                       <p>☀️ <strong>Light:</strong> Thrives in medium to bright indirect sunlight. Avoid keeping under direct harsh noon sun.</p>
                       <p>💧 <strong>Watering:</strong> Water only when the top 1-2 inches of soil feels dry. Succulents prefer dry roots over soggy ones.</p>
@@ -468,10 +468,10 @@ export default function ProductDetail({ productId, onClose }) {
               </div>
 
               {/* Shipping */}
-              <div className="border-b border-gray-100 pb-2">
+              <div className="border-b border-gray-100 dark:border-zinc-900 pb-2">
                 <button
                   onClick={() => toggleAccordion('shipping')}
-                  className="w-full py-2 flex items-center justify-between text-xs font-extrabold uppercase text-text-dark tracking-wide hover:text-primary transition-colors cursor-pointer text-left"
+                  className="w-full py-2 flex items-center justify-between text-xs font-extrabold uppercase text-text-dark dark:text-gray-200 tracking-wide hover:text-primary transition-colors cursor-pointer text-left"
                 >
                   <span>Shipping</span>
                   {openAccordions.shipping ? <FiChevronUp /> : <FiChevronDown />}
@@ -482,7 +482,7 @@ export default function ProductDetail({ productId, onClose }) {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      className="overflow-hidden text-[11px] text-text-muted/90 leading-relaxed py-1"
+                      className="overflow-hidden text-[11px] text-text-muted/90 dark:text-gray-400 leading-relaxed py-1"
                     >
                       Ships within 2-4 business days. Secure packaging ensures the plant stays alive and healthy during the transit period of up to 7 days.
                     </motion.div>
@@ -491,10 +491,10 @@ export default function ProductDetail({ productId, onClose }) {
               </div>
 
               {/* Refund Policy */}
-              <div className="border-b border-gray-100 pb-2">
+              <div className="border-b border-gray-100 dark:border-zinc-900 pb-2">
                 <button
                   onClick={() => toggleAccordion('refundPolicy')}
-                  className="w-full py-2 flex items-center justify-between text-xs font-extrabold uppercase text-text-dark tracking-wide hover:text-primary transition-colors cursor-pointer text-left"
+                  className="w-full py-2 flex items-center justify-between text-xs font-extrabold uppercase text-text-dark dark:text-gray-200 tracking-wide hover:text-primary transition-colors cursor-pointer text-left"
                 >
                   <span>Refund Policy</span>
                   {openAccordions.refundPolicy ? <FiChevronUp /> : <FiChevronDown />}
@@ -505,7 +505,7 @@ export default function ProductDetail({ productId, onClose }) {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      className="overflow-hidden text-[11px] text-text-muted/90 leading-relaxed py-1"
+                      className="overflow-hidden text-[11px] text-text-muted/90 dark:text-gray-400 leading-relaxed py-1"
                     >
                       We offer a comprehensive 7-day money-back guarantee. If the plant arrives damaged or dies within 7 days, submit a simple video of package unboxing for a full instant replacement or refund.
                     </motion.div>
@@ -517,7 +517,7 @@ export default function ProductDetail({ productId, onClose }) {
               <div className="pb-2">
                 <button
                   onClick={() => toggleAccordion('description')}
-                  className="w-full py-2 flex items-center justify-between text-xs font-extrabold uppercase text-text-dark tracking-wide hover:text-primary transition-colors cursor-pointer text-left"
+                  className="w-full py-2 flex items-center justify-between text-xs font-extrabold uppercase text-text-dark dark:text-gray-200 tracking-wide hover:text-primary transition-colors cursor-pointer text-left"
                 >
                   <span>Description</span>
                   {openAccordions.description ? <FiChevronUp /> : <FiChevronDown />}
@@ -528,7 +528,7 @@ export default function ProductDetail({ productId, onClose }) {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      className="overflow-hidden text-[11px] text-text-muted/90 leading-relaxed py-1 text-left"
+                      className="overflow-hidden text-[11px] text-text-muted/90 dark:text-gray-400 leading-relaxed py-1 text-left"
                     >
                       {product.desc}
                     </motion.div>
@@ -544,13 +544,13 @@ export default function ProductDetail({ productId, onClose }) {
 
       {/* Suggested Products Section */}
       {similarProducts.length > 0 && (
-        <section className="max-w-6xl mx-auto px-4 md:px-8 mt-16 border-t border-primary/5 pt-12 text-left">
+        <section className="max-w-6xl mx-auto px-4 md:px-8 mt-16 border-t border-primary/5 dark:border-zinc-900 pt-12 text-left">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
               <span className="text-[10px] text-primary font-bold uppercase tracking-widest bg-primary/10 px-3 py-1 rounded-full">
                 Related Plants
               </span>
-              <h3 className="font-display font-black text-2xl text-text-dark mt-3">
+              <h3 className="font-display font-black text-2xl text-text-dark dark:text-gray-100 mt-3">
                 You may also like
               </h3>
             </div>
@@ -569,20 +569,20 @@ export default function ProductDetail({ productId, onClose }) {
                 onClick={() => {
                   window.location.hash = `#product/${item.id}`;
                 }}
-                className="bg-white rounded-2xl border border-gray-100 p-3 flex flex-col justify-between hover:shadow-lg transition-all group cursor-pointer"
+                className="bg-white dark:bg-zinc-950 rounded-2xl border border-gray-100 dark:border-zinc-855 p-3 flex flex-col justify-between hover:shadow-lg transition-all group cursor-pointer"
               >
                 <div>
-                  <div className="aspect-square rounded-xl overflow-hidden mb-2 bg-gray-50 relative">
+                  <div className="aspect-square rounded-xl overflow-hidden mb-2 bg-gray-50 dark:bg-zinc-900 relative border border-transparent dark:border-zinc-800/40">
                     <img
                       src={item.image}
                       alt={item.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    <span className="absolute top-2 left-2 bg-amber-100 text-amber-800 text-[8px] font-black px-1.5 py-0.5 rounded shadow-sm">
+                    <span className="absolute top-2 left-2 bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-200 text-[8px] font-black px-1.5 py-0.5 rounded shadow-sm border border-transparent dark:border-amber-900/30">
                       Sale
                     </span>
                   </div>
-                  <h4 className="font-display font-extrabold text-xs text-text-dark line-clamp-1 mb-0.5 font-sans group-hover:text-primary transition-colors">
+                  <h4 className="font-display font-extrabold text-xs text-text-dark dark:text-gray-200 line-clamp-1 mb-0.5 font-sans group-hover:text-primary transition-colors">
                     {item.name}
                   </h4>
                   <div className="flex items-center gap-1 my-1">
@@ -591,12 +591,12 @@ export default function ProductDetail({ productId, onClose }) {
                         <span key={i} className="w-2.5 h-2.5 bg-primary text-white flex items-center justify-center rounded-sm">★</span>
                       ))}
                     </div>
-                    <span className="text-[9px] text-text-muted font-bold">(12)</span>
+                    <span className="text-[9px] text-text-muted dark:text-gray-400 font-bold">(12)</span>
                   </div>
                 </div>
-                <div className="flex items-center justify-between mt-2 pt-2 border-t border-gray-50">
+                <div className="flex items-center justify-between mt-2 pt-2 border-t border-gray-50 dark:border-zinc-900">
                   <div className="flex flex-col">
-                    <span className="text-[8px] text-gray-400 line-through">₹{item.originalPrice}</span>
+                    <span className="text-[8px] text-gray-400 dark:text-gray-500 line-through">₹{item.originalPrice}</span>
                     <span className="font-display font-black text-xs text-primary">₹{item.price}</span>
                   </div>
                   <span className="text-[9px] md:text-[10px] font-bold text-primary hover:text-primary-dark underline">View</span>
@@ -615,7 +615,7 @@ export default function ProductDetail({ productId, onClose }) {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="w-full max-w-md bg-white rounded-3xl overflow-hidden border border-primary/10 shadow-2xl p-6 relative"
+              className="w-full max-w-md bg-white dark:bg-zinc-950 rounded-3xl overflow-hidden border border-primary/10 dark:border-zinc-900 shadow-2xl p-6 relative"
               data-lenis-prevent
             >
               <button
@@ -623,7 +623,7 @@ export default function ProductDetail({ productId, onClose }) {
                   setShowInquiryModal(false);
                   setIsInquirySuccess(false);
                 }}
-                className="absolute top-4 right-4 text-gray-400 hover:text-text-dark text-lg font-bold cursor-pointer"
+                className="absolute top-4 right-4 text-gray-400 dark:text-gray-500 hover:text-text-dark dark:hover:text-gray-200 text-lg font-bold cursor-pointer"
               >
                 ✕
               </button>
@@ -634,47 +634,47 @@ export default function ProductDetail({ productId, onClose }) {
                     <span className="bg-primary/10 text-primary border border-primary/20 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full inline-block">
                       Secure Catalog Booking
                     </span>
-                    <h3 className="font-display font-black text-xl text-text-dark mt-3">
+                    <h3 className="font-display font-black text-xl text-text-dark dark:text-gray-100 mt-3">
                       Complete Your Inquiry Details
                     </h3>
-                    <p className="text-xs text-text-muted mt-1 leading-relaxed">
+                    <p className="text-xs text-text-muted dark:text-gray-400 mt-1 leading-relaxed">
                       You are booking {selectedQuantityOption}x {product.name} ({selectedPot}) for a total price of <strong className="text-primary">₹{totalPrice.toFixed(2)}</strong>.
                     </p>
                   </div>
 
                   <form onSubmit={handleInquirySubmit} className="flex flex-col gap-4 text-left">
                     <div className="flex flex-col gap-1">
-                      <label className="text-xs font-bold text-text-dark">Your Name</label>
+                      <label className="text-xs font-bold text-text-dark dark:text-gray-250">Your Name</label>
                       <input
                         type="text"
                         required
                         placeholder="Enter your name"
                         value={inquiryForm.name}
                         onChange={(e) => setInquiryForm(prev => ({ ...prev, name: e.target.value }))}
-                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all"
+                        className="w-full bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:bg-white dark:focus:bg-zinc-850 focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all dark:text-gray-100"
                       />
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <label className="text-xs font-bold text-text-dark">Phone Number</label>
+                      <label className="text-xs font-bold text-text-dark dark:text-gray-250">Phone Number</label>
                       <input
                         type="tel"
                         required
                         placeholder="WhatsApp number preferred"
                         value={inquiryForm.phone}
                         onChange={(e) => setInquiryForm(prev => ({ ...prev, phone: e.target.value }))}
-                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all"
+                        className="w-full bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:bg-white dark:focus:bg-zinc-850 focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all dark:text-gray-100"
                       />
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <label className="text-xs font-bold text-text-dark">Message (Optional)</label>
+                      <label className="text-xs font-bold text-text-dark dark:text-gray-250">Message (Optional)</label>
                       <textarea
                         rows="2"
                         placeholder="Include custom queries or delivery instructions..."
                         value={inquiryForm.message}
                         onChange={(e) => setInquiryForm(prev => ({ ...prev, message: e.target.value }))}
-                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2 text-xs focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all resize-none"
+                        className="w-full bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl px-4 py-2 text-xs focus:outline-none focus:bg-white dark:focus:bg-zinc-850 focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all resize-none dark:text-gray-100"
                       />
                     </div>
 
@@ -689,12 +689,12 @@ export default function ProductDetail({ productId, onClose }) {
                 </>
               ) : (
                 <div className="text-center py-6">
-                  <div className="w-14 h-14 bg-green-50 text-primary border border-green-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
+                  <div className="w-14 h-14 bg-green-50 dark:bg-emerald-950/40 text-primary border border-green-100 dark:border-emerald-900/30 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
                     ✓
                   </div>
-                  <h3 className="font-display font-black text-xl text-text-dark mb-1">Inquiry Sent Successfully!</h3>
-                  <p className="text-xs text-text-muted max-w-sm mx-auto mb-6 leading-relaxed">
-                    Thank you <span className="font-bold text-text-dark">{inquiryForm.name}</span>. The accredited grower at <span className="font-bold text-text-dark">{product.origin}</span> has received your booking request for <span className="font-bold text-text-dark">{selectedQuantityOption}x {product.name}</span>. They will respond shortly.
+                  <h3 className="font-display font-black text-xl text-text-dark dark:text-gray-100 mb-1">Inquiry Sent Successfully!</h3>
+                  <p className="text-xs text-text-muted dark:text-gray-400 max-w-sm mx-auto mb-6 leading-relaxed">
+                    Thank you <span className="font-bold text-text-dark dark:text-gray-200">{inquiryForm.name}</span>. The accredited grower at <span className="font-bold text-text-dark dark:text-gray-200">{product.origin}</span> has received your booking request for <span className="font-bold text-text-dark dark:text-gray-200">{selectedQuantityOption}x {product.name}</span>. They will respond shortly.
                   </p>
 
                   <button
@@ -703,7 +703,7 @@ export default function ProductDetail({ productId, onClose }) {
                       setIsInquirySuccess(false);
                       setInquiryForm({ name: '', phone: '', message: '' });
                     }}
-                    className="w-full py-3 bg-gray-900 hover:bg-black text-white font-bold text-xs rounded-xl transition-all cursor-pointer"
+                    className="w-full py-3 bg-gray-900 dark:bg-zinc-800 hover:bg-black dark:hover:bg-zinc-700 text-white font-bold text-xs rounded-xl transition-all cursor-pointer"
                   >
                     Done
                   </button>

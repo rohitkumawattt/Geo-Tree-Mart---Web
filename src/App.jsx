@@ -23,7 +23,7 @@ const CartPage = lazy(() => import('../Pages/Cart'));
 
 // Beautiful minimal loading spinner fallback for lazy-loaded route transitions
 const LoadingFallback = () => (
-  <div className="w-full min-h-[60vh] flex flex-col items-center justify-center bg-[#FAF9F6] text-text-muted">
+  <div className="w-full min-h-[60vh] flex flex-col items-center justify-center bg-bg-light text-text-muted transition-colors duration-300">
     <div className="w-10 h-10 border-4 border-primary/20 border-t-primary rounded-full animate-spin mb-4"></div>
     <p className="text-xs font-bold uppercase tracking-widest text-primary/70 animate-pulse">Loading Premium Garden Deals...</p>
   </div>

@@ -59,7 +59,7 @@ export default function Footer() {
     <footer id="footer" className="w-full bg-[#0f1f10] text-[#F8FFF8]/80 pt-24 pb-8 px-6 md:px-12 relative overflow-hidden">
       {/* Modern Wave Divider at the top of the footer */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] pointer-events-none">
-        <svg className="relative block w-full h-[35px] md:h-[55px]" viewBox="0 0 1200 120" preserveAspectRatio="none" fill='white'>
+        <svg className="relative block w-full h-[35px] md:h-[55px] text-bg-light fill-current transition-colors duration-300" viewBox="0 0 1200 120" preserveAspectRatio="none">
           <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V95.8C67.81,111.31,144.29,103.7,214.34,85.22,250.74,75.6,286.27,66.6,321.39,56.44Z"></path>
         </svg>
       </div>
@@ -85,7 +85,7 @@ export default function Footer() {
           {/* Col 1: Brand Info */}
           <div className="lg:col-span-3 sm:col-span-2 flex flex-col items-start text-left">
             <div className="flex items-center gap-3 mb-4 group/brand">
-              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-md shadow-primary/20 transform transition-transform group-hover/brand:scale-105 duration-500">
+              <div className="w-10 h-10 rounded-xl bg-white dark:bg-zinc-900 border border-transparent dark:border-zinc-800 flex items-center justify-center shadow-md shadow-primary/20 transform transition-transform group-hover/brand:scale-105 duration-500">
                 <img src="./favicon.png" alt="GeoTree Mart Logo" className="w-7 h-7 object-contain" loading="lazy" />
               </div>
               <div className="flex flex-col">

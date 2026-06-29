@@ -64,8 +64,8 @@ function FAQItem({ faq, isOpen, onToggle }) {
 
   return (
     <div className={`mb-4 rounded-2xl border transition-all duration-300 overflow-hidden ${isOpen
-        ? 'border-primary/30 bg-gradient-to-br from-white to-primary/[0.02] shadow-md shadow-primary/5'
-        : 'border-primary/10 bg-white hover:border-primary/20 hover:shadow-sm'
+        ? 'border-primary/30 dark:border-primary/40 bg-gradient-to-br from-white to-primary/[0.02] dark:from-zinc-950 dark:to-primary/[0.05] shadow-md shadow-primary/5 dark:shadow-primary/10'
+        : 'border-primary/10 dark:border-zinc-800 bg-white dark:bg-zinc-950 hover:border-primary/20 dark:hover:border-zinc-700 hover:shadow-sm'
       }`}>
       <button
         onClick={onToggle}
@@ -74,7 +74,7 @@ function FAQItem({ faq, isOpen, onToggle }) {
         <div className="flex items-start gap-3.5 pr-4">
           <FiHelpCircle className={`text-xl mt-0.5 flex-shrink-0 transition-colors duration-300 ${isOpen ? 'text-primary' : 'text-primary/40 group-hover:text-primary/75'
             }`} />
-          <span className="font-display font-extrabold text-base sm:text-lg text-text-dark leading-snug group-hover:text-primary transition-colors duration-300">
+          <span className="font-display font-extrabold text-base sm:text-lg text-text-dark dark:text-gray-100 leading-snug group-hover:text-primary transition-colors duration-300">
             {faq.question}
           </span>
         </div>
@@ -93,7 +93,7 @@ function FAQItem({ faq, isOpen, onToggle }) {
         style={{ willChange: 'height, opacity' }}
       >
         <div className="px-5 sm:px-6 pb-6 pt-0">
-          <div className="border-l-2 border-primary/20 pl-4 text-sm sm:text-base text-text-muted font-sans leading-relaxed">
+          <div className="border-l-2 border-primary/20 pl-4 text-sm sm:text-base text-text-muted dark:text-gray-400 font-sans leading-relaxed">
             {faq.answer}
           </div>
         </div>
@@ -150,7 +150,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="relative w-full pt-6 pb-12 bg-[#F8FAF8] px-6 md:px-12 overflow-hidden"
+      className="relative w-full pt-6 pb-12 bg-[#F8FAF8] dark:bg-[#070b0e] px-6 md:px-12 overflow-hidden transition-colors duration-300"
     >
       {/* Decorative background blur spots */}
       <div className="absolute top-[20%] left-[-50px] w-72 h-72 bg-primary/5 blur-[120px] rounded-full pointer-events-none" />

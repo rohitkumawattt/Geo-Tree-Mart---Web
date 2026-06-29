@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenu, HiX } from 'react-icons/hi';
 import { FaGooglePlay, FaApple } from 'react-icons/fa';
-import { FiShoppingCart, FiLogOut, FiUser } from 'react-icons/fi';
+import { FiShoppingCart, FiLogOut, FiUser, FiSun, FiMoon } from 'react-icons/fi';
 import { useCart } from '../context/CartContext';
+import { useTheme } from '../context/ThemeContext';
 
 const NAV_ITEMS = [
   { label: 'Home', id: 'home' },
@@ -17,6 +18,7 @@ const NAV_ITEMS = [
 
 export default function Navbar() {
   const { cartCount, isLoggedIn, userPhone, login, logout } = useCart();
+  const { isDarkMode, toggleDarkMode } = useTheme();
   const displayCount = cartCount > 99 ? '99+' : cartCount;
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
@@ -194,15 +196,17 @@ export default function Navbar() {
             style={{
               backdropFilter: 'blur(12px)',
               WebkitBackdropFilter: 'blur(12px)',
-              background: 'linear-gradient(to bottom, rgba(248, 255, 248, 0.45), rgba(248, 255, 248, 0))'
+              background: isDarkMode 
+                ? 'linear-gradient(to bottom, rgba(6, 9, 12, 0.45), rgba(6, 9, 12, 0))'
+                : 'linear-gradient(to bottom, rgba(248, 255, 248, 0.45), rgba(248, 255, 248, 0))'
             }}
           />
         )}
         <motion.div
           layout
           className={`mx-auto pointer-events-auto ${isScrolled
-            ? 'mt-2.5 w-[95%] max-w-9xl rounded-full bg-white/50 shadow-[0_10px_35px_rgba(0,0,0,0.05)] border border-white/50 py-2 px-6 md:px-8'
-            : 'mt-0 w-full rounded-none bg-white/30 border-b border-white/20 py-3 px-6 md:px-10'
+            ? 'mt-2.5 w-[95%] max-w-9xl rounded-full bg-white/50 dark:bg-zinc-900/50 shadow-[0_10px_35px_rgba(0,0,0,0.05)] dark:shadow-[0_10px_35px_rgba(0,0,0,0.35)] border border-white/50 dark:border-zinc-800/50 py-2 px-6 md:px-8'
+            : 'mt-0 w-full rounded-none bg-white/30 dark:bg-zinc-950/30 border-b border-white/20 dark:border-zinc-900/20 py-3 px-6 md:px-10'
             }`}
           style={{
             backdropFilter: isScrolled ? 'blur(24px)' : 'blur(12px)',
@@ -217,28 +221,28 @@ export default function Navbar() {
               onClick={() => scrollToSection('home')}
               className="flex items-center gap-2.5 group cursor-pointer text-left focus:outline-none"
             >
-              <div className="w-9 h-9 rounded-lg bg-white flex items-center justify-center shadow-md shadow-primary/10 transform transition-all group-hover:scale-105 group-hover:rotate-6 duration-300 border border-primary/5">
+              <div className="w-9 h-9 rounded-lg bg-white dark:bg-zinc-900 flex items-center justify-center shadow-md shadow-primary/10 transform transition-all group-hover:scale-105 group-hover:rotate-6 duration-300 border border-primary/5 dark:border-zinc-800/50">
                 <img src="./favicon.png" alt="" className="w-5.5 h-5.5 object-contain" />
               </div>
               <div className="md:hidden lg:flex flex flex-col">
-                <span className="font-display font-black text-base md:text-lg leading-none tracking-tight text-text-dark">
+                <span className="font-display font-black text-base md:text-lg leading-none tracking-tight text-text-dark dark:text-gray-105">
                   GeoTree <span className="text-primary">Mart</span>
                 </span>
                 <span className="text-[9px] text-primary font-bold tracking-wider mt-0.5">
-                  <span className='text-text-muted font-normal'>By</span> Geo Planet Solution
+                  <span className='text-text-muted dark:text-gray-400 font-normal'>By</span> Geo Planet Solution
                 </span>
               </div>
             </button>
 
             {/* Desktop Navigation Link Menu */}
-            <div className="hidden md:flex items-center gap-1 bg-black/[0.02] p-2 rounded-full border border-black/[0.04]">
+            <div className="hidden md:flex items-center gap-1 bg-black/[0.02] dark:bg-white/[0.03] p-2 rounded-full border border-black/[0.04] dark:border-white/[0.05]">
               {NAV_ITEMS.map((item) => {
                 const isActive = activeSection === item.id;
                 return (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`relative px-3.5 py-1.5 text-xs font-bold rounded-full transition-colors duration-300 cursor-pointer focus:outline-none ${isActive ? 'text-primary' : 'text-text-dark/70 hover:text-primary'
+                    className={`relative px-3.5 py-1.5 text-xs font-bold rounded-full transition-colors duration-300 cursor-pointer focus:outline-none ${isActive ? 'text-primary' : 'text-text-dark/70 dark:text-gray-300 hover:text-primary'
                       }`}
                   >
                     {isActive && (
@@ -256,14 +260,27 @@ export default function Navbar() {
 
             {/* Call To Action Buttons (Right) */}
             <div className="hidden md:flex items-center gap-4">
+              {/* Desktop Theme Toggle */}
+              <button
+                onClick={toggleDarkMode}
+                className="p-2.5 bg-gray-50 border border-gray-100 text-text-dark hover:bg-gray-100 rounded-full transition-all cursor-pointer focus:outline-none dark:bg-zinc-900 dark:border-zinc-800 dark:text-gray-100 dark:hover:bg-zinc-800 flex items-center justify-center"
+                title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              >
+                {isDarkMode ? (
+                  <FiSun className="text-base text-yellow-400" />
+                ) : (
+                  <FiMoon className="text-base text-indigo-650" />
+                )}
+              </button>
+
               {/* Desktop Cart Button */}
               <button
                 onClick={() => window.location.hash = '#cart'}
-                className="relative p-2.5 bg-gray-50 border border-gray-100 text-text-dark hover:bg-gray-100 rounded-full transition-colors cursor-pointer focus:outline-none"
+                className="relative p-2.5 bg-gray-50 border border-gray-100 text-text-dark hover:bg-gray-100 rounded-full transition-colors cursor-pointer focus:outline-none dark:bg-zinc-900 dark:border-zinc-800 dark:text-gray-105 dark:hover:bg-zinc-800"
               >
                 <FiShoppingCart className="text-base" />
                 {cartCount > 0 && (
-                  <span className="absolute -top-1.5 -right-1.5 bg-primary text-white text-[9px] font-black px-1 min-w-[18px] h-[18px] rounded-full flex items-center justify-center border border-white shadow-sm">
+                  <span className="absolute -top-1.5 -right-1.5 bg-primary text-white text-[9px] font-black px-1 min-w-[18px] h-[18px] rounded-full flex items-center justify-center border border-white dark:border-zinc-950 shadow-sm">
                     {displayCount}
                   </span>
                 )}
@@ -276,13 +293,13 @@ export default function Navbar() {
                     className={`p-2.5 border rounded-full transition-colors cursor-pointer focus:outline-none flex items-center justify-center relative ${
                       showProfileDropdown 
                         ? 'bg-primary/10 border-primary text-primary' 
-                        : 'bg-gray-50 border-gray-100 text-text-dark hover:bg-gray-100'
+                        : 'bg-gray-50 border-gray-100 text-text-dark hover:bg-gray-100 dark:bg-zinc-900 dark:border-zinc-800 dark:text-gray-105 dark:hover:bg-zinc-800'
                     }`}
                     title="Profile Settings"
                   >
                     <FiUser className="text-base" />
                     {/* Active green dot */}
-                    <span className="absolute top-0.5 right-0.5 w-2 h-2 bg-[#2e7d32] border border-white rounded-full"></span>
+                    <span className="absolute top-0.5 right-0.5 w-2 h-2 bg-[#2e7d32] border border-white dark:border-zinc-950 rounded-full"></span>
                   </button>
 
                   <AnimatePresence>
@@ -298,18 +315,18 @@ export default function Navbar() {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 10, scale: 0.95 }}
                           transition={{ duration: 0.15 }}
-                          className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 rounded-2xl shadow-xl p-4 text-left z-20"
+                          className="absolute right-0 mt-2 w-48 bg-white dark:bg-zinc-950 border border-gray-100 dark:border-zinc-900 rounded-2xl shadow-xl p-4 text-left z-20"
                         >
-                          <div className="flex flex-col gap-0.5 mb-3 border-b border-gray-100 pb-2.5">
-                            <span className="text-[9px] font-black text-text-muted uppercase tracking-wider">Active Session</span>
-                            <span className="text-xs font-black text-text-dark font-sans">+91 {userPhone}</span>
+                          <div className="flex flex-col gap-0.5 mb-3 border-b border-gray-100 dark:border-zinc-900 pb-2.5">
+                            <span className="text-[9px] font-black text-text-muted dark:text-gray-400 uppercase tracking-wider">Active Session</span>
+                            <span className="text-xs font-black text-text-dark dark:text-gray-100 font-sans">+91 {userPhone}</span>
                           </div>
                           <button
                             onClick={() => {
                               setShowProfileDropdown(false);
                               logout();
                             }}
-                            className="w-full flex items-center justify-center gap-2 py-2 bg-red-50 hover:bg-red-100 text-red-500 hover:text-red-650 font-extrabold text-[10px] rounded-lg transition-colors border border-red-100/50 cursor-pointer focus:outline-none uppercase tracking-wider"
+                            className="w-full flex items-center justify-center gap-2 py-2 bg-red-50 hover:bg-red-100 text-red-500 hover:text-red-650 dark:bg-red-950/20 dark:hover:bg-red-950/40 dark:text-red-400 font-extrabold text-[10px] rounded-lg transition-colors border border-red-100/50 dark:border-red-900/30 cursor-pointer focus:outline-none uppercase tracking-wider"
                           >
                             <FiLogOut className="text-[10px]" />
                             Logout
@@ -329,7 +346,7 @@ export default function Navbar() {
                     setAuthError('');
                     setShowLoginModal(true);
                   }}
-                  className="p-2.5 bg-gray-50 border border-gray-100 text-text-dark hover:bg-gray-100 rounded-full transition-colors cursor-pointer focus:outline-none flex items-center justify-center"
+                  className="p-2.5 bg-gray-50 border border-gray-100 text-text-dark hover:bg-gray-100 rounded-full transition-colors cursor-pointer focus:outline-none flex items-center justify-center dark:bg-zinc-900 dark:border-zinc-800 dark:text-gray-105 dark:hover:bg-zinc-800"
                   title="Login / Signup"
                 >
                   <FiUser className="text-base" />
@@ -344,14 +361,27 @@ export default function Navbar() {
               </button>
             </div>
 
+            {/* Mobile Theme Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              className="md:hidden p-2.5 bg-gray-50 border border-gray-100 text-text-dark hover:bg-gray-100 rounded-full transition-colors cursor-pointer focus:outline-none mr-2 dark:bg-zinc-900 dark:border-zinc-800 dark:text-gray-105"
+              title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            >
+              {isDarkMode ? (
+                <FiSun className="text-sm text-yellow-400" />
+              ) : (
+                <FiMoon className="text-sm text-indigo-650" />
+              )}
+            </button>
+
             {/* Mobile Cart Button */}
             <button
               onClick={() => window.location.hash = '#cart'}
-              className="md:hidden relative p-2.5 bg-gray-50 border border-gray-100 text-text-dark hover:bg-gray-100 rounded-full transition-colors cursor-pointer focus:outline-none mr-2"
+              className="md:hidden relative p-2.5 bg-gray-50 border border-gray-100 text-text-dark hover:bg-gray-100 rounded-full transition-colors cursor-pointer focus:outline-none mr-2 dark:bg-zinc-900 dark:border-zinc-800 dark:text-gray-105 dark:hover:bg-zinc-800"
             >
               <FiShoppingCart className="text-sm" />
               {cartCount > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 bg-primary text-white text-[9px] font-black px-1 min-w-[18px] h-[18px] rounded-full flex items-center justify-center border border-white shadow-sm">
+                <span className="absolute -top-1.5 -right-1.5 bg-primary text-white text-[9px] font-black px-1 min-w-[18px] h-[18px] rounded-full flex items-center justify-center border border-white dark:border-zinc-950 shadow-sm">
                   {displayCount}
                 </span>
               )}
@@ -360,7 +390,7 @@ export default function Navbar() {
             {/* Hamburger Icon for Mobile */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-xl text-text-dark hover:bg-primary/5 transition-colors focus:outline-none"
+              className="md:hidden p-2 rounded-xl text-text-dark dark:text-gray-105 hover:bg-primary/5 transition-colors focus:outline-none"
               aria-label="Toggle Menu"
             >
               {isMobileMenuOpen ? <HiX className="text-xl" /> : <HiMenu className="text-xl" />}
@@ -377,7 +407,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.98 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-4 z-40 bg-white/95 backdrop-blur-xl md:hidden flex flex-col p-6 rounded-3xl border border-primary/10 shadow-xl top-20"
+            className="fixed inset-x-4 z-40 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl md:hidden flex flex-col p-6 rounded-3xl border border-primary/10 dark:border-primary/20 shadow-xl top-20"
           >
             <div className="flex flex-col gap-3 my-4">
               {NAV_ITEMS.map((item, idx) => {
@@ -391,7 +421,7 @@ export default function Navbar() {
                     onClick={() => scrollToSection(item.id)}
                     className={`text-left py-2.5 px-4 rounded-xl text-base font-extrabold transition-all ${isActive
                       ? 'bg-primary/10 text-primary border border-primary/20'
-                      : 'text-text-dark hover:bg-primary/5 hover:text-primary'
+                      : 'text-text-dark dark:text-gray-150 hover:bg-primary/5 hover:text-primary'
                       }`}
                   >
                     {item.label}
@@ -401,17 +431,17 @@ export default function Navbar() {
             </div>
             <div className="mt-4 flex flex-col gap-3">
               {isLoggedIn ? (
-                <div className="flex items-center justify-between bg-gray-50 border border-gray-150 rounded-xl p-3.5">
+                <div className="flex items-center justify-between bg-gray-50 dark:bg-zinc-900 border border-gray-150 dark:border-zinc-800 rounded-xl p-3.5">
                   <div className="flex flex-col text-left">
-                    <span className="text-[9px] font-bold text-text-muted uppercase tracking-tight">Active Session</span>
-                    <span className="text-xs font-black text-text-dark font-sans">+91 {userPhone}</span>
+                    <span className="text-[9px] font-bold text-text-muted dark:text-gray-400 uppercase tracking-tight">Active Session</span>
+                    <span className="text-xs font-black text-text-dark dark:text-gray-100 font-sans">+91 {userPhone}</span>
                   </div>
                   <button
                     onClick={() => {
                       setIsMobileMenuOpen(false);
                       logout();
                     }}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-500 hover:text-red-650 font-extrabold text-[10px] rounded-lg transition-colors border border-red-100/50 cursor-pointer focus:outline-none uppercase tracking-wider"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-500 hover:text-red-650 dark:bg-red-950/20 dark:hover:bg-red-950/40 dark:text-red-400 font-extrabold text-[10px] rounded-lg transition-colors border border-red-100/50 dark:border-red-900/30 cursor-pointer focus:outline-none uppercase tracking-wider"
                   >
                     <FiLogOut className="text-[10px]" />
                     Logout
@@ -427,7 +457,7 @@ export default function Navbar() {
                     setAuthError('');
                     setShowLoginModal(true);
                   }}
-                  className="w-full text-center py-3 bg-white border border-primary/25 text-primary hover:bg-primary/[0.02] font-extrabold text-sm rounded-xl focus:outline-none cursor-pointer active:scale-[0.99] transition-all"
+                  className="w-full text-center py-3 bg-white dark:bg-zinc-900 border border-primary/25 dark:border-primary/20 text-primary hover:bg-primary/[0.02] font-extrabold text-sm rounded-xl focus:outline-none cursor-pointer active:scale-[0.99] transition-all"
                 >
                   Login / Signup
                 </button>
@@ -465,13 +495,13 @@ export default function Navbar() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 30 }}
               transition={{ type: "spring", damping: 25, stiffness: 250 }}
-              className="relative w-full max-w-sm bg-white rounded-3xl shadow-2xl p-6 sm:p-8 z-10 text-center border border-primary/10 overflow-hidden"
+              className="relative w-full max-w-sm bg-white dark:bg-zinc-950 rounded-3xl shadow-2xl p-6 sm:p-8 z-10 text-center border border-primary/10 dark:border-primary/20 overflow-hidden"
               data-lenis-prevent
             >
               {/* Close Button */}
               <button
                 onClick={() => setShowDownloadModal(false)}
-                className="absolute top-4 right-4 text-text-muted hover:text-text-dark text-lg font-bold cursor-pointer focus:outline-none w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center hover:bg-gray-100 transition-colors"
+                className="absolute top-4 right-4 text-text-muted hover:text-text-dark dark:text-gray-400 dark:hover:text-gray-100 text-lg font-bold cursor-pointer focus:outline-none w-8 h-8 rounded-full bg-gray-50 dark:bg-zinc-900 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
               >
                 <HiX />
               </button>
@@ -481,10 +511,10 @@ export default function Navbar() {
                 <img src="./favicon.png" alt="" className="w-6 h-6 object-contain" />
               </div>
 
-              <h3 className="font-display font-black text-xl text-text-dark mb-2">
+              <h3 className="font-display font-black text-xl text-text-dark dark:text-gray-100 mb-2">
                 Get the GeoTree Mart App
               </h3>
-              <p className="font-sans text-xs text-text-muted leading-relaxed mb-6">
+              <p className="font-sans text-xs text-text-muted dark:text-gray-400 leading-relaxed mb-6">
                 Get access to verified nurseries, live GIS tracking, and secure escrow B2B trading right from your phone.
               </p>
 
@@ -492,7 +522,7 @@ export default function Navbar() {
               <div className="flex flex-col gap-3">
                 <a
                   href="#"
-                  className="flex items-center gap-3 bg-text-dark hover:bg-primary text-white rounded-xl px-4 py-2 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group justify-center shadow-md shadow-text-dark/10 hover:shadow-primary/20"
+                  className="flex items-center gap-3 bg-text-dark dark:bg-zinc-900 hover:bg-primary text-white rounded-xl px-4 py-2 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group justify-center shadow-md shadow-text-dark/10 hover:shadow-primary/20"
                 >
                   <FaGooglePlay className="text-lg text-white group-hover:scale-110 transition-transform duration-300" />
                   <div className="flex flex-col text-left">
@@ -503,7 +533,7 @@ export default function Navbar() {
 
                 <a
                   href="#"
-                  className="flex items-center gap-3 bg-text-dark hover:bg-primary text-white rounded-xl px-4 py-2 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group justify-center shadow-md shadow-text-dark/10 hover:shadow-primary/20"
+                  className="flex items-center gap-3 bg-text-dark dark:bg-zinc-900 hover:bg-primary text-white rounded-xl px-4 py-2 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group justify-center shadow-md shadow-text-dark/10 hover:shadow-primary/20"
                 >
                   <FaApple className="text-xl text-white group-hover:scale-110 transition-transform duration-300" />
                   <div className="flex flex-col text-left">
@@ -515,25 +545,25 @@ export default function Navbar() {
 
               {/* QR Code Divider */}
               <div className="flex items-center my-5">
-                <div className="flex-1 h-[1px] bg-gray-100"></div>
+                <div className="flex-1 h-[1px] bg-gray-100 dark:bg-zinc-900"></div>
                 <span className="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest">Or Scan QR</span>
-                <div className="flex-1 h-[1px] bg-gray-100"></div>
+                <div className="flex-1 h-[1px] bg-gray-100 dark:bg-zinc-900"></div>
               </div>
 
               {/* QR Code SVG */}
-              <div className="inline-flex flex-col items-center justify-center bg-gray-50 border border-gray-100 rounded-2xl p-4 w-full">
-                <svg className="w-24 h-24 text-text-dark" viewBox="0 0 100 100" fill="currentColor">
+              <div className="inline-flex flex-col items-center justify-center bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 rounded-2xl p-4 w-full">
+                <svg className="w-24 h-24 text-text-dark dark:text-gray-100" viewBox="0 0 100 100" fill="currentColor">
                   {/* Outer corner blocks */}
                   <rect x="0" y="0" width="22" height="22" />
-                  <rect x="3" y="3" width="16" height="16" fill="white" />
+                  <rect x="3" y="3" width="16" height="16" fill="white" className="dark:fill-zinc-950" />
                   <rect x="6" y="6" width="10" height="10" />
                   
                   <rect x="78" y="0" width="22" height="22" />
-                  <rect x="81" y="3" width="16" height="16" fill="white" />
+                  <rect x="81" y="3" width="16" height="16" fill="white" className="dark:fill-zinc-950" />
                   <rect x="84" y="6" width="10" height="10" />
                   
                   <rect x="0" y="78" width="22" height="22" />
-                  <rect x="3" y="81" width="16" height="16" fill="white" />
+                  <rect x="3" y="81" width="16" height="16" fill="white" className="dark:fill-zinc-950" />
                   <rect x="6" y="84" width="10" height="10" />
                   
                   {/* Random dots & grid patterns for QR */}
@@ -545,10 +575,10 @@ export default function Navbar() {
                   <rect x="24" y="48" width="12" height="12" />
                   
                   {/* Green brand logo center block */}
-                  <rect x="38" y="38" width="24" height="24" fill="white" />
+                  <rect x="38" y="38" width="24" height="24" fill="white" className="dark:fill-zinc-950" />
                   <rect x="41" y="41" width="18" height="18" rx="4" fill="#1b5e20" />
                   {/* Inner brand cross/dot */}
-                  <circle cx="50" cy="50" r="4" fill="white" />
+                  <circle cx="50" cy="50" r="4" fill="white" className="dark:fill-zinc-950" />
                   
                   <rect x="72" y="30" width="18" height="6" />
                   <rect x="88" y="42" width="10" height="18" />
@@ -561,7 +591,7 @@ export default function Navbar() {
                   <rect x="60" y="84" width="18" height="6" />
                   <rect x="84" y="84" width="10" height="10" />
                 </svg>
-                <span className="text-[9px] text-text-muted font-bold tracking-wider mt-2.5 uppercase">Scan on Mobile Screen</span>
+                <span className="text-[9px] text-text-muted dark:text-gray-400 font-bold tracking-wider mt-2.5 uppercase">Scan on Mobile Screen</span>
               </div>
             </motion.div>
           </div>
@@ -587,12 +617,12 @@ export default function Navbar() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 30 }}
               transition={{ type: "spring", damping: 25, stiffness: 250 }}
-              className="relative w-full max-w-sm bg-white rounded-3xl shadow-2xl p-6 sm:p-8 z-10 text-center border border-primary/10 overflow-hidden"
+              className="relative w-full max-w-sm bg-white dark:bg-zinc-950 rounded-3xl shadow-2xl p-6 sm:p-8 z-10 text-center border border-primary/10 dark:border-primary/20 overflow-hidden"
             >
               {/* Close button */}
               <button
                 onClick={() => setShowLoginModal(false)}
-                className="absolute top-4 right-4 p-1.5 text-text-muted hover:text-text-dark hover:bg-gray-150 rounded-full transition-colors cursor-pointer focus:outline-none"
+                className="absolute top-4 right-4 p-1.5 text-text-muted hover:text-text-dark dark:text-gray-400 dark:hover:text-gray-100 hover:bg-gray-150 dark:hover:bg-zinc-800 rounded-full transition-colors cursor-pointer focus:outline-none"
               >
                 <HiX className="text-lg" />
               </button>
@@ -601,8 +631,8 @@ export default function Navbar() {
                 <div className="w-12 h-12 bg-primary/10 text-primary border border-primary/15 rounded-full flex items-center justify-center mx-auto mb-3">
                   <FiUser className="text-xl" />
                 </div>
-                <h3 className="font-display font-black text-xl text-text-dark">Login / Signup</h3>
-                <p className="text-[10px] text-text-muted mt-1 leading-relaxed max-w-xs mx-auto">
+                <h3 className="font-display font-black text-xl text-text-dark dark:text-gray-100">Login / Signup</h3>
+                <p className="text-[10px] text-text-muted dark:text-gray-400 mt-1 leading-relaxed max-w-xs mx-auto">
                   Verify your WhatsApp/Phone number to sync your cart and place orders instantly
                 </p>
               </div>
@@ -639,9 +669,9 @@ export default function Navbar() {
               >
                 {authStep === 'phone' ? (
                   <div className="flex flex-col gap-1">
-                    <label className="text-xs font-bold text-text-dark">Phone Number</label>
+                    <label className="text-xs font-bold text-text-dark dark:text-gray-250">Phone Number</label>
                     <div className="relative flex items-center mt-1">
-                      <span className="absolute left-4 text-sm font-bold text-text-muted font-sans">+91</span>
+                      <span className="absolute left-4 text-sm font-bold text-text-muted dark:text-gray-400 font-sans">+91</span>
                       <input
                         type="tel"
                         required
@@ -652,14 +682,14 @@ export default function Navbar() {
                           setAuthPhone(val);
                           if (authError) setAuthError('');
                         }}
-                        className="w-full bg-white border border-gray-250 rounded-xl pl-12 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all font-sans font-bold"
+                        className="w-full bg-white dark:bg-zinc-900 border border-gray-250 dark:border-zinc-800 rounded-xl pl-12 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all font-sans font-bold text-text-dark dark:text-gray-105"
                       />
                     </div>
                   </div>
                 ) : (
                   <div className="flex flex-col gap-1">
                     <div className="flex justify-between items-baseline">
-                      <label className="text-xs font-bold text-text-dark">Enter OTP</label>
+                      <label className="text-xs font-bold text-text-dark dark:text-gray-250">Enter OTP</label>
                       <button
                         type="button"
                         onClick={() => {
@@ -682,10 +712,10 @@ export default function Navbar() {
                         setOtpVal(val);
                         if (authError) setAuthError('');
                       }}
-                      className="w-full bg-white border border-gray-250 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all text-center tracking-widest font-mono font-black mt-1"
+                      className="w-full bg-white dark:bg-zinc-900 border border-gray-250 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all text-center tracking-widest font-mono font-black mt-1 text-text-dark dark:text-gray-105"
                     />
-                    <p className="text-[10px] text-text-muted mt-1.5 leading-relaxed">
-                      An OTP has been simulated for <span className="font-bold text-text-dark">+91 {authPhone}</span>. Enter any 4 digits to proceed.
+                    <p className="text-[10px] text-text-muted dark:text-gray-400 mt-1.5 leading-relaxed">
+                      An OTP has been simulated for <span className="font-bold text-text-dark dark:text-gray-150">+91 {authPhone}</span>. Enter any 4 digits to proceed.
                     </p>
                   </div>
                 )}

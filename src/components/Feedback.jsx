@@ -183,8 +183,8 @@ export default function Feedback() {
       {/* Scrolling Feedback Container */}
       <div className="relative w-full overflow-hidden py-4 select-none">
         {/* Left and Right Edge Fade Overlays */}
-        <div className="absolute top-0 left-0 bottom-0 w-16 sm:w-32 md:w-44 bg-gradient-to-r from-[#F8FFF8] via-[#F8FFF8]/70 to-transparent z-10 pointer-events-none" />
-        <div className="absolute top-0 right-0 bottom-0 w-16 sm:w-32 md:w-44 bg-gradient-to-l from-[#F8FFF8] via-[#F8FFF8]/70 to-transparent z-10 pointer-events-none" />
+        <div className="absolute top-0 left-0 bottom-0 w-16 sm:w-32 md:w-44 bg-gradient-to-r from-bg-light via-bg-light/70 to-transparent z-10 pointer-events-none transition-colors duration-300" />
+        <div className="absolute top-0 right-0 bottom-0 w-16 sm:w-32 md:w-44 bg-gradient-to-l from-bg-light via-bg-light/70 to-transparent z-10 pointer-events-none transition-colors duration-300" />
 
         <div
           ref={rowRef}
@@ -220,13 +220,13 @@ export default function Feedback() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 30 }}
               transition={{ type: "spring", damping: 25, stiffness: 250 }}
-              className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl p-6 sm:p-8 z-10 text-left border border-primary/10 overflow-hidden"
+              className="relative w-full max-w-lg bg-white dark:bg-zinc-950 rounded-3xl shadow-2xl p-6 sm:p-8 z-10 text-left border border-primary/10 dark:border-primary/20 overflow-hidden"
               data-lenis-prevent
             >
               {/* Close button */}
               <button
                 onClick={() => setSelectedFeedback(null)}
-                className="absolute top-4 right-4 text-text-muted hover:text-text-dark text-lg font-bold cursor-pointer focus:outline-none w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center hover:bg-gray-100 transition-colors"
+                className="absolute top-4 right-4 text-text-muted hover:text-text-dark dark:text-gray-400 dark:hover:text-gray-100 text-lg font-bold cursor-pointer focus:outline-none w-8 h-8 rounded-full bg-gray-50 dark:bg-zinc-900 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
               >
                 ✕
               </button>
@@ -245,25 +245,25 @@ export default function Feedback() {
                 </div>
 
                 {/* Text */}
-                <p className="font-sans text-base sm:text-lg text-text-dark leading-relaxed font-medium italic">
+                <p className="font-sans text-base sm:text-lg text-text-dark dark:text-gray-100 leading-relaxed font-medium italic">
                   "{selectedFeedback.text}"
                 </p>
 
                 {/* Profile */}
-                <div className="flex items-center gap-4 border-t border-primary/5 pt-6">
+                <div className="flex items-center gap-4 border-t border-primary/5 dark:border-zinc-900 pt-6">
                   <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-primary to-secondary text-white font-display font-bold text-base flex items-center justify-center shadow-md shadow-primary/15 flex-shrink-0">
                     {selectedFeedback.initials}
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-1.5">
-                      <h4 className="font-display font-black text-base text-text-dark">
+                      <h4 className="font-display font-black text-base text-text-dark dark:text-gray-100">
                         {selectedFeedback.name}
                       </h4>
                       <span className="text-primary text-sm flex-shrink-0" title="Verified Partner">
                         <FaCheckCircle />
                       </span>
                     </div>
-                    <p className="font-sans text-xs sm:text-sm text-text-muted mt-0.5">
+                    <p className="font-sans text-xs sm:text-sm text-text-muted dark:text-gray-400 mt-0.5">
                       {selectedFeedback.role}
                     </p>
                   </div>
@@ -287,7 +287,7 @@ export default function Feedback() {
 
 function FeedbackCard({ item, onClick }) {
   return (
-    <div onClick={onClick} className={`w-[300px] sm:w-[380px] flex-shrink-0 rounded-3xl p-6 sm:p-8 bg-gradient-to-br ${item.bg} border border-white/85 shadow-[0_15px_35px_rgba(27,94,32,0.02)] glassmorphism-card hover:shadow-[0_20px_40px_rgba(27,94,32,0.06)] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between gap-6 cursor-pointer`}>
+    <div onClick={onClick} className={`w-[300px] sm:w-[380px] flex-shrink-0 rounded-3xl p-6 sm:p-8 bg-gradient-to-br ${item.bg} dark:from-zinc-900 dark:to-zinc-950 border border-white/85 dark:border-zinc-800 shadow-[0_15px_35px_rgba(27,94,32,0.02)] glassmorphism-card hover:shadow-[0_20px_40px_rgba(27,94,32,0.06)] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between gap-6 cursor-pointer`}>
       <div className="flex flex-col gap-4">
         {/* Top bar: Stars and Quote icon */}
         <div className="flex items-center justify-between">
@@ -302,26 +302,26 @@ function FeedbackCard({ item, onClick }) {
         </div>
 
         {/* Testimonial text */}
-        <p className="font-sans text-sm sm:text-base text-text-muted leading-relaxed line-clamp-3">
+        <p className="font-sans text-sm sm:text-base text-text-muted dark:text-gray-300 leading-relaxed line-clamp-3">
           {item.text}
         </p>
       </div>
 
       {/* Profile/Author Info */}
-      <div className="flex items-center gap-4 border-t border-primary/5 pt-4">
+      <div className="flex items-center gap-4 border-t border-primary/5 dark:border-zinc-800/80 pt-4">
         <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-primary to-secondary text-white font-display font-bold text-sm flex items-center justify-center shadow-md shadow-primary/15 flex-shrink-0">
           {item.initials}
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5">
-            <h4 className="font-display font-extrabold text-sm sm:text-base text-text-dark truncate">
+            <h4 className="font-display font-extrabold text-sm sm:text-base text-text-dark dark:text-gray-105 truncate">
               {item.name}
             </h4>
             <span className="text-primary text-xs flex-shrink-0" title="Verified Partner">
               <FaCheckCircle />
             </span>
           </div>
-          <p className="font-sans text-[11px] sm:text-xs text-text-muted truncate mt-0.5">
+          <p className="font-sans text-[11px] sm:text-xs text-text-muted dark:text-gray-400 truncate mt-0.5">
             {item.role}
           </p>
         </div>

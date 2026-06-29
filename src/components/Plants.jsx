@@ -84,10 +84,10 @@ export default function Buy() {
               className="w-full will-change-[transform,opacity]"
               onClick={() => window.location.hash = `#product/${plant.id}`}
             >
-              <div className="w-full h-full rounded-[20px] bg-white border border-black/[0.04] shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.08)] hover:border-primary/20 transition-all duration-300 flex flex-col overflow-hidden group text-left cursor-pointer transform hover:-translate-y-1.5">
+              <div className="w-full h-full rounded-[20px] bg-white dark:bg-zinc-950 border border-black/[0.04] dark:border-zinc-800/80 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.08)] hover:border-primary/20 transition-all duration-300 flex flex-col overflow-hidden group text-left cursor-pointer transform hover:-translate-y-1.5">
 
                 {/* Plant Image Container */}
-                <div className="relative aspect-square w-full overflow-hidden bg-gray-100">
+                <div className="relative aspect-square w-full overflow-hidden bg-gray-100 dark:bg-zinc-900">
                   <img
                     src={plant.image}
                     alt={plant.name}
@@ -96,7 +96,7 @@ export default function Buy() {
                   />
 
                   {/* Category Badge */}
-                  <span className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm text-primary-dark text-[9px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-sm border border-black/[0.03] z-10">
+                  <span className="absolute bottom-3 left-3 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-sm text-primary-dark dark:text-primary text-[9px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-sm border border-black/[0.03] dark:border-zinc-800 z-10">
                     {plant.category}
                   </span>
 
@@ -107,34 +107,34 @@ export default function Buy() {
                 </div>
 
                 {/* Plant Card Details */}
-                <div className="p-4 flex flex-col flex-grow justify-between bg-white">
+                <div className="p-4 flex flex-col flex-grow justify-between bg-white dark:bg-zinc-950">
                   <div>
-                    <h3 className="font-display font-bold text-sm sm:text-base text-text-dark leading-snug group-hover:text-primary transition-colors duration-300 truncate">
+                    <h3 className="font-display font-bold text-sm sm:text-base text-text-dark dark:text-gray-100 leading-snug group-hover:text-primary transition-colors duration-300 truncate">
                       {plant.name}
                     </h3>
 
-                    <div className="flex items-center gap-1.5 text-text-muted text-[11px] mt-1.5 truncate">
+                    <div className="flex items-center gap-1.5 text-text-muted dark:text-gray-400 text-[11px] mt-1.5 truncate">
                       <FaStore className="text-primary/60 flex-shrink-0" />
                       <span className="truncate">{plant.origin}</span>
                     </div>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-black/[0.04] flex items-center justify-between">
+                  <div className="mt-4 pt-3 border-t border-black/[0.04] dark:border-zinc-800/80 flex items-center justify-between">
                     <div className="flex flex-col text-left">
-                      <span className="text-[9px] text-text-muted uppercase tracking-wider font-semibold">Bulk Price</span>
+                      <span className="text-[9px] text-text-muted dark:text-gray-400 uppercase tracking-wider font-semibold">Bulk Price</span>
                       <div className="flex items-baseline gap-1.5 mt-0.5">
                         <span className="text-primary font-display font-extrabold text-base leading-none">
                           ₹{plant.price}
                         </span>
-                        <span className="text-[11px] text-text-muted/60 line-through font-medium leading-none">
+                        <span className="text-[11px] text-text-muted/60 dark:text-gray-500 line-through font-medium leading-none">
                           ₹{plant.originalPrice}
                         </span>
                       </div>
                     </div>
 
                     <div className="flex flex-col items-end">
-                      <span className="text-[9px] text-text-muted uppercase tracking-wider font-semibold">Available</span>
-                      <span className="text-text-dark font-sans font-bold text-xs leading-none mt-1">
+                      <span className="text-[9px] text-text-muted dark:text-gray-400 uppercase tracking-wider font-semibold">Available</span>
+                      <span className="text-text-dark dark:text-gray-200 font-sans font-bold text-xs leading-none mt-1">
                         {plant.stock >= 1000 ? `${(plant.stock / 1000)}k` : plant.stock}
                       </span>
                     </div>

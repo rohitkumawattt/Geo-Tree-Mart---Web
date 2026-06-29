@@ -70,7 +70,7 @@ export default function ProblemSolution() {
       <div className="mx-auto relative z-10">
         {/* Title */}
         <div className="text-center max-w-3xl mx-auto mb-10 flex flex-col items-center group">
-          <h2 className="font-display text-3xl sm:text-5xl text-[#0f1f10] leading-tight tracking-tight">
+          <h2 className="font-display text-3xl sm:text-5xl text-text-dark leading-tight tracking-tight">
             Why Choose <span className="text-primary italic">GeoTree Mart?</span>
           </h2>
         </div>
@@ -93,11 +93,11 @@ export default function ProblemSolution() {
                   className="flex flex-col items-center group transition-all duration-300"
                 >
                   {/* Soft Round Icon Container with Hover Scale & Rotation */}
-                  <div className="w-16 h-16 rounded-full bg-white border border-[#e1e2e1] flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-secondary group-hover:text-white group-hover:border-transparent group-hover:shadow-[0_10px_25px_rgba(46,125,50,0.25)] transition-all duration-500 relative">
+                  <div className="w-16 h-16 rounded-full bg-white dark:bg-zinc-900 border border-[#e1e2e1] dark:border-zinc-800 text-primary group-hover:text-white flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-secondary group-hover:border-transparent group-hover:shadow-[0_10px_25px_rgba(46,125,50,0.25)] transition-all duration-500 relative">
                     <IconComponent className="text-xl transition-transform duration-700 ease-out" />
                   </div>
                   {/* Feature Title */}
-                  <h4 className="font-display font-extrabold text-lg text-[#0f1f10] mb-1 group-hover:text-primary transition-colors duration-300">
+                  <h4 className="font-display font-extrabold text-lg text-text-dark mb-1 group-hover:text-primary transition-colors duration-300">
                     {item.title}
                   </h4>
 
@@ -105,7 +105,7 @@ export default function ProblemSolution() {
                   <div className="w-6 h-[2px] bg-secondary/20 mx-auto mt-1 mb-3 group-hover:w-12 group-hover:bg-primary transition-all duration-300 rounded-full" />
 
                   {/* Feature Description */}
-                  <p className="text-[#0f1f10]/60 text-sm leading-relaxed max-w-xs px-2">
+                  <p className="text-text-muted text-sm leading-relaxed max-w-xs px-2">
                     {item.desc}
                   </p>
                 </div>

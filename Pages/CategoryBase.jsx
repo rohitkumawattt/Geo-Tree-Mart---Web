@@ -199,10 +199,10 @@ export default function CategoryBase({ categoryName, onClose }) {
   };
 
   return (
-    <div className="w-full min-h-screen pt-[72px] md:pt-[76px] pb-20 bg-[#FAF9F6] text-text-dark font-sans relative">
+    <div className="w-full min-h-screen pt-[72px] md:pt-[76px] pb-20 bg-bg-light text-text-dark dark:text-gray-105 font-sans relative transition-colors duration-300">
 
       {/* Category Banner/Header */}
-      <section className="relative w-full overflow-hidden py-5 md:py-6 px-6 md:px-12 bg-[#F3F6F2] border-b border-primary/5">
+      <section className="relative w-full overflow-hidden py-5 md:py-6 px-6 md:px-12 bg-[#F3F6F2] dark:bg-zinc-900/60 border-b border-primary/5 dark:border-zinc-800 transition-colors duration-300">
         {/* Soft botanical background image with low opacity overlay */}
         <div
           className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-15 mix-blend-overlay pointer-events-none"
@@ -215,17 +215,17 @@ export default function CategoryBase({ categoryName, onClose }) {
 
         <div className="max-w-7xl mx-auto relative z-10 text-left">
           {/* Breadcrumbs */}
-          <div className="flex flex-wrap items-center gap-1 text-[10px] font-bold text-text-muted/70 tracking-wide mb-4">
+          <div className="flex flex-wrap items-center gap-1 text-[10px] font-bold text-text-muted/70 dark:text-gray-400 tracking-wide mb-4">
             <button onClick={onClose} className="hover:text-primary transition-colors cursor-pointer uppercase">Home</button>
             <FiChevronRight />
-            <span className="text-text-dark uppercase tracking-tight">
+            <span className="text-text-dark dark:text-gray-200 uppercase tracking-tight">
               {categoryName === "Flowring" ? "Flowering" : categoryName}
             </span>
           </div>
 
           <button
             onClick={onClose}
-            className="group inline-flex items-center gap-2 mb-6 text-xs font-black text-primary hover:text-primary-dark bg-white border border-primary/10 hover:border-primary/20 px-4 py-2 rounded-full transition-all duration-300 shadow-sm hover:shadow cursor-pointer"
+            className="group inline-flex items-center gap-2 mb-6 text-xs font-black text-primary hover:text-primary-dark bg-white dark:bg-zinc-950 border border-primary/10 dark:border-zinc-850 hover:border-primary/20 px-4 py-2 rounded-full transition-all duration-300 shadow-sm hover:shadow cursor-pointer"
           >
             <FiArrowLeft className="group-hover:-translate-x-0.5 transition-transform" />
             BACK TO HOME
@@ -233,15 +233,15 @@ export default function CategoryBase({ categoryName, onClose }) {
 
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
             <div className="max-w-2xl">
-              <h1 className="font-display font-black text-xl sm:text-2xl tracking-tight text-text-dark mb-1">
+              <h1 className="font-display font-black text-xl sm:text-2xl tracking-tight text-text-dark dark:text-gray-100 mb-1">
                 {categoryName === "Vegetables" ? "Vegetable Saplings" : categoryName === "Flowring" ? "Flowering Plants" : `${categoryName} Plants`}
               </h1>
-              <p className="font-sans text-xs text-text-muted max-w-xl leading-relaxed">
+              <p className="font-sans text-xs text-text-muted dark:text-gray-400 max-w-xl leading-relaxed">
                 {categoryInfo.tagline}
               </p>
             </div>
 
-            <div className="text-text-muted text-[10px] font-semibold border-l border-primary/20 pl-4 py-0.5">
+            <div className="text-text-muted dark:text-gray-400 text-[10px] font-semibold border-l border-primary/20 pl-4 py-0.5">
               <span className="text-xl font-black text-primary block leading-none mb-1">
                 {filteredProducts.length}
               </span>
@@ -259,11 +259,11 @@ export default function CategoryBase({ categoryName, onClose }) {
           <aside className="hidden lg:block w-72 shrink-0">
             <div className={`sticky top-28 border shadow-sm rounded-3xl p-6 transition-all ${isPlants
                 ? "bg-white/10 backdrop-blur-md border-white/10 text-white shadow-xl"
-                : "bg-white border-primary/5 text-text-dark"
+                : "bg-white dark:bg-zinc-950 border-primary/5 dark:border-zinc-800 text-text-dark dark:text-gray-200"
               }`}>
 
-              <div className={`flex items-center justify-between mb-6 pb-4 border-b ${isPlants ? "border-white/10" : "border-gray-100"}`}>
-                <h3 className={`font-display font-bold text-lg flex items-center gap-2 ${isPlants ? "text-white" : "text-text-dark"}`}>
+              <div className={`flex items-center justify-between mb-6 pb-4 border-b ${isPlants ? "border-white/10" : "border-gray-100 dark:border-zinc-900"}`}>
+                <h3 className={`font-display font-bold text-lg flex items-center gap-2 ${isPlants ? "text-white" : "text-text-dark dark:text-gray-100"}`}>
                   <FiFilter className={`${isPlants ? "text-emerald-400" : "text-primary"} text-sm`} /> Filters
                 </h3>
                 <button
@@ -277,7 +277,7 @@ export default function CategoryBase({ categoryName, onClose }) {
 
               {/* Sub-category Filter */}
               <div className="mb-6">
-                <h4 className={`font-display font-bold text-sm mb-3 ${isPlants ? "text-white" : "text-text-dark"}`}>Subcategories</h4>
+                <h4 className={`font-display font-bold text-sm mb-3 ${isPlants ? "text-white" : "text-text-dark dark:text-gray-200"}`}>Subcategories</h4>
                 <div className="flex flex-col gap-2">
                   {subcategories.map(sub => {
                     const isChecked = selectedSubcategories.includes(sub);
@@ -291,7 +291,7 @@ export default function CategoryBase({ categoryName, onClose }) {
                               : 'bg-primary/10 text-primary border border-primary/20'
                             : isPlants
                               ? 'bg-white/5 text-white/70 hover:bg-white/10 border border-transparent'
-                              : 'bg-gray-50 text-text-muted hover:bg-gray-100 border border-transparent'
+                              : 'bg-gray-50 dark:bg-zinc-900 text-text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-850 border border-transparent dark:border-zinc-800/40'
                           }`}
                       >
                         {sub}
@@ -303,7 +303,7 @@ export default function CategoryBase({ categoryName, onClose }) {
 
               {/* Price Filter */}
               <div className="mb-6">
-                <h4 className={`font-display font-bold text-sm mb-3 flex justify-between ${isPlants ? "text-white" : "text-text-dark"}`}>
+                <h4 className={`font-display font-bold text-sm mb-3 flex justify-between ${isPlants ? "text-white" : "text-text-dark dark:text-gray-200"}`}>
                   <span>Max Price</span>
                   <span className={isPlants ? "text-emerald-300" : "text-primary"}>₹{maxPrice}</span>
                 </h4>
@@ -313,10 +313,10 @@ export default function CategoryBase({ categoryName, onClose }) {
                   max={priceLimits.max}
                   value={maxPrice}
                   onChange={(e) => setMaxPrice(Number(e.target.value))}
-                  className={`w-full h-1.5 rounded-lg appearance-none cursor-pointer accent-primary focus:outline-none ${isPlants ? "bg-white/20" : "bg-gray-200"
+                  className={`w-full h-1.5 rounded-lg appearance-none cursor-pointer accent-primary focus:outline-none ${isPlants ? "bg-white/20" : "bg-gray-200 dark:bg-zinc-800"
                     }`}
                 />
-                <div className={`flex justify-between text-[10px] mt-1 font-semibold ${isPlants ? "text-white/60" : "text-text-muted"}`}>
+                <div className={`flex justify-between text-[10px] mt-1 font-semibold ${isPlants ? "text-white/60" : "text-text-muted dark:text-gray-400"}`}>
                   <span>₹{priceLimits.min}</span>
                   <span>₹{priceLimits.max}</span>
                 </div>
@@ -324,21 +324,21 @@ export default function CategoryBase({ categoryName, onClose }) {
 
               {/* Nursery Origin Filter */}
               <div>
-                <h4 className={`font-display font-bold text-sm mb-3 ${isPlants ? "text-white" : "text-text-dark"}`}>Accredited Nursery</h4>
+                <h4 className={`font-display font-bold text-sm mb-3 ${isPlants ? "text-white" : "text-text-dark dark:text-gray-200"}`}>Accredited Nursery</h4>
                 <div className="flex flex-col gap-2 max-h-48 overflow-y-auto pr-1">
                   {nurseries.map(nursery => {
                     const isChecked = selectedNurseries.includes(nursery);
                     return (
                       <label
                         key={nursery}
-                        className={`flex items-center gap-2 text-xs font-medium cursor-pointer transition-colors ${isPlants ? "text-white/70 hover:text-white" : "text-text-muted hover:text-text-dark"
+                        className={`flex items-center gap-2 text-xs font-medium cursor-pointer transition-colors ${isPlants ? "text-white/70 hover:text-white" : "text-text-muted dark:text-gray-400 hover:text-text-dark dark:hover:text-gray-100"
                           }`}
                       >
                         <input
                           type="checkbox"
                           checked={isChecked}
                           onChange={() => toggleNursery(nursery)}
-                          className={`w-4 h-4 rounded focus:ring-primary/20 accent-primary cursor-pointer ${isPlants ? "border-white/25 bg-white/5" : "border-gray-300 text-primary"
+                          className={`w-4 h-4 rounded focus:ring-primary/20 accent-primary cursor-pointer ${isPlants ? "border-white/25 bg-white/5" : "border-gray-300 dark:border-zinc-700 text-primary dark:bg-zinc-900"
                             }`}
                         />
                         <span className="truncate">{nursery}</span>
@@ -357,12 +357,12 @@ export default function CategoryBase({ categoryName, onClose }) {
             {/* Search, Mobile Filter Trigger, Sort bar */}
             <div className={`border shadow-sm rounded-3xl p-4 mb-6 flex flex-col sm:flex-row items-center gap-4 transition-all duration-300 ${isPlants
                 ? "bg-white/10 backdrop-blur-md border-white/10 text-white shadow-xl"
-                : "bg-white border-primary/5 text-text-dark"
+                : "bg-white dark:bg-zinc-950 border-primary/5 dark:border-zinc-800 text-text-dark dark:text-gray-200"
               }`}>
 
               {/* Search input */}
               <div className="relative w-full sm:flex-1">
-                <FiSearch className={`absolute left-4 top-1/2 -translate-y-1/2 text-lg ${isPlants ? "text-white/60" : "text-text-muted"}`} />
+                <FiSearch className={`absolute left-4 top-1/2 -translate-y-1/2 text-lg ${isPlants ? "text-white/60" : "text-text-muted dark:text-gray-400"}`} />
                 <input
                   type="text"
                   placeholder={`Search in ${categoryName}...`}
@@ -370,7 +370,7 @@ export default function CategoryBase({ categoryName, onClose }) {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className={`w-full border rounded-2xl py-3 pl-12 pr-4 text-sm transition-all focus:outline-none ${isPlants
                       ? 'bg-white/5 border-white/10 text-white placeholder-white/40 focus:bg-white/10 focus:ring-white/20 focus:border-white/30'
-                      : 'bg-gray-50 border-gray-100 text-text-dark placeholder-text-muted focus:bg-white focus:ring-primary/10 focus:border-primary/30'
+                      : 'bg-gray-50 dark:bg-zinc-900 border-gray-100 dark:border-zinc-800 text-text-dark dark:text-gray-150 placeholder-text-muted dark:placeholder-gray-400 focus:bg-white dark:focus:bg-zinc-850 focus:ring-primary/10 focus:border-primary/30'
                     }`}
                 />
                 {searchQuery && (
@@ -392,7 +392,7 @@ export default function CategoryBase({ categoryName, onClose }) {
                   onClick={() => setShowFiltersMobile(true)}
                   className={`flex items-center gap-2 border px-4 py-3 rounded-2xl text-sm font-semibold transition-colors cursor-pointer focus:outline-none ${isPlants
                       ? "border-white/10 bg-white/5 hover:bg-white/10 text-white"
-                      : "border-gray-100 bg-gray-50 hover:bg-gray-100 text-text-dark"
+                      : "border-gray-100 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 hover:bg-gray-100 dark:hover:bg-zinc-850 text-text-dark dark:text-gray-250"
                     }`}
                 >
                   <FiFilter className={isPlants ? "text-emerald-400" : "text-primary"} /> Filters
@@ -401,13 +401,13 @@ export default function CategoryBase({ categoryName, onClose }) {
                 {/* Sort dropdown */}
                 <div className={`relative flex items-center gap-2 border rounded-2xl px-4 py-3 text-sm ${isPlants
                     ? "border-white/10 bg-white/5 text-white"
-                    : "border-gray-100 bg-gray-50 text-text-dark"
+                    : "border-gray-100 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-text-dark dark:text-gray-200"
                   }`}>
-                  <span className={`hidden md:inline font-medium ${isPlants ? "text-white/60" : "text-text-muted"}`}>Sort by:</span>
+                  <span className={`hidden md:inline font-medium ${isPlants ? "text-white/60" : "text-text-muted dark:text-gray-400"}`}>Sort by:</span>
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className={`bg-transparent font-bold border-none focus:outline-none cursor-pointer pr-1 ${isPlants ? "text-white [&>option]:text-text-dark" : "text-text-dark"
+                    className={`bg-transparent font-bold border-none focus:outline-none cursor-pointer pr-1 ${isPlants ? "text-white [&>option]:text-text-dark" : "text-text-dark dark:text-gray-100 [&>option]:dark:bg-zinc-900 [&>option]:dark:text-gray-100"
                       }`}
                   >
                     <option value="rating">Top Rated</option>
@@ -423,12 +423,12 @@ export default function CategoryBase({ categoryName, onClose }) {
             {/* Active Filters Tag list */}
             {(selectedSubcategories.length > 0 || selectedNurseries.length > 0 || searchQuery) && (
               <div className="flex flex-wrap items-center gap-2 mb-6">
-                <span className={`text-xs font-semibold ${isPlants ? "text-white/60" : "text-text-muted"}`}>Active:</span>
+                <span className={`text-xs font-semibold ${isPlants ? "text-white/60" : "text-text-muted dark:text-gray-400"}`}>Active:</span>
 
                 {searchQuery && (
                   <span className={`inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full border ${isPlants
                       ? "bg-white/10 text-white border-white/20"
-                      : "bg-primary/5 text-primary border-primary/10"
+                      : "bg-primary/5 dark:bg-primary/10 text-primary border-primary/10 dark:border-primary/20"
                     }`}>
                     "{searchQuery}"
                     <button onClick={() => setSearchQuery('')} className="cursor-pointer focus:outline-none">
@@ -440,7 +440,7 @@ export default function CategoryBase({ categoryName, onClose }) {
                 {selectedSubcategories.map(sub => (
                   <span key={sub} className={`inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full border ${isPlants
                       ? "bg-white/10 text-white border-white/20"
-                      : "bg-primary/5 text-primary border-primary/10"
+                      : "bg-primary/5 dark:bg-primary/10 text-primary border-primary/10 dark:border-primary/20"
                     }`}>
                     {sub}
                     <button onClick={() => toggleSubcategory(sub)} className="cursor-pointer focus:outline-none">
@@ -452,7 +452,7 @@ export default function CategoryBase({ categoryName, onClose }) {
                 {selectedNurseries.map(nursery => (
                   <span key={nursery} className={`inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full border ${isPlants
                       ? "bg-white/10 text-white border-white/20"
-                      : "bg-primary/5 text-primary border-primary/10"
+                      : "bg-primary/5 dark:bg-primary/10 text-primary border-primary/10 dark:border-primary/20"
                     }`}>
                     {nursery}
                     <button onClick={() => toggleNursery(nursery)} className="cursor-pointer focus:outline-none">
@@ -487,10 +487,10 @@ export default function CategoryBase({ categoryName, onClose }) {
                       transition={{ duration: 0.3 }}
                       key={product.id}
                       onClick={() => window.location.hash = `#product/${product.id}`}
-                      className="group rounded-2xl bg-white border border-primary/5 shadow-sm hover:shadow-lg hover:border-primary/10 transition-all duration-300 overflow-hidden flex flex-col cursor-pointer"
+                      className="group rounded-2xl bg-white dark:bg-zinc-950 border border-primary/5 dark:border-zinc-850/80 shadow-sm hover:shadow-lg hover:border-primary/10 transition-all duration-300 overflow-hidden flex flex-col cursor-pointer"
                     >
                       {/* Product Image Container */}
-                      <div className="relative aspect-square w-full overflow-hidden bg-gray-50">
+                      <div className="relative aspect-square w-full overflow-hidden bg-gray-50 dark:bg-zinc-900">
                         <img
                           src={product.image}
                           alt={product.name}
@@ -499,7 +499,7 @@ export default function CategoryBase({ categoryName, onClose }) {
                         />
                         {/* Subcategory Badge */}
                         <div className="absolute top-2.5 left-2.5">
-                          <span className="bg-white/90 backdrop-blur-sm text-primary text-[9px] font-extrabold px-2.5 py-0.5 rounded-full shadow-sm">
+                          <span className="bg-white/90 dark:bg-zinc-950/90 backdrop-blur-sm text-primary text-[9px] font-extrabold px-2.5 py-0.5 rounded-full shadow-sm border border-black/[0.02] dark:border-zinc-800/65">
                             {product.category}
                           </span>
                         </div>
@@ -514,17 +514,17 @@ export default function CategoryBase({ categoryName, onClose }) {
                             <div className="flex text-amber-400">
                               <FiStar className="fill-amber-400 text-[10px]" />
                             </div>
-                            <span className="text-[10px] font-bold text-text-dark">{product.rating}</span>
-                            <span className="text-[9px] text-text-muted font-medium">({product.reviews})</span>
+                            <span className="text-[10px] font-bold text-text-dark dark:text-gray-200">{product.rating}</span>
+                            <span className="text-[9px] text-text-muted dark:text-gray-400 font-medium">({product.reviews})</span>
                           </div>
 
                           {/* Product Title */}
-                          <h3 className="font-display font-black text-sm md:text-base text-text-dark group-hover:text-primary transition-colors mb-1 leading-snug line-clamp-1">
+                          <h3 className="font-display font-black text-sm md:text-base text-text-dark dark:text-gray-100 group-hover:text-primary transition-colors mb-1 leading-snug line-clamp-1">
                             {product.name}
                           </h3>
 
                           {/* Product Description */}
-                          <p className="text-[11px] text-text-muted mb-3 line-clamp-2 leading-relaxed">
+                          <p className="text-[11px] text-text-muted dark:text-gray-400 mb-3 line-clamp-2 leading-relaxed">
                             {product.desc}
                           </p>
 
@@ -533,7 +533,7 @@ export default function CategoryBase({ categoryName, onClose }) {
                         <div>
 
                           {/* Stock and Nursery */}
-                          <div className="flex flex-col gap-1 mb-3 border-t border-gray-50 pt-2 text-[10px] font-semibold text-text-muted">
+                          <div className="flex flex-col gap-1 mb-3 border-t border-gray-50 dark:border-zinc-900 pt-2 text-[10px] font-semibold text-text-muted dark:text-gray-400">
                             <div className="flex items-center gap-1">
                               <FiMapPin className="text-primary text-[10px] shrink-0" />
                               <span className="truncate">{product.origin}</span>
@@ -547,10 +547,10 @@ export default function CategoryBase({ categoryName, onClose }) {
                           {/* Price & Action button */}
                           <div className="flex items-center justify-between pt-0.5">
                             <div className="flex flex-col">
-                              <span className="text-[9px] text-text-muted font-bold uppercase tracking-wider">Bulk Price</span>
+                              <span className="text-[9px] text-text-muted dark:text-gray-400 font-bold uppercase tracking-wider">Bulk Price</span>
                               <span className="font-display text-sm md:text-base font-black text-primary">
                                 ₹{product.price}
-                                <span className="text-[10px] text-text-muted font-normal"> / {product.unit}</span>
+                                <span className="text-[10px] text-text-muted dark:text-gray-400 font-normal"> / {product.unit}</span>
                               </span>
                             </div>
 
@@ -573,12 +573,12 @@ export default function CategoryBase({ categoryName, onClose }) {
               </motion.div>
             ) : (
               // Empty State
-              <div className="text-center py-20 bg-white border border-primary/5 rounded-3xl p-8">
+              <div className="text-center py-20 bg-white dark:bg-zinc-950 border border-primary/5 dark:border-zinc-800 rounded-3xl p-8">
                 <div className="w-16 h-16 rounded-full bg-primary/5 flex items-center justify-center mx-auto mb-4">
                   <FiSearch className="text-primary text-2xl" />
                 </div>
-                <h3 className="font-display font-bold text-lg text-text-dark mb-2">No items found</h3>
-                <p className="text-sm text-text-muted max-w-sm mx-auto mb-6">
+                <h3 className="font-display font-bold text-lg text-text-dark dark:text-gray-100 mb-2">No items found</h3>
+                <p className="text-sm text-text-muted dark:text-gray-400 max-w-sm mx-auto mb-6">
                   We couldn't find any products in {categoryName} matching your current filters. Try relaxing your search terms or expanding filter boundaries.
                 </p>
                 <button
@@ -595,15 +595,15 @@ export default function CategoryBase({ categoryName, onClose }) {
       </section>
 
 
-      {/* Bottom Bestseller Showcase (matching the bottom of the screenshot) */}
-      <section className="bg-[#FAF9F6] py-16 border-t border-primary/5">
+      {/* Bottom Bestseller Showcase */}
+      <section className="bg-[#FAF9F6] dark:bg-zinc-950 py-16 border-t border-primary/5 dark:border-zinc-900 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
             <div>
               <span className="text-[10px] text-primary font-bold uppercase tracking-widest bg-primary/10 px-3 py-1 rounded-full">
                 Trending Choice
               </span>
-              <h3 className="font-display font-black text-2xl md:text-3xl text-text-dark mt-3">
+              <h3 className="font-display font-black text-2xl md:text-3xl text-text-dark dark:text-gray-100 mt-3">
                 Customer Choice Bestsellers
               </h3>
             </div>
@@ -619,21 +619,21 @@ export default function CategoryBase({ categoryName, onClose }) {
               <div
                 key={idx}
                 onClick={() => window.location.hash = `#product/${item.id}`}
-                className="bg-white rounded-2xl border border-gray-100 p-3 flex flex-col justify-between hover:shadow-lg transition-all group cursor-pointer"
+                className="bg-white dark:bg-zinc-900/60 rounded-2xl border border-gray-100 dark:border-zinc-800 p-3 flex flex-col justify-between hover:shadow-lg transition-all group cursor-pointer"
               >
                 <div>
-                  <div className="aspect-square rounded-xl overflow-hidden mb-2 bg-gray-50 relative">
+                  <div className="aspect-square rounded-xl overflow-hidden mb-2 bg-gray-50 dark:bg-zinc-950 relative border border-transparent dark:border-zinc-800/40">
                     <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 animate-fade-in" />
-                    <span className="absolute top-2 left-2 bg-white/90 backdrop-blur-sm text-[8px] font-black px-1.5 py-0.5 rounded text-primary shadow-sm">
+                    <span className="absolute top-2 left-2 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-sm text-[8px] font-black px-1.5 py-0.5 rounded text-primary shadow-sm border border-black/[0.02] dark:border-zinc-800/40">
                       {item.tag}
                     </span>
                   </div>
-                  <h4 className="font-display font-extrabold text-xs text-text-dark line-clamp-2 mb-1 font-sans group-hover:text-primary transition-colors">
+                  <h4 className="font-display font-extrabold text-xs text-text-dark dark:text-gray-100 line-clamp-2 mb-1 font-sans group-hover:text-primary transition-colors">
                     {item.name}
                   </h4>
                 </div>
-                <div className="flex items-center justify-between mt-2 pt-2 border-t border-gray-50">
-                  <span className="font-display font-black text-xs md:text-sm text-primary">₹{item.price}<span className="text-[9px] md:text-[10px] text-text-muted font-normal font-sans">/{item.unit}</span></span>
+                <div className="flex items-center justify-between mt-2 pt-2 border-t border-gray-50 dark:border-zinc-800">
+                  <span className="font-display font-black text-xs md:text-sm text-primary">₹{item.price}<span className="text-[9px] md:text-[10px] text-text-muted dark:text-gray-400 font-normal font-sans">/{item.unit}</span></span>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
@@ -675,17 +675,17 @@ export default function CategoryBase({ categoryName, onClose }) {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-xs bg-white p-6 shadow-2xl overflow-y-auto flex flex-col justify-between"
+              className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-xs bg-white dark:bg-zinc-950 p-6 shadow-2xl overflow-y-auto flex flex-col justify-between border-l dark:border-zinc-900"
               data-lenis-prevent
             >
               <div>
-                <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-100">
-                  <h3 className="font-display font-bold text-lg text-text-dark flex items-center gap-2">
+                <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-100 dark:border-zinc-900">
+                  <h3 className="font-display font-bold text-lg text-text-dark dark:text-gray-100 flex items-center gap-2">
                     <FiFilter className="text-primary text-sm" /> Filters
                   </h3>
                   <button
                     onClick={() => setShowFiltersMobile(false)}
-                    className="text-text-muted hover:text-text-dark cursor-pointer focus:outline-none"
+                    className="text-text-muted dark:text-gray-400 hover:text-text-dark dark:hover:text-gray-100 cursor-pointer focus:outline-none"
                   >
                     <FiX className="text-xl" />
                   </button>
@@ -693,7 +693,7 @@ export default function CategoryBase({ categoryName, onClose }) {
 
                 {/* Subcategory */}
                 <div className="mb-6">
-                  <h4 className="font-display font-bold text-sm text-text-dark mb-3">Subcategories</h4>
+                  <h4 className="font-display font-bold text-sm text-text-dark dark:text-gray-200 mb-3">Subcategories</h4>
                   <div className="flex flex-wrap gap-1.5">
                     {subcategories.map(sub => {
                       const isChecked = selectedSubcategories.includes(sub);
@@ -703,7 +703,7 @@ export default function CategoryBase({ categoryName, onClose }) {
                           onClick={() => toggleSubcategory(sub)}
                           className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${isChecked
                               ? 'bg-primary/10 text-primary border border-primary/20'
-                              : 'bg-gray-50 text-text-muted border border-transparent'
+                              : 'bg-gray-50 dark:bg-zinc-900 text-text-muted dark:text-gray-400 border border-transparent dark:border-zinc-800'
                             }`}
                         >
                           {sub}
@@ -715,7 +715,7 @@ export default function CategoryBase({ categoryName, onClose }) {
 
                 {/* Price */}
                 <div className="mb-6">
-                  <h4 className="font-display font-bold text-sm text-text-dark mb-3 flex justify-between">
+                  <h4 className="font-display font-bold text-sm text-text-dark dark:text-gray-200 mb-3 flex justify-between">
                     <span>Max Price</span>
                     <span className="text-primary font-bold">₹{maxPrice}</span>
                   </h4>
@@ -725,9 +725,9 @@ export default function CategoryBase({ categoryName, onClose }) {
                     max={priceLimits.max}
                     value={maxPrice}
                     onChange={(e) => setMaxPrice(Number(e.target.value))}
-                    className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary focus:outline-none"
+                    className="w-full h-1.5 bg-gray-200 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-primary focus:outline-none"
                   />
-                  <div className="flex justify-between text-[10px] text-text-muted mt-1 font-semibold">
+                  <div className="flex justify-between text-[10px] text-text-muted dark:text-gray-400 mt-1 font-semibold">
                     <span>₹{priceLimits.min}</span>
                     <span>₹{priceLimits.max}</span>
                   </div>
@@ -735,20 +735,20 @@ export default function CategoryBase({ categoryName, onClose }) {
 
                 {/* Nursery */}
                 <div className="mb-6">
-                  <h4 className="font-display font-bold text-sm text-text-dark mb-3">Accredited Nursery</h4>
+                  <h4 className="font-display font-bold text-sm text-text-dark dark:text-gray-200 mb-3">Accredited Nursery</h4>
                   <div className="flex flex-col gap-2.5 max-h-48 overflow-y-auto pr-1">
                     {nurseries.map(nursery => {
                       const isChecked = selectedNurseries.includes(nursery);
                       return (
                         <label
                           key={nursery}
-                          className="flex items-center gap-2.5 text-xs font-medium text-text-muted cursor-pointer hover:text-text-dark"
+                          className="flex items-center gap-2.5 text-xs font-medium text-text-muted dark:text-gray-400 cursor-pointer hover:text-text-dark dark:hover:text-gray-100"
                         >
                           <input
                             type="checkbox"
                             checked={isChecked}
                             onChange={() => toggleNursery(nursery)}
-                            className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary/20 accent-primary"
+                            className="w-4 h-4 rounded border-gray-300 dark:border-zinc-700 text-primary focus:ring-primary/20 accent-primary dark:bg-zinc-900"
                           />
                           <span className="truncate">{nursery}</span>
                         </label>
@@ -758,10 +758,10 @@ export default function CategoryBase({ categoryName, onClose }) {
                 </div>
               </div>
 
-              <div className="flex gap-3 pt-6 border-t border-gray-100">
+              <div className="flex gap-3 pt-6 border-t border-gray-100 dark:border-zinc-900">
                 <button
                   onClick={clearFilters}
-                  className="flex-1 py-3 bg-gray-50 border border-gray-200 text-text-dark font-bold text-xs rounded-xl cursor-pointer focus:outline-none"
+                  className="flex-1 py-3 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 text-text-dark dark:text-gray-200 font-bold text-xs rounded-xl cursor-pointer focus:outline-none"
                 >
                   Clear All
                 </button>
@@ -796,13 +796,13 @@ export default function CategoryBase({ categoryName, onClose }) {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl p-6 md:p-8 overflow-hidden z-10"
+              className="relative w-full max-w-lg bg-white dark:bg-zinc-950 rounded-3xl shadow-2xl p-6 md:p-8 overflow-hidden z-10 border dark:border-zinc-900"
               data-lenis-prevent
             >
               {/* Close Button */}
               <button
                 onClick={resetInquiry}
-                className="absolute right-6 top-6 text-text-muted hover:text-text-dark transition-colors cursor-pointer focus:outline-none"
+                className="absolute right-6 top-6 text-text-muted dark:text-gray-400 hover:text-text-dark dark:hover:text-gray-100 transition-colors cursor-pointer focus:outline-none"
               >
                 <FiX className="text-xl" />
               </button>
@@ -813,11 +813,11 @@ export default function CategoryBase({ categoryName, onClose }) {
                     <span className="text-[10px] text-primary font-bold uppercase tracking-widest bg-primary/10 px-3 py-1 rounded-full">
                       Request Catalog Price
                     </span>
-                    <h3 className="font-display font-black text-2xl text-text-dark mt-3 leading-snug">
+                    <h3 className="font-display font-black text-2xl text-text-dark dark:text-gray-100 mt-3 leading-snug">
                       Bulk Inquiry for <span className="text-primary">{inquiryProduct.name}</span>
                     </h3>
-                    <p className="text-xs text-text-muted mt-1">
-                      Raised by <span className="font-bold text-text-dark">{inquiryProduct.origin}</span>. Stock limit: {inquiryProduct.stock.toLocaleString()} units.
+                    <p className="text-xs text-text-muted dark:text-gray-400 mt-1">
+                      Raised by <span className="font-bold text-text-dark dark:text-gray-250">{inquiryProduct.origin}</span>. Stock limit: {inquiryProduct.stock.toLocaleString()} units.
                     </p>
                   </div>
 
@@ -825,22 +825,22 @@ export default function CategoryBase({ categoryName, onClose }) {
 
                     {/* Name */}
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-bold text-text-dark">Your Name</label>
+                      <label className="text-xs font-bold text-text-dark dark:text-gray-200">Your Name</label>
                       <input
                         type="text"
                         required
                         placeholder="Enter your full name"
                         value={inquiryForm.name}
                         onChange={(e) => setInquiryForm(prev => ({ ...prev, name: e.target.value }))}
-                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all"
+                        className="w-full bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:bg-white dark:focus:bg-zinc-850 focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all dark:text-gray-100"
                       />
                     </div>
 
                     {/* Phone */}
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-bold text-text-dark">Phone Number (WhatsApp preferred)</label>
+                      <label className="text-xs font-bold text-text-dark dark:text-gray-200">Phone Number (WhatsApp preferred)</label>
                       <input
-                        type="tel"
+                        type="text"
                         required
                         placeholder="10-digit phone number"
                         value={inquiryForm.phone}
@@ -848,33 +848,33 @@ export default function CategoryBase({ categoryName, onClose }) {
                           const val = e.target.value.replace(/\D/g, '').slice(0, 10);
                           setInquiryForm(prev => ({ ...prev, phone: val }));
                         }}
-                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all"
+                        className="w-full bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:bg-white dark:focus:bg-zinc-850 focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all dark:text-gray-100"
                       />
                     </div>
 
                     {/* Quantity Required */}
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-bold text-text-dark">Required Quantity ({inquiryProduct.unit}s)</label>
+                      <label className="text-xs font-bold text-text-dark dark:text-gray-200">Required Quantity ({inquiryProduct.unit}s)</label>
                       <input
                         type="number"
                         min="50"
                         required
                         value={inquiryForm.quantity}
                         onChange={(e) => setInquiryForm(prev => ({ ...prev, quantity: e.target.value }))}
-                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all"
+                        className="w-full bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:bg-white dark:focus:bg-zinc-850 focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all dark:text-gray-100"
                       />
-                      <span className="text-[10px] text-text-muted font-medium">Minimum order quantity: 50 units for nursery logistics.</span>
+                      <span className="text-[10px] text-text-muted dark:text-gray-400 font-medium">Minimum order quantity: 50 units for nursery logistics.</span>
                     </div>
 
                     {/* Message */}
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-bold text-text-dark">Message (Optional)</label>
+                      <label className="text-xs font-bold text-text-dark dark:text-gray-200">Message (Optional)</label>
                       <textarea
                         rows="3"
                         placeholder="Special instructions or logistics requests..."
                         value={inquiryForm.message}
                         onChange={(e) => setInquiryForm(prev => ({ ...prev, message: e.target.value }))}
-                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all resize-none"
+                        className="w-full bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:bg-white dark:focus:bg-zinc-850 focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all resize-none dark:text-gray-100"
                       />
                     </div>
 
@@ -891,22 +891,22 @@ export default function CategoryBase({ categoryName, onClose }) {
               ) : (
                 // Success Screen inside Modal
                 <div className="text-center py-8">
-                  <div className="w-16 h-16 bg-green-50 text-primary border border-green-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                  <div className="w-16 h-16 bg-green-50 dark:bg-emerald-950/40 text-primary border border-green-100 dark:border-emerald-900/30 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
                     <FiCheckCircle className="text-3xl" />
                   </div>
-                  <h3 className="font-display font-black text-2xl text-text-dark mb-2">Inquiry Submitted!</h3>
-                  <p className="text-sm text-text-muted max-w-sm mx-auto mb-6 leading-relaxed">
-                    Thank you <span className="font-bold text-text-dark">{inquiryForm.name}</span>. The grower at <span className="font-bold text-text-dark">{inquiryProduct.origin}</span> has been notified of your interest. They will contact you shortly on <span className="font-bold text-text-dark">{inquiryForm.phone}</span>.
+                  <h3 className="font-display font-black text-2xl text-text-dark dark:text-gray-100 mb-2">Inquiry Submitted!</h3>
+                  <p className="text-sm text-text-muted dark:text-gray-400 max-w-sm mx-auto mb-6 leading-relaxed">
+                    Thank you <span className="font-bold text-text-dark dark:text-gray-200">{inquiryForm.name}</span>. The grower at <span className="font-bold text-text-dark dark:text-gray-250">{inquiryProduct.origin}</span> has been notified of your interest. They will contact you shortly on <span className="font-bold text-text-dark dark:text-gray-200">{inquiryForm.phone}</span>.
                   </p>
 
-                  <div className="bg-primary/5 border border-primary/10 rounded-2xl p-4 mb-6">
+                  <div className="bg-primary/5 dark:bg-primary/10 border border-primary/10 dark:border-primary/20 rounded-2xl p-4 mb-6">
                     <span className="text-xs font-bold text-primary block mb-1">Want instant bookings and live tracking?</span>
-                    <p className="text-[11px] text-text-muted">Download the GeoTree Mart App to directly communicate with growers and verify nursery credentials.</p>
+                    <p className="text-[11px] text-text-muted dark:text-gray-300">Download the GeoTree Mart App to directly communicate with growers and verify nursery credentials.</p>
                   </div>
 
                   <button
                     onClick={resetInquiry}
-                    className="w-full py-3 bg-gray-900 hover:bg-black text-white font-bold text-sm rounded-xl transition-all cursor-pointer focus:outline-none"
+                    className="w-full py-3 bg-gray-900 dark:bg-zinc-800 hover:bg-black dark:hover:bg-zinc-700 text-white font-bold text-sm rounded-xl transition-all cursor-pointer focus:outline-none"
                   >
                     Close
                   </button>
@@ -917,7 +917,6 @@ export default function CategoryBase({ categoryName, onClose }) {
           </div>
         )}
       </AnimatePresence>
-
     </div>
   );
 }
