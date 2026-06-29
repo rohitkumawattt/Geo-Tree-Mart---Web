@@ -100,6 +100,7 @@ const OurCategories = () => {
                     src={category.images}
                     alt={category.name}
                     className="w-full h-full object-contain category-card-img"
+                    loading="lazy"
                   />
                   {/* Title */}
                   <h3 className="absolute bottom-3 text-primary/60 bg-white rounded-xl px-4 py-1.5 border border-white/50 shadow-md text-xs sm:text-sm font-semibold transition-colors duration-300 group-hover:text-primary">

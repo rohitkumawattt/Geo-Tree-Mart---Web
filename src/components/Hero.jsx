@@ -108,6 +108,8 @@ const Hero = () => {
                       src={slide.DesktopImage}
                       alt={slide.title}
                       className="h-full w-full object-cover"
+                      loading="eager"
+                      fetchpriority="high"
                     />
                   </motion.picture>
 

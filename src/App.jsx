@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import useSmoothScroll from './hooks/useSmoothScroll';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -10,16 +10,24 @@ import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import OurCategories from './components/OurCategories';
 
-// Import pages from the Pages directory
-import VegetablesPage from '../Pages/Vegetables';
-import DecorativePage from '../Pages/Decorative';
-import MedicinalPage from '../Pages/Medicinal';
-import OutdoorPage from '../Pages/Outdoor';
-import FlowringPage from '../Pages/Flowring';
-import FruitsPage from '../Pages/Fruits';
-import ProductDetailPage from '../Pages/ProductDetail';
-import BlogPage from '../Pages/Blog';
-import CartPage from '../Pages/Cart';
+// Lazily load pages for optimized initial bundle size and faster initial page paint
+const VegetablesPage = lazy(() => import('../Pages/Vegetables'));
+const DecorativePage = lazy(() => import('../Pages/Decorative'));
+const MedicinalPage = lazy(() => import('../Pages/Medicinal'));
+const OutdoorPage = lazy(() => import('../Pages/Outdoor'));
+const FlowringPage = lazy(() => import('../Pages/Flowring'));
+const FruitsPage = lazy(() => import('../Pages/Fruits'));
+const ProductDetailPage = lazy(() => import('../Pages/ProductDetail'));
+const BlogPage = lazy(() => import('../Pages/Blog'));
+const CartPage = lazy(() => import('../Pages/Cart'));
+
+// Beautiful minimal loading spinner fallback for lazy-loaded route transitions
+const LoadingFallback = () => (
+  <div className="w-full min-h-[60vh] flex flex-col items-center justify-center bg-[#FAF9F6] text-text-muted">
+    <div className="w-10 h-10 border-4 border-primary/20 border-t-primary rounded-full animate-spin mb-4"></div>
+    <p className="text-xs font-bold uppercase tracking-widest text-primary/70 animate-pulse">Loading Premium Garden Deals...</p>
+  </div>
+);
 
 function App() {
   useSmoothScroll();
@@ -142,25 +150,27 @@ function App() {
     <div className="w-full min-h-screen bg-bg-light text-text-dark font-sans antialiased overflow-x-hidden">
       <Navbar />
       <main className="w-full">
-        {selectedProductId ? (
-          <ProductDetailPage productId={selectedProductId} onClose={handleCloseProduct} />
-        ) : showBlog ? (
-          <BlogPage onClose={handleCloseBlog} />
-        ) : showCart ? (
-          <CartPage onClose={handleCloseCart} />
-        ) : selectedCategory ? (
-          renderCategoryPage()
-        ) : (
-          <>
-            <Hero />
-            <OurCategories />
-            <Plants />
-            <Banner />
-            <ProblemSolution />
-            <Feedback />
-            <FAQ />
-          </>
-        )}
+        <Suspense fallback={<LoadingFallback />}>
+          {selectedProductId ? (
+            <ProductDetailPage productId={selectedProductId} onClose={handleCloseProduct} />
+          ) : showBlog ? (
+            <BlogPage onClose={handleCloseBlog} />
+          ) : showCart ? (
+            <CartPage onClose={handleCloseCart} />
+          ) : selectedCategory ? (
+            renderCategoryPage()
+          ) : (
+            <>
+              <Hero />
+              <OurCategories />
+              <Plants />
+              <Banner />
+              <ProblemSolution />
+              <Feedback />
+              <FAQ />
+            </>
+          )}
+        </Suspense>
       </main>
       <Footer />
     </div>

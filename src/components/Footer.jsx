@@ -86,7 +86,7 @@ export default function Footer() {
           <div className="lg:col-span-3 sm:col-span-2 flex flex-col items-start text-left">
             <div className="flex items-center gap-3 mb-4 group/brand">
               <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-md shadow-primary/20 transform transition-transform group-hover/brand:scale-105 duration-500">
-                <img src="./favicon.png" alt="GeoTree Mart Logo" className="w-7 h-7 object-contain" />
+                <img src="./favicon.png" alt="GeoTree Mart Logo" className="w-7 h-7 object-contain" loading="lazy" />
               </div>
               <div className="flex flex-col">
                 <span className="font-display font-extrabold text-xl leading-none tracking-tight text-white">
