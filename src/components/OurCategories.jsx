@@ -11,12 +11,12 @@ import fruits from '../assets/categories/fruits.png'
 gsap.registerPlugin(ScrollTrigger);
 
 const categories = [
-  { name: "Vegetables", images: vegetables, color: "#ECF7E9" },
-  { name: "Decorative", images: decorative, color: "#fffbf5ff" },
-  { name: "Medicinal", images: Medicinal, color: "#ECF7E9" },
-  { name: "Outdoor", images: outdoor, color: "#fffbf5ff" },
-  { name: "Flowring", images: flowring, color: "#ECF7E9" },
-  { name: "Fruits", images: fruits, color: "#fffbf5ff" },
+  { name: "Vegetables", images: vegetables, color: "#ECF7E9", scale: 1.15 },
+  { name: "Decorative", images: decorative, color: "#fffbf5ff", scale: 1.35 },
+  { name: "Medicinal", images: Medicinal, color: "#ECF7E9", scale: 1.25 },
+  { name: "Outdoor", images: outdoor, color: "#fffbf5ff", scale: 1.15 },
+  { name: "Flowring", images: flowring, color: "#ECF7E9", scale: 1.0 },
+  { name: "Fruits", images: fruits, color: "#fffbf5ff", scale: 1.05 },
 ];
 
 const OurCategories = () => {
@@ -61,7 +61,16 @@ const OurCategories = () => {
   }, []);
 
   return (
-    <section id="categories" className="relative overflow-hidden py-12">
+    <section id="categories" className="relative overflow-hidden pt-6 pb-4">
+      <style dangerouslySetInnerHTML={{__html: `
+        .category-card-img {
+          transform: scale(var(--base-scale));
+          transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .group:hover .category-card-img {
+          transform: scale(var(--hover-scale)) !important;
+        }
+      `}} />
 
       <div className="relative mx-auto">
         {/* Heading */}
@@ -72,7 +81,7 @@ const OurCategories = () => {
         </div>
 
         {/* Categories Grid */}
-        <div ref={gridRef} className="grid grid-cols-2 gap-2 sm:gap-8 sm:grid-cols-3 lg:grid-cols-6 justify-items-center">
+        <div ref={gridRef} className="grid grid-cols-2 gap-3 sm:gap-4 lg:gap-5 sm:grid-cols-3 lg:grid-cols-6 justify-items-center">
           {categories.map((category, index) => {
             const categorySlug = category.name.toLowerCase().replace(/\s+/g, '-');
             return (
@@ -82,16 +91,18 @@ const OurCategories = () => {
                 className="group flex flex-col items-center cursor-pointer no-underline"
               >
                 {/* Outer Circle Container (Responsive sizes: h-32 w-32 on mobile, h-40 w-40 on tablet/desktop) */}
-                <div className="flex h-40 w-32 md:h-46 md:w-38 items-center justify-center rounded-md shadow-xl transition-all duration-500 ease-in-out overflow-hidden group-hover:scale-105 p-2" style={{
-                  backgroundColor: category.color
+                <div className="relative flex h-44 w-40 md:h-52 md:w-48 items-center justify-center rounded-2xl shadow-xl transition-all duration-500 ease-in-out overflow-hidden group-hover:scale-105 p-1" style={{
+                  backgroundColor: category.color,
+                  '--base-scale': String(category.scale),
+                  '--hover-scale': String(category.scale * 1.15)
                 }}>
                   <img
                     src={category.images}
                     alt={category.name}
-                    className="relative object-contain transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-contain category-card-img"
                   />
                   {/* Title */}
-                  <h3 className="absolute bottom-2 text-primary/60 bg-white rounded-xl px-4 py-1 border border-white/50 shadow-md text-xs sm:text-sm font-semibold transition-colors duration-300 group-hover:text-primary">
+                  <h3 className="absolute bottom-3 text-primary/60 bg-white rounded-xl px-4 py-1.5 border border-white/50 shadow-md text-xs sm:text-sm font-semibold transition-colors duration-300 group-hover:text-primary">
                     {category.name}
                   </h3>
                 </div>

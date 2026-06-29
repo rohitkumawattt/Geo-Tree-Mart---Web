@@ -58,7 +58,7 @@ export default function Buy() {
     <section
       id="buy"
       ref={containerRef}
-      className="relative w-full py-12 bg-bg-light px-6 md:px-12 overflow-hidden"
+      className="relative w-full pt-4 pb-12 bg-bg-light px-6 md:px-12 overflow-hidden"
     >
       {/* Blurred background vectors */}
       <div className="absolute top-1/3 left-0 w-[380px] h-[380px] rounded-full bg-secondary/5 blur-[120px] pointer-events-none" />
@@ -67,8 +67,8 @@ export default function Buy() {
       <div className="mx-auto">
 
         {/* Title Area */}
-        <div ref={titleRef} className="text-center max-w-2xl mx-auto mb-8 flex flex-col items-center">
-          <h2 className="font-display md:text-5xl text-4xl sm:text-3xl text-text-dark leading-tight tracking-tight mb-4">
+        <div ref={titleRef} className="text-center max-w-2xl mx-auto mb-4 flex flex-col items-center">
+          <h2 className="font-display md:text-5xl text-4xl sm:text-3xl text-text-dark leading-tight tracking-tight mb-0">
             Green Deals You <span className="text-primary italic">Can't Miss</span>
           </h2>
         </div>

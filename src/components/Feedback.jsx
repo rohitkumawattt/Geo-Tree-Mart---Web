@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FaStar, FaQuoteLeft, FaCheckCircle, FaLeaf } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -67,6 +68,37 @@ export default function Feedback() {
   const rowRef = useRef(null);
   const titleRef = useRef(null);
   const tweenRef = useRef(null);
+  const [selectedFeedback, setSelectedFeedback] = useState(null);
+
+  // Lock background body scroll when the feedback modal is open
+  useEffect(() => {
+    if (selectedFeedback) {
+      document.body.style.overflow = 'hidden';
+      // Pause marquee
+      if (tweenRef.current) {
+        gsap.to(tweenRef.current, {
+          timeScale: 0,
+          duration: 0.6,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
+      }
+    } else {
+      document.body.style.overflow = '';
+      // Resume marquee
+      if (tweenRef.current) {
+        gsap.to(tweenRef.current, {
+          timeScale: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
+      }
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedFeedback]);
 
   useEffect(() => {
     const trigger = containerRef.current;
@@ -135,7 +167,7 @@ export default function Feedback() {
     <section
       id="feedback"
       ref={containerRef}
-      className="relative w-full py-12 overflow-hidden bg-bg-light"
+      className="relative w-full pt-4 pb-4 overflow-hidden bg-bg-light"
     >
       {/* Background Soft Gradients */}
       <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] rounded-full bg-primary/5 blur-[80px] pointer-events-none" />
@@ -149,7 +181,11 @@ export default function Feedback() {
       </div>
 
       {/* Scrolling Feedback Container */}
-      <div className="w-full overflow-hidden py-4 select-none">
+      <div className="relative w-full overflow-hidden py-4 select-none">
+        {/* Left and Right Edge Fade Overlays */}
+        <div className="absolute top-0 left-0 bottom-0 w-16 sm:w-32 md:w-44 bg-gradient-to-r from-[#F8FFF8] via-[#F8FFF8]/70 to-transparent z-10 pointer-events-none" />
+        <div className="absolute top-0 right-0 bottom-0 w-16 sm:w-32 md:w-44 bg-gradient-to-l from-[#F8FFF8] via-[#F8FFF8]/70 to-transparent z-10 pointer-events-none" />
+
         <div
           ref={rowRef}
           className="flex gap-6 w-max px-6 will-change-transform cursor-grab active:cursor-grabbing"
@@ -160,17 +196,98 @@ export default function Feedback() {
           onTouchEnd={handleMouseLeave}
         >
           {duplicatedTestimonials.map((item, idx) => (
-            <FeedbackCard key={`${item.id}-${idx}`} item={item} />
+            <FeedbackCard key={`${item.id}-${idx}`} item={item} onClick={() => setSelectedFeedback(item)} />
           ))}
         </div>
       </div>
+
+      {/* Feedback Detail Modal */}
+      <AnimatePresence>
+        {selectedFeedback && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.6 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedFeedback(null)}
+              className="absolute inset-0 bg-black"
+            />
+
+            {/* Modal Body */}
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 30 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 30 }}
+              transition={{ type: "spring", damping: 25, stiffness: 250 }}
+              className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl p-6 sm:p-8 z-10 text-left border border-primary/10 overflow-hidden"
+              data-lenis-prevent
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setSelectedFeedback(null)}
+                className="absolute top-4 right-4 text-text-muted hover:text-text-dark text-lg font-bold cursor-pointer focus:outline-none w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center hover:bg-gray-100 transition-colors"
+              >
+                ✕
+              </button>
+
+              <div className="flex flex-col gap-6">
+                {/* Header: Stars & Quote */}
+                <div className="flex items-center justify-between mt-2">
+                  <div className="flex gap-1 text-yellow-500">
+                    {Array.from({ length: selectedFeedback.rating }).map((_, i) => (
+                      <FaStar key={i} className="text-lg" />
+                    ))}
+                  </div>
+                  <span className="text-primary/10 text-4xl sm:text-5xl">
+                    <FaQuoteLeft />
+                  </span>
+                </div>
+
+                {/* Text */}
+                <p className="font-sans text-base sm:text-lg text-text-dark leading-relaxed font-medium italic">
+                  "{selectedFeedback.text}"
+                </p>
+
+                {/* Profile */}
+                <div className="flex items-center gap-4 border-t border-primary/5 pt-6">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-primary to-secondary text-white font-display font-bold text-base flex items-center justify-center shadow-md shadow-primary/15 flex-shrink-0">
+                    {selectedFeedback.initials}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-1.5">
+                      <h4 className="font-display font-black text-base text-text-dark">
+                        {selectedFeedback.name}
+                      </h4>
+                      <span className="text-primary text-sm flex-shrink-0" title="Verified Partner">
+                        <FaCheckCircle />
+                      </span>
+                    </div>
+                    <p className="font-sans text-xs sm:text-sm text-text-muted mt-0.5">
+                      {selectedFeedback.role}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Done Button */}
+                <button
+                  onClick={() => setSelectedFeedback(null)}
+                  className="w-full mt-2 py-3 bg-primary hover:bg-primary-dark text-white font-bold text-xs rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer focus:outline-none uppercase"
+                >
+                  Done Reading
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
 
-function FeedbackCard({ item }) {
+function FeedbackCard({ item, onClick }) {
   return (
-    <div className={`w-[300px] sm:w-[380px] flex-shrink-0 rounded-3xl p-6 sm:p-8 bg-gradient-to-br ${item.bg} border border-white/85 shadow-[0_15px_35px_rgba(27,94,32,0.02)] glassmorphism-card hover:shadow-[0_20px_40px_rgba(27,94,32,0.06)] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between gap-6`}>
+    <div onClick={onClick} className={`w-[300px] sm:w-[380px] flex-shrink-0 rounded-3xl p-6 sm:p-8 bg-gradient-to-br ${item.bg} border border-white/85 shadow-[0_15px_35px_rgba(27,94,32,0.02)] glassmorphism-card hover:shadow-[0_20px_40px_rgba(27,94,32,0.06)] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between gap-6 cursor-pointer`}>
       <div className="flex flex-col gap-4">
         {/* Top bar: Stars and Quote icon */}
         <div className="flex items-center justify-between">
@@ -185,7 +302,7 @@ function FeedbackCard({ item }) {
         </div>
 
         {/* Testimonial text */}
-        <p className="font-sans text-sm sm:text-base text-text-muted leading-relaxed">
+        <p className="font-sans text-sm sm:text-base text-text-muted leading-relaxed line-clamp-3">
           {item.text}
         </p>
       </div>

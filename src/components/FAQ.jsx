@@ -150,7 +150,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="relative w-full py-20 bg-[#F8FAF8] px-6 md:px-12 overflow-hidden"
+      className="relative w-full pt-6 pb-12 bg-[#F8FAF8] px-6 md:px-12 overflow-hidden"
     >
       {/* Decorative background blur spots */}
       <div className="absolute top-[20%] left-[-50px] w-72 h-72 bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
@@ -167,7 +167,7 @@ export default function FAQ() {
       <div className="max-w-4xl mx-auto relative z-10">
 
         {/* Title area */}
-        <div ref={titleRef} className="text-center max-w-2xl mb-12 mx-auto flex flex-col items-center group">
+        <div ref={titleRef} className="text-center max-w-2xl mb-6 mx-auto flex flex-col items-center group">
           <h2 className="font-display text-3xl sm:text-5xl text-text-dark leading-tight tracking-tight">
             <span className="italic text-primary">Frequently Asked</span> Questions
           </h2>

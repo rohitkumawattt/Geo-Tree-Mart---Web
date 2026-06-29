@@ -54,7 +54,7 @@ export default function ProblemSolution() {
     <section
       id="problem-solution"
       ref={containerRef}
-      className="relative w-full py-20 bg-bg-light px-6 md:px-12 overflow-hidden"
+      className="relative w-full pt-6 pb-4 bg-bg-light px-6 md:px-12 overflow-hidden"
     >
       {/* Huge faded leaf watermark in background */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.02] pointer-events-none select-none">
@@ -69,7 +69,7 @@ export default function ProblemSolution() {
 
       <div className="mx-auto relative z-10">
         {/* Title */}
-        <div className="text-center max-w-3xl mx-auto mb-20 flex flex-col items-center group">
+        <div className="text-center max-w-3xl mx-auto mb-10 flex flex-col items-center group">
           <h2 className="font-display text-3xl sm:text-5xl text-[#0f1f10] leading-tight tracking-tight">
             Why Choose <span className="text-primary italic">GeoTree Mart?</span>
           </h2>

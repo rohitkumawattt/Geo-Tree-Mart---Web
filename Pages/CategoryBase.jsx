@@ -104,6 +104,18 @@ export default function CategoryBase({ categoryName, onClose }) {
     setMaxPrice(priceLimits.max);
   }, [priceLimits]);
 
+  // Lock background body scroll when mobile filters or inquiry modal is open
+  useEffect(() => {
+    if (showFiltersMobile || inquiryProduct) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [showFiltersMobile, inquiryProduct]);
+
   // Handle inquiry submission
   const handleInquirySubmit = (e) => {
     e.preventDefault();
@@ -657,6 +669,7 @@ export default function CategoryBase({ categoryName, onClose }) {
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-xs bg-white p-6 shadow-2xl overflow-y-auto flex flex-col justify-between"
+              data-lenis-prevent
             >
               <div>
                 <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-100">
@@ -777,6 +790,7 @@ export default function CategoryBase({ categoryName, onClose }) {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl p-6 md:p-8 overflow-hidden z-10"
+              data-lenis-prevent
             >
               {/* Close Button */}
               <button

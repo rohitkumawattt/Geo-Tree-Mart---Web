@@ -92,7 +92,7 @@ export default function Footer() {
                 <span className="font-display font-extrabold text-xl leading-none tracking-tight text-white">
                   GeoTree <span className="text-secondary font-bold">Mart</span>
                 </span>
-                <span className="text-[10px] text-primary font-bold tracking-widest uppercase mt-0.5">
+                <span className="text-[10px] text-primary font-bold tracking-widest mt-0.5">
                   <span className="text-white/70">By</span> Geo Planet Solution
                 </span>
               </div>
@@ -149,9 +149,9 @@ export default function Footer() {
                 <li key={link.id}>
                   <button
                     onClick={() => handleNavClick(link.id)}
-                    className="group flex items-center gap-2.5 hover:text-secondary text-white/60 transition-all duration-300 cursor-pointer text-left focus:outline-none transform hover:translate-x-2"
+                    className="group relative pl-0 hover:pl-4 flex items-center hover:text-secondary text-white/60 transition-all duration-300 cursor-pointer text-left focus:outline-none"
                   >
-                    <FaLeaf className="text-[10px] text-secondary scale-0 group-hover:scale-100 transition-transform duration-300 flex-shrink-0" />
+                    <FaLeaf className="absolute left-0 text-[10px] text-secondary scale-0 group-hover:scale-100 transition-transform duration-300" />
                     {link.label}
                   </button>
                 </li>
@@ -177,9 +177,9 @@ export default function Footer() {
                 <li key={idx}>
                   <button
                     onClick={() => handleCategoryClick(cat.slug)}
-                    className="group flex items-center gap-2.5 hover:text-secondary text-white/60 transition-all duration-300 cursor-pointer text-left focus:outline-none transform hover:translate-x-2"
+                    className="group relative pl-0 hover:pl-4 flex items-center hover:text-secondary text-white/60 transition-all duration-300 cursor-pointer text-left focus:outline-none"
                   >
-                    <FaLeaf className="text-[10px] text-secondary scale-0 group-hover:scale-100 transition-transform duration-300 flex-shrink-0" />
+                    <FaLeaf className="absolute left-0 text-[10px] text-secondary scale-0 group-hover:scale-100 transition-transform duration-300" />
                     {cat.label}
                   </button>
                 </li>
@@ -204,9 +204,9 @@ export default function Footer() {
                 <li key={idx}>
                   <a
                     href={link.href}
-                    className="group flex items-center gap-2.5 hover:text-secondary text-white/60 transition-all duration-300 cursor-pointer text-left focus:outline-none transform hover:translate-x-2"
+                    className="group relative pl-0 hover:pl-4 flex items-center hover:text-secondary text-white/60 transition-all duration-300 cursor-pointer text-left focus:outline-none"
                   >
-                    <FaLeaf className="text-[10px] text-secondary scale-0 group-hover:scale-100 transition-transform duration-300 flex-shrink-0" />
+                    <FaLeaf className="absolute left-0 text-[10px] text-secondary scale-0 group-hover:scale-100 transition-transform duration-300" />
                     {link.label}
                   </a>
                 </li>
@@ -257,7 +257,7 @@ export default function Footer() {
 
         {/* Footer bottom links and Copyright (Restored Flat Layout) */}
         <div className="pt-6 mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-sans">
-          <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left relative -top-3 md:-top-5">
+          <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left relative -top-6 md:-top-10">
             <p className="text-white font-semibold">© {currentYear} GeoTree Mart. All rights reserved.</p>
             <span className="hidden sm:inline text-white/30">|</span>
             <p className="text-[11px] text-white/90 font-semibold">

@@ -63,7 +63,7 @@ const Hero = () => {
         {heroSlides.map((slide) => (
           <SwiperSlide key={slide.id}>
             {({ isActive }) => (
-              <div className="h-[55vh] lg:h-[65vh] w-full mx-auto overflow-hidden bg-gray-50">
+              <div className="h-[45vh] lg:h-[55vh] w-full mx-auto overflow-hidden bg-gray-50">
                 <div className="relative overflow-hidden h-full w-full bg-green-950">
 
                   {/* Slide Transition Overlay */}
@@ -115,7 +115,7 @@ const Hero = () => {
                   <div className="absolute inset-0 bg-black/20 md:bg-gradient-to-r md:from-black/60 md:via-black/25 md:to-transparent z-10 pointer-events-none" />
 
                   {/* Hanging Offer carrd */}
-                  <div className="hidden md:block absolute top-20 right-8 sm:right-16 md:right-28 z-20 pointer-events-none">
+                  <div className="hidden md:block absolute top-12 right-8 sm:right-16 md:right-28 z-20 pointer-events-none">
                     <OfferComponent offer={slide.offer} />
                   </div>
 
@@ -129,7 +129,7 @@ const Hero = () => {
                     {/* Title */}
                     <motion.h2
                       variants={itemVariants}
-                      className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white drop-shadow-md leading-tight max-w-2xl"
+                      className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white drop-shadow-md leading-tight max-w-2xl"
                     >
                       {slide.title.split(" ").map((word, index) => (
                         <span
@@ -147,20 +147,20 @@ const Hero = () => {
                     {/* Dynamic Description */}
                     <motion.p
                       variants={itemVariants}
-                      className="mt-3 text-sm sm:text-base md:text-lg lg:text-xl text-gray-200/95 max-w-md sm:max-w-lg font-light tracking-wide leading-relaxed drop-shadow-sm"
+                      className="mt-2 text-xs sm:text-sm md:text-base lg:text-lg text-gray-200/95 max-w-md sm:max-w-lg font-light tracking-wide leading-relaxed drop-shadow-sm"
                     >
                       {slide.description}
                     </motion.p>
 
                     {/* Unified Shop Now Button */}
-                    <motion.div variants={itemVariants} className="mt-6 sm:mt-8">
+                    <motion.div variants={itemVariants} className="mt-4 sm:mt-5">
                       <motion.button
                         whileHover={{ scale: 1.05, y: -2 }}
                         whileTap={{ scale: 0.95 }}
-                        className="group flex items-center gap-2.5 rounded-full  px-6 py-3 sm:px-8 sm:py-4 text-white text-sm sm:text-base font-bold shadow-lg transition-all duration-300 cursor-pointer bg-gradient-to-r from-primary-dark to-primary"
+                        className="group flex items-center gap-2 rounded-full px-5 py-2.5 sm:px-7 sm:py-3 text-white text-xs sm:text-sm font-bold shadow-lg transition-all duration-300 cursor-pointer bg-gradient-to-r from-primary-dark to-primary"
                       >
                         <span>Shop Now</span>
-                        <FaLongArrowAltRight className="text-lg sm:text-xl transition-transform duration-300 group-hover:translate-x-1.5" />
+                        <FaLongArrowAltRight className="text-base sm:text-lg transition-transform duration-300 group-hover:translate-x-1.5" />
                       </motion.button>
                     </motion.div>
                   </motion.div>
@@ -168,10 +168,10 @@ const Hero = () => {
                   <motion.button
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className="absolute md:hidden bottom-10 right-10 group flex items-center gap-2.5 rounded-full  px-6 py-3 sm:px-8 sm:py-4 text-white text-sm sm:text-base font-bold shadow-lg transition-all duration-300 cursor-pointer bg-gradient-to-r from-primary-dark to-primary"
+                    className="absolute md:hidden bottom-6 right-6 group flex items-center gap-2.5 rounded-full px-5 py-2.5 sm:px-6 sm:py-3 text-white text-xs sm:text-sm font-bold shadow-lg transition-all duration-300 cursor-pointer bg-gradient-to-r from-primary-dark to-primary"
                   >
                     <span>Shop Now</span>
-                    <FaLongArrowAltRight className="text-lg sm:text-xl transition-transform duration-300 group-hover:translate-x-1.5" />
+                    <FaLongArrowAltRight className="text-base sm:text-lg transition-transform duration-300 group-hover:translate-x-1.5" />
                   </motion.button>
 
 
@@ -196,10 +196,10 @@ const OfferComponent = ({ offer }) => {
       {/* hanging offer component  */}
       < motion.div
         variants={offerVariants}
-        className="relative -top-12 -left-24 flex justify-center"
+        className="relative -top-8 -left-20 flex justify-center"
       >
         {/* Rope */}
-        < div className="absolute -top-14 left-1/2 h-14 w-[3px] -translate-x-1/2 bg-primary" ></div >
+        < div className="absolute -top-10 left-1/2 h-10 w-[2px] -translate-x-1/2 bg-primary" ></div >
         {/* Board */}
         < motion.div
           animate={{
@@ -211,9 +211,9 @@ const OfferComponent = ({ offer }) => {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="relative rounded-2xl border-[3px] border-primary bg-white/95 md:px-5 md:py-3 px-3 py-1 shadow-[0_20px_40px_rgba(46,125,50,0.15)]"
+          className="relative rounded-xl border-[2px] border-primary bg-white/95 md:px-4 md:py-2 px-2.5 py-1 shadow-[0_15px_30px_rgba(46,125,50,0.15)]"
         >
-          <h3 className="md:text-5xl text-4xl font-black text-primary">
+          <h3 className="md:text-3xl text-2xl font-black text-primary">
             <span style={{
               fontFamily: "'Syne Mono', monospace"
             }}>{offer} OFF</span>

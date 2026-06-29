@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiArrowLeft, FiClock, FiCalendar, FiUser, FiSearch, FiChevronRight, FiX } from 'react-icons/fi';
 import { FaLeaf } from 'react-icons/fa';
@@ -195,6 +195,18 @@ export default function Blog({ onClose }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activePost, setActivePost] = useState(null);
 
+  // Lock background body scroll when the blog modal is open
+  useEffect(() => {
+    if (activePost) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [activePost]);
+
   // Filter posts based on category and search query
   const filteredPosts = useMemo(() => {
     return BLOG_POSTS.filter(post => {
@@ -314,7 +326,7 @@ export default function Blog({ onClose }) {
           {filteredPosts.map(post => (
             <article
               key={post.id}
-              onClick={() => window.location.hash = `#product/${post.productId}`}
+              onClick={() => setActivePost(post)}
               className="bg-white rounded-3xl border border-black/[0.03] overflow-hidden flex flex-col justify-between hover:shadow-lg transition-all group cursor-pointer text-left"
             >
               <div>
@@ -383,55 +395,58 @@ export default function Blog({ onClose }) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 50, scale: 0.95 }}
               transition={{ type: "spring", damping: 25, stiffness: 250 }}
-              className="relative w-full max-w-3xl max-h-[85vh] bg-white rounded-3xl shadow-2xl overflow-y-auto z-10 flex flex-col"
+              className="relative w-full max-w-2xl max-h-[90vh] bg-white rounded-3xl shadow-2xl flex flex-col z-10"
             >
               {/* Close Button */}
               <button
                 onClick={() => setActivePost(null)}
-                className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition-colors cursor-pointer focus:outline-none"
+                className="absolute top-4 right-4 z-30 w-8 h-8 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition-colors cursor-pointer focus:outline-none shadow-md"
               >
                 <FiX />
               </button>
 
-              {/* Modal Cover Image */}
-              <div className="relative aspect-[21/9] w-full bg-gray-100 flex-shrink-0">
-                <img src={activePost.image} alt={activePost.title} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <span className="absolute bottom-4 left-6 bg-primary text-white text-[9px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full">
-                  {activePost.category}
-                </span>
-              </div>
-
-              {/* Modal Content */}
-              <div className="p-6 sm:p-8 overflow-y-auto text-left flex-grow">
-                {/* Meta details */}
-                <div className="flex flex-wrap items-center gap-4 text-xs font-bold text-text-muted mb-4 border-b border-gray-100 pb-4">
-                  <span className="flex items-center gap-1"><FiCalendar /> {activePost.date}</span>
-                  <span className="flex items-center gap-1"><FiClock /> {activePost.readTime}</span>
-                  <span className="flex items-center gap-1"><FiUser className="text-primary" /> {activePost.author}</span>
+              {/* Scrollable Container */}
+              <div className="w-full overflow-y-auto rounded-3xl flex-grow" data-lenis-prevent>
+                {/* Modal Cover Image */}
+                <div className="relative h-44 sm:h-52 w-full bg-gray-100 overflow-hidden">
+                  <img src={activePost.image} alt={activePost.title} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <span className="absolute bottom-4 left-6 bg-primary text-white text-[9px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full">
+                    {activePost.category}
+                  </span>
                 </div>
 
-                <h2 className="font-display font-black text-2xl sm:text-3xl text-text-dark tracking-tight leading-tight mb-6">
-                  {activePost.title}
-                </h2>
-
-                {/* Article Body */}
-                <div className="font-sans text-sm text-text-muted leading-relaxed flex flex-col gap-4">
-                  {activePost.content}
-                </div>
-
-                {/* Return CTA */}
-                <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
-                  <div className="text-left">
-                    <span className="text-[10px] font-bold text-text-muted uppercase block">Written By</span>
-                    <span className="text-xs font-black text-text-dark">{activePost.author}</span>
+                {/* Modal Content */}
+                <div className="p-6 sm:p-8 text-left">
+                  {/* Meta details */}
+                  <div className="flex flex-wrap items-center gap-4 text-xs font-bold text-text-muted mb-4 border-b border-gray-100 pb-4">
+                    <span className="flex items-center gap-1"><FiCalendar /> {activePost.date}</span>
+                    <span className="flex items-center gap-1"><FiClock /> {activePost.readTime}</span>
+                    <span className="flex items-center gap-1"><FiUser className="text-primary" /> {activePost.author}</span>
                   </div>
-                  <button
-                    onClick={() => setActivePost(null)}
-                    className="px-6 py-2.5 bg-primary hover:bg-primary-dark text-white font-bold text-xs rounded-full transition-colors cursor-pointer focus:outline-none"
-                  >
-                    Done Reading
-                  </button>
+
+                  <h2 className="font-display font-black text-2xl sm:text-3xl text-text-dark tracking-tight leading-tight mb-6">
+                    {activePost.title}
+                  </h2>
+
+                  {/* Article Body */}
+                  <div className="font-sans text-sm text-text-muted leading-relaxed flex flex-col gap-4">
+                    {activePost.content}
+                  </div>
+
+                  {/* Return CTA */}
+                  <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div className="text-left">
+                      <span className="text-[10px] font-bold text-text-muted uppercase block">Written By</span>
+                      <span className="text-xs font-black text-text-dark">{activePost.author}</span>
+                    </div>
+                    <button
+                      onClick={() => setActivePost(null)}
+                      className="px-6 py-2.5 bg-primary hover:bg-primary-dark text-white font-bold text-xs rounded-full transition-colors cursor-pointer focus:outline-none"
+                    >
+                      Done Reading
+                    </button>
+                  </div>
                 </div>
               </div>
 

@@ -57,6 +57,18 @@ export default function ProductDetail({ productId, onClose }) {
     setSelectedQuantityOption(1);
   }, [productId]);
 
+  // Lock background body scroll when inquiry modal is open
+  useEffect(() => {
+    if (showInquiryModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [showInquiryModal]);
+
   // Programmatically generate additional thumbnail variations by mixing parent category photos
   const productImages = useMemo(() => {
     if (!product) return [];
@@ -563,6 +575,7 @@ export default function ProductDetail({ productId, onClose }) {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               className="w-full max-w-md bg-white rounded-3xl overflow-hidden border border-primary/10 shadow-2xl p-6 relative"
+              data-lenis-prevent
             >
               <button
                 onClick={() => {
