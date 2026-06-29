@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenu, HiX } from 'react-icons/hi';
 import { FaGooglePlay, FaApple } from 'react-icons/fa';
-import { FiShoppingCart } from 'react-icons/fi';
+import { FiShoppingCart, FiLogOut, FiUser } from 'react-icons/fi';
 import { useCart } from '../context/CartContext';
 
 const NAV_ITEMS = [
@@ -16,16 +16,25 @@ const NAV_ITEMS = [
 ];
 
 export default function Navbar() {
-  const { cartCount } = useCart();
+  const { cartCount, isLoggedIn, userPhone, login, logout } = useCart();
   const displayCount = cartCount > 99 ? '99+' : cartCount;
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showDownloadModal, setShowDownloadModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
 
-  // Lock background body scroll when the download modal is open
+  // Local temporary Auth input states
+  const [authPhone, setAuthPhone] = useState('');
+  const [authStep, setAuthStep] = useState('phone'); // 'phone' | 'otp'
+  const [otpVal, setOtpVal] = useState('');
+  const [isAuthSubmitting, setIsAuthSubmitting] = useState(false);
+  const [authError, setAuthError] = useState('');
+
+  // Lock background body scroll when the download modal or login modal is open
   useEffect(() => {
-    if (showDownloadModal) {
+    if (showDownloadModal || showLoginModal) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -33,7 +42,7 @@ export default function Navbar() {
     return () => {
       document.body.style.overflow = '';
     };
-  }, [showDownloadModal]);
+  }, [showDownloadModal, showLoginModal]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -260,6 +269,73 @@ export default function Navbar() {
                 )}
               </button>
 
+              {isLoggedIn ? (
+                <div className="relative">
+                  <button
+                    onClick={() => setShowProfileDropdown(!showProfileDropdown)}
+                    className={`p-2.5 border rounded-full transition-colors cursor-pointer focus:outline-none flex items-center justify-center relative ${
+                      showProfileDropdown 
+                        ? 'bg-primary/10 border-primary text-primary' 
+                        : 'bg-gray-50 border-gray-100 text-text-dark hover:bg-gray-100'
+                    }`}
+                    title="Profile Settings"
+                  >
+                    <FiUser className="text-base" />
+                    {/* Active green dot */}
+                    <span className="absolute top-0.5 right-0.5 w-2 h-2 bg-[#2e7d32] border border-white rounded-full"></span>
+                  </button>
+
+                  <AnimatePresence>
+                    {showProfileDropdown && (
+                      <>
+                        {/* Overlay backdrop to close dropdown on clicking outside */}
+                        <div 
+                          className="fixed inset-0 z-10" 
+                          onClick={() => setShowProfileDropdown(false)}
+                        />
+                        <motion.div
+                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                          transition={{ duration: 0.15 }}
+                          className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 rounded-2xl shadow-xl p-4 text-left z-20"
+                        >
+                          <div className="flex flex-col gap-0.5 mb-3 border-b border-gray-100 pb-2.5">
+                            <span className="text-[9px] font-black text-text-muted uppercase tracking-wider">Active Session</span>
+                            <span className="text-xs font-black text-text-dark font-sans">+91 {userPhone}</span>
+                          </div>
+                          <button
+                            onClick={() => {
+                              setShowProfileDropdown(false);
+                              logout();
+                            }}
+                            className="w-full flex items-center justify-center gap-2 py-2 bg-red-50 hover:bg-red-100 text-red-500 hover:text-red-650 font-extrabold text-[10px] rounded-lg transition-colors border border-red-100/50 cursor-pointer focus:outline-none uppercase tracking-wider"
+                          >
+                            <FiLogOut className="text-[10px]" />
+                            Logout
+                          </button>
+                        </motion.div>
+                      </>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ) : (
+                /* Logged Out User Button */
+                <button
+                  onClick={() => {
+                    setAuthPhone('');
+                    setOtpVal('');
+                    setAuthStep('phone');
+                    setAuthError('');
+                    setShowLoginModal(true);
+                  }}
+                  className="p-2.5 bg-gray-50 border border-gray-100 text-text-dark hover:bg-gray-100 rounded-full transition-colors cursor-pointer focus:outline-none flex items-center justify-center"
+                  title="Login / Signup"
+                >
+                  <FiUser className="text-base" />
+                </button>
+              )}
+
               <button
                 onClick={() => setShowDownloadModal(true)}
                 className="relative overflow-hidden group px-4 py-1.5 bg-gradient-to-r from-primary to-primary-dark text-white font-bold text-xs rounded-full shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/35 hover:scale-[1.03] active:scale-[0.97] transition-all duration-300 cursor-pointer focus:outline-none"
@@ -323,7 +399,39 @@ export default function Navbar() {
                 );
               })}
             </div>
-            <div className="mt-4 flex flex-col gap-4">
+            <div className="mt-4 flex flex-col gap-3">
+              {isLoggedIn ? (
+                <div className="flex items-center justify-between bg-gray-50 border border-gray-150 rounded-xl p-3.5">
+                  <div className="flex flex-col text-left">
+                    <span className="text-[9px] font-bold text-text-muted uppercase tracking-tight">Active Session</span>
+                    <span className="text-xs font-black text-text-dark font-sans">+91 {userPhone}</span>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      logout();
+                    }}
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-500 hover:text-red-650 font-extrabold text-[10px] rounded-lg transition-colors border border-red-100/50 cursor-pointer focus:outline-none uppercase tracking-wider"
+                  >
+                    <FiLogOut className="text-[10px]" />
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setAuthPhone('');
+                    setOtpVal('');
+                    setAuthStep('phone');
+                    setAuthError('');
+                    setShowLoginModal(true);
+                  }}
+                  className="w-full text-center py-3 bg-white border border-primary/25 text-primary hover:bg-primary/[0.02] font-extrabold text-sm rounded-xl focus:outline-none cursor-pointer active:scale-[0.99] transition-all"
+                >
+                  Login / Signup
+                </button>
+              )}
               <button
                 onClick={() => {
                   setIsMobileMenuOpen(false);
@@ -455,6 +563,145 @@ export default function Navbar() {
                 </svg>
                 <span className="text-[9px] text-text-muted font-bold tracking-wider mt-2.5 uppercase">Scan on Mobile Screen</span>
               </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Login / Signup Modal */}
+      <AnimatePresence>
+        {showLoginModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.6 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowLoginModal(false)}
+              className="absolute inset-0 bg-black"
+            />
+
+            {/* Modal Body */}
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 30 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 30 }}
+              transition={{ type: "spring", damping: 25, stiffness: 250 }}
+              className="relative w-full max-w-sm bg-white rounded-3xl shadow-2xl p-6 sm:p-8 z-10 text-center border border-primary/10 overflow-hidden"
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setShowLoginModal(false)}
+                className="absolute top-4 right-4 p-1.5 text-text-muted hover:text-text-dark hover:bg-gray-150 rounded-full transition-colors cursor-pointer focus:outline-none"
+              >
+                <HiX className="text-lg" />
+              </button>
+
+              <div className="mb-6 mt-2 text-center">
+                <div className="w-12 h-12 bg-primary/10 text-primary border border-primary/15 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <FiUser className="text-xl" />
+                </div>
+                <h3 className="font-display font-black text-xl text-text-dark">Login / Signup</h3>
+                <p className="text-[10px] text-text-muted mt-1 leading-relaxed max-w-xs mx-auto">
+                  Verify your WhatsApp/Phone number to sync your cart and place orders instantly
+                </p>
+              </div>
+
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (authStep === 'phone') {
+                    if (authPhone.length !== 10) {
+                      setAuthError('Please enter a valid 10-digit phone number.');
+                      return;
+                    }
+                    setAuthError('');
+                    setIsAuthSubmitting(true);
+                    setTimeout(() => {
+                      setIsAuthSubmitting(false);
+                      setAuthStep('otp');
+                    }, 1000);
+                  } else {
+                    if (otpVal.length !== 4) {
+                      setAuthError('Please enter a valid 4-digit OTP.');
+                      return;
+                    }
+                    setAuthError('');
+                    setIsAuthSubmitting(true);
+                    setTimeout(() => {
+                      setIsAuthSubmitting(false);
+                      login(authPhone);
+                      setShowLoginModal(false);
+                    }, 1000);
+                  }
+                }}
+                className="flex flex-col gap-4 text-left"
+              >
+                {authStep === 'phone' ? (
+                  <div className="flex flex-col gap-1">
+                    <label className="text-xs font-bold text-text-dark">Phone Number</label>
+                    <div className="relative flex items-center mt-1">
+                      <span className="absolute left-4 text-sm font-bold text-text-muted font-sans">+91</span>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="10-digit number"
+                        value={authPhone}
+                        onChange={(e) => {
+                          const val = e.target.value.replace(/\D/g, '').slice(0, 10);
+                          setAuthPhone(val);
+                          if (authError) setAuthError('');
+                        }}
+                        className="w-full bg-white border border-gray-250 rounded-xl pl-12 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all font-sans font-bold"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex flex-col gap-1">
+                    <div className="flex justify-between items-baseline">
+                      <label className="text-xs font-bold text-text-dark">Enter OTP</label>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setAuthStep('phone');
+                          setOtpVal('');
+                          setAuthError('');
+                        }}
+                        className="text-[10px] text-primary font-bold hover:underline cursor-pointer focus:outline-none"
+                      >
+                        Change Number
+                      </button>
+                    </div>
+                    <input
+                      type="text"
+                      required
+                      placeholder="4-digit OTP"
+                      value={otpVal}
+                      onChange={(e) => {
+                        const val = e.target.value.replace(/\D/g, '').slice(0, 4);
+                        setOtpVal(val);
+                        if (authError) setAuthError('');
+                      }}
+                      className="w-full bg-white border border-gray-250 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all text-center tracking-widest font-mono font-black mt-1"
+                    />
+                    <p className="text-[10px] text-text-muted mt-1.5 leading-relaxed">
+                      An OTP has been simulated for <span className="font-bold text-text-dark">+91 {authPhone}</span>. Enter any 4 digits to proceed.
+                    </p>
+                  </div>
+                )}
+
+                {authError && (
+                  <p className="text-[11px] font-bold text-red-500">{authError}</p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={isAuthSubmitting}
+                  className="w-full py-3.5 bg-primary hover:bg-primary-dark text-white font-display font-black text-xs rounded-xl shadow-md hover:shadow-lg disabled:opacity-50 transition-all cursor-pointer focus:outline-none mt-2 uppercase tracking-wider"
+                >
+                  {isAuthSubmitting ? 'Please wait...' : authStep === 'phone' ? 'Get OTP' : 'Verify & Login'}
+                </button>
+              </form>
             </motion.div>
           </div>
         )}

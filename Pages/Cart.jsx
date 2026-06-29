@@ -9,17 +9,41 @@ export default function Cart({ onClose }) {
     updateQuantity,
     removeFromCart,
     cartTotal,
-    clearCart
+    clearCart,
+    isLoggedIn,
+    userPhone,
+    login,
+    logout
   } = useCart();
 
   const [checkoutStep, setCheckoutStep] = useState('cart'); // 'cart' | 'success'
+  
+  // Local temporary Auth input states
+  const [authPhone, setAuthPhone] = useState(userPhone || '');
+  const [authStep, setAuthStep] = useState('phone'); // 'phone' | 'otp'
+  const [otpVal, setOtpVal] = useState('');
+  const [isAuthSubmitting, setIsAuthSubmitting] = useState(false);
+  const [authError, setAuthError] = useState('');
+
   const [shippingForm, setShippingForm] = useState({
     name: '',
-    phone: '',
+    phone: userPhone || '',
     address: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Sync state if logged in/out globally (e.g. from navbar)
+  React.useEffect(() => {
+    if (!isLoggedIn) {
+      setAuthPhone('');
+      setOtpVal('');
+      setAuthStep('phone');
+      setShippingForm(prev => ({ ...prev, phone: '' }));
+    } else {
+      setShippingForm(prev => ({ ...prev, phone: userPhone }));
+    }
+  }, [isLoggedIn, userPhone]);
 
   // Delivery Thresholds
   const freeShippingThreshold = 249;
@@ -36,6 +60,35 @@ export default function Cart({ onClose }) {
       setIsSubmitting(false);
       setCheckoutStep('success');
     }, 1500);
+  };
+
+  const handleAuthSubmit = (e) => {
+    e.preventDefault();
+    if (authStep === 'phone') {
+      if (authPhone.length !== 10) {
+        setAuthError('Please enter a valid 10-digit phone number.');
+        return;
+      }
+      setAuthError('');
+      setIsAuthSubmitting(true);
+      // Simulate sending OTP
+      setTimeout(() => {
+        setIsAuthSubmitting(false);
+        setAuthStep('otp');
+      }, 1000);
+    } else {
+      if (otpVal.length !== 4) {
+        setAuthError('Please enter a valid 4-digit OTP.');
+        return;
+      }
+      setAuthError('');
+      setIsAuthSubmitting(true);
+      // Simulate verifying OTP
+      setTimeout(() => {
+        setIsAuthSubmitting(false);
+        login(authPhone);
+      }, 1000);
+    }
   };
 
   const handleSuccessClose = () => {
@@ -250,67 +303,150 @@ export default function Cart({ onClose }) {
                   </div>
                 </div>
 
-                {/* Shipping Details Card */}
-                <div className="bg-[#FAF9F6] border border-gray-100 rounded-2xl p-6 text-left">
-                  <h3 className="font-display font-black text-base text-text-dark mb-4 border-b border-gray-200 pb-3">Delivery Information</h3>
-
-                  <form onSubmit={handleCheckoutSubmit} className="flex flex-col gap-4">
-                    <div className="flex flex-col gap-1">
-                      <label className="text-xs font-bold text-text-dark">Your Name</label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="Enter your full name"
-                        value={shippingForm.name}
-                        onChange={(e) => setShippingForm(prev => ({ ...prev, name: e.target.value }))}
-                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all"
-                      />
+                {/* Authentication / Delivery Column Wrapper */}
+                {!isLoggedIn ? (
+                  /* Auth Login/Signup Card */
+                  <div className="bg-[#FAF9F6] border border-gray-100 rounded-2xl p-6 text-left">
+                    <div className="mb-4 border-b border-gray-200 pb-3">
+                      <h3 className="font-display font-black text-base text-text-dark">Login / Signup</h3>
+                      <p className="text-[10px] text-text-muted mt-0.5">Please verify your number to proceed with order booking</p>
                     </div>
 
-                    <div className="flex flex-col gap-1">
-                      <label className="text-xs font-bold text-text-dark">Phone Number</label>
-                      <input
-                        type="tel"
-                        required
-                        placeholder="WhatsApp number preferred"
-                        value={shippingForm.phone}
-                        onChange={(e) => setShippingForm(prev => ({ ...prev, phone: e.target.value }))}
-                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all"
-                      />
+                    <form onSubmit={handleAuthSubmit} className="flex flex-col gap-4">
+                      {authStep === 'phone' ? (
+                        <div className="flex flex-col gap-1">
+                          <label className="text-xs font-bold text-text-dark">Enter Phone Number</label>
+                          <div className="relative flex items-center mt-1">
+                            <span className="absolute left-4 text-sm font-bold text-text-muted font-sans">+91</span>
+                            <input
+                              type="tel"
+                              required
+                              placeholder="10-digit number"
+                              value={authPhone}
+                              onChange={(e) => {
+                                const val = e.target.value.replace(/\D/g, '').slice(0, 10);
+                                setAuthPhone(val);
+                                if (authError) setAuthError('');
+                              }}
+                              className="w-full bg-white border border-gray-200 rounded-xl pl-12 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all font-sans font-bold"
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col gap-1">
+                          <div className="flex justify-between items-baseline">
+                            <label className="text-xs font-bold text-text-dark">Enter OTP</label>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setAuthStep('phone');
+                                setOtpVal('');
+                                setAuthError('');
+                              }}
+                              className="text-[10px] text-primary font-bold hover:underline cursor-pointer focus:outline-none"
+                            >
+                              Change Number
+                            </button>
+                          </div>
+                          <input
+                            type="text"
+                            required
+                            placeholder="Enter 4-digit OTP"
+                            value={otpVal}
+                            onChange={(e) => {
+                              const val = e.target.value.replace(/\D/g, '').slice(0, 4);
+                              setOtpVal(val);
+                              if (authError) setAuthError('');
+                            }}
+                            className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all text-center tracking-widest font-mono font-black mt-1"
+                          />
+                          <p className="text-[10px] text-text-muted mt-1">
+                            An OTP has been simulated for <span className="font-bold text-text-dark">+91 {authPhone}</span>. Enter any 4 digits to sign in.
+                          </p>
+                        </div>
+                      )}
+
+                      {authError && (
+                        <p className="text-[11px] font-bold text-red-500">{authError}</p>
+                      )}
+
+                      <button
+                        type="submit"
+                        disabled={isAuthSubmitting}
+                        className="w-full py-4 bg-primary hover:bg-primary-dark text-white font-display font-black text-xs rounded-xl shadow-md hover:shadow-lg disabled:opacity-50 transition-all cursor-pointer focus:outline-none mt-2 uppercase tracking-wider"
+                      >
+                        {isAuthSubmitting ? 'Please wait...' : authStep === 'phone' ? 'Get OTP' : 'Verify & Login'}
+                      </button>
+                    </form>
+                  </div>
+                ) : (
+                  /* Shipping Details Card */
+                  <div className="bg-[#FAF9F6] border border-gray-100 rounded-2xl p-6 text-left">
+                    <div className="flex justify-between items-baseline mb-4 border-b border-gray-200 pb-3">
+                      <h3 className="font-display font-black text-base text-text-dark">Delivery Information</h3>
                     </div>
 
-                    <div className="flex flex-col gap-1">
-                      <label className="text-xs font-bold text-text-dark">Delivery Address</label>
-                      <textarea
-                        rows="3"
-                        required
-                        placeholder="Full delivery location address..."
-                        value={shippingForm.address}
-                        onChange={(e) => setShippingForm(prev => ({ ...prev, address: e.target.value }))}
-                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all resize-none"
-                      />
-                    </div>
+                    <form onSubmit={handleCheckoutSubmit} className="flex flex-col gap-4">
+                      <div className="flex flex-col gap-1">
+                        <label className="text-xs font-bold text-text-dark">Your Name</label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="Enter your full name"
+                          value={shippingForm.name}
+                          onChange={(e) => setShippingForm(prev => ({ ...prev, name: e.target.value }))}
+                          className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all"
+                        />
+                      </div>
 
-                    <div className="flex flex-col gap-1">
-                      <label className="text-xs font-bold text-text-dark">Custom Message (Optional)</label>
-                      <textarea
-                        rows="2"
-                        placeholder="Custom logistic requests or nursery instructions..."
-                        value={shippingForm.message}
-                        onChange={(e) => setShippingForm(prev => ({ ...prev, message: e.target.value }))}
-                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all resize-none"
-                      />
-                    </div>
+                      <div className="flex flex-col gap-1">
+                        <label className="text-xs font-bold text-text-dark">Phone Number</label>
+                        <input
+                          type="tel"
+                          required
+                          placeholder="WhatsApp number preferred"
+                          value={shippingForm.phone}
+                          onChange={(e) => {
+                            const val = e.target.value.replace(/\D/g, '').slice(0, 10);
+                            setShippingForm(prev => ({ ...prev, phone: val }));
+                          }}
+                          className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all"
+                        />
+                      </div>
 
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full py-4 bg-primary hover:bg-primary-dark text-white font-display font-black text-xs rounded-xl shadow-md hover:shadow-lg disabled:opacity-50 transition-all cursor-pointer focus:outline-none mt-2 uppercase tracking-wider"
-                    >
-                      {isSubmitting ? 'Processing Order...' : `Place Order (₹${grandTotal.toFixed(2)})`}
-                    </button>
-                  </form>
-                </div>
+                      <div className="flex flex-col gap-1">
+                        <label className="text-xs font-bold text-text-dark">Delivery Address</label>
+                        <textarea
+                          rows="3"
+                          required
+                          placeholder="Full delivery location address..."
+                          value={shippingForm.address}
+                          onChange={(e) => setShippingForm(prev => ({ ...prev, address: e.target.value }))}
+                          className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all resize-none"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1">
+                        <label className="text-xs font-bold text-text-dark">Custom Message (Optional)</label>
+                        <textarea
+                          rows="2"
+                          placeholder="Custom logistic requests or nursery instructions..."
+                          value={shippingForm.message}
+                          onChange={(e) => setShippingForm(prev => ({ ...prev, message: e.target.value }))}
+                          className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all resize-none"
+                        />
+                      </div>
+
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full py-4 bg-primary hover:bg-primary-dark text-white font-display font-black text-xs rounded-xl shadow-md hover:shadow-lg disabled:opacity-50 transition-all cursor-pointer focus:outline-none mt-2 uppercase tracking-wider"
+                      >
+                        {isSubmitting ? 'Processing Order...' : `Place Order (₹${grandTotal.toFixed(2)})`}
+                      </button>
+                    </form>
+                  </div>
+                )}
               </div>
             </motion.div>
           )}

@@ -842,9 +842,12 @@ export default function CategoryBase({ categoryName, onClose }) {
                       <input
                         type="tel"
                         required
-                        placeholder="e.g. +91 98765 43210"
+                        placeholder="10-digit phone number"
                         value={inquiryForm.phone}
-                        onChange={(e) => setInquiryForm(prev => ({ ...prev, phone: e.target.value }))}
+                        onChange={(e) => {
+                          const val = e.target.value.replace(/\D/g, '').slice(0, 10);
+                          setInquiryForm(prev => ({ ...prev, phone: val }));
+                        }}
                         className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/10 focus:border-primary/30 transition-all"
                       />
                     </div>

@@ -68,6 +68,27 @@ export function CartProvider({ children }) {
     setCartItems([]);
   };
 
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return localStorage.getItem('geotree_logged_in') === 'true';
+  });
+  const [userPhone, setUserPhone] = useState(() => {
+    return localStorage.getItem('geotree_user_phone') || '';
+  });
+
+  const login = (phone) => {
+    setIsLoggedIn(true);
+    setUserPhone(phone);
+    localStorage.setItem('geotree_logged_in', 'true');
+    localStorage.setItem('geotree_user_phone', phone);
+  };
+
+  const logout = () => {
+    setIsLoggedIn(false);
+    setUserPhone('');
+    localStorage.removeItem('geotree_logged_in');
+    localStorage.removeItem('geotree_user_phone');
+  };
+
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const cartTotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
@@ -81,6 +102,10 @@ export function CartProvider({ children }) {
         clearCart,
         cartCount,
         cartTotal,
+        isLoggedIn,
+        userPhone,
+        login,
+        logout,
       }}
     >
       {children}
