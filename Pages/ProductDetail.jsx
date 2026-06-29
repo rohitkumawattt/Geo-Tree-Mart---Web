@@ -14,11 +14,14 @@ import {
 } from 'react-icons/fi';
 import { FaLeaf, FaTruck, FaGift, FaPercentage, FaBoxOpen } from 'react-icons/fa';
 import { PRODUCTS_DB } from '../src/data/products';
+import { useCart } from '../src/context/CartContext';
 
 export default function ProductDetail({ productId, onClose }) {
+  const { addToCart } = useCart();
   // Option selection states
   const [selectedPot, setSelectedPot] = useState('Bare Rooted');
-  const [selectedQuantityOption, setSelectedQuantityOption] = useState(1); // 1, 2, 5, 10
+  const [selectedQuantityOption, setSelectedQuantityOption] = useState(1); // 1, 2, 5, 10, 'custom'
+  const [customQuantityVal, setCustomQuantityVal] = useState(50);
   const [activeImageIdx, setActiveImageIdx] = useState(0);
 
   // Accordion toggle states
@@ -138,12 +141,24 @@ export default function ProductDetail({ productId, onClose }) {
     { qty: 1, label: 'Buy 1', discount: 0 },
     { qty: 2, label: 'Buy 2 and get a discount!', discount: 2 },
     { qty: 5, label: 'Buy 5 and get a discount!', discount: 5 },
-    { qty: 10, label: 'Buy 10 and get a discount!', discount: 10 }
+    { qty: 10, label: 'Buy 10 and get a discount!', discount: 10 },
+    { qty: 'custom', label: 'Custom / Bulk Quantity', discount: 0 }
   ];
 
-  const currentOption = quantityOptions.find(o => o.qty === selectedQuantityOption);
-  const finalPricePerUnit = basePrice * (1 - currentOption.discount / 100);
-  const totalPrice = finalPricePerUnit * selectedQuantityOption;
+  const getDiscountForQty = (q) => {
+    if (q >= 100) return 30; // Wholesale bulk rate!
+    if (q >= 10) return 10;
+    if (q >= 5) return 5;
+    if (q >= 2) return 2;
+    return 0;
+  };
+
+  const isCustom = selectedQuantityOption === 'custom';
+  const qty = isCustom ? customQuantityVal : selectedQuantityOption;
+  const discount = isCustom ? getDiscountForQty(customQuantityVal) : (quantityOptions.find(o => o.qty === selectedQuantityOption)?.discount || 0);
+
+  const finalPricePerUnit = basePrice * (1 - discount / 100);
+  const totalPrice = finalPricePerUnit * qty;
 
   const toggleAccordion = (key) => {
     setOpenAccordions(prev => ({
@@ -199,7 +214,7 @@ export default function ProductDetail({ productId, onClose }) {
         </div>
 
         <button
-          onClick={onClose}
+          onClick={handleCategoryNav}
           className="group inline-flex items-center gap-2 mb-6 text-xs font-black text-primary hover:text-primary-dark bg-white border border-primary/10 hover:border-primary/20 px-4 py-2 rounded-full transition-all duration-300 shadow-sm hover:shadow cursor-pointer"
         >
           <FiArrowLeft className="group-hover:-translate-x-0.5 transition-transform" />
@@ -304,52 +319,73 @@ export default function ProductDetail({ productId, onClose }) {
                 <span>───</span>
               </div>
 
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2.5">
                 {quantityOptions.map((option) => {
-                  const optUnitPrice = basePrice * (1 - option.discount / 100);
-                  const optTotalPrice = optUnitPrice * option.qty;
-                  const optOriginalTotal = originalBasePrice * option.qty;
+                  const isOptCustom = option.qty === 'custom';
+                  const optDiscount = isOptCustom ? getDiscountForQty(customQuantityVal) : option.discount;
+                  const optQty = isOptCustom ? customQuantityVal : option.qty;
+                  const optUnitPrice = basePrice * (1 - optDiscount / 100);
+                  const optTotalPrice = optUnitPrice * optQty;
+                  const optOriginalTotal = originalBasePrice * optQty;
 
                   return (
-                    <label
-                      key={option.qty}
-                      onClick={() => setSelectedQuantityOption(option.qty)}
-                      className={`relative flex items-center justify-between border rounded-xl p-3 cursor-pointer transition-all ${selectedQuantityOption === option.qty
-                          ? 'border-primary bg-primary/[0.02] shadow-sm'
-                          : 'border-gray-200 hover:border-gray-300 bg-white'
-                        }`}
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <input
-                          type="radio"
-                          name="qty-discount-option"
-                          checked={selectedQuantityOption === option.qty}
-                          onChange={() => setSelectedQuantityOption(option.qty)}
-                          className="w-3.5 h-3.5 accent-primary cursor-pointer"
-                        />
-                        <div className="flex flex-col">
-                          <span className="text-xs font-extrabold text-text-dark">{option.label}</span>
-                          {option.discount > 0 && (
-                            <span className="absolute -top-2 right-2 bg-primary text-white text-[8px] font-black uppercase px-2 py-0.5 rounded-full tracking-wider">
-                              Save {option.discount}%
-                            </span>
-                          )}
+                    <div key={option.qty} className="flex flex-col w-full">
+                      <label
+                        onClick={() => setSelectedQuantityOption(option.qty)}
+                        className={`relative flex items-center justify-between border rounded-xl p-3 cursor-pointer transition-all ${selectedQuantityOption === option.qty
+                            ? 'border-primary bg-primary/[0.02] shadow-sm'
+                            : 'border-gray-200 hover:border-gray-300 bg-white'
+                          }`}
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <input
+                            type="radio"
+                            name="qty-discount-option"
+                            checked={selectedQuantityOption === option.qty}
+                            onChange={() => setSelectedQuantityOption(option.qty)}
+                            className="w-3.5 h-3.5 accent-primary cursor-pointer"
+                          />
+                          <div className="flex flex-col text-left">
+                            <span className="text-xs font-extrabold text-text-dark">{option.label}</span>
+                            {optDiscount > 0 && (
+                              <span className="absolute -top-2 right-2 bg-primary text-white text-[8px] font-black uppercase px-2 py-0.5 rounded-full tracking-wider">
+                                Save {optDiscount}%
+                              </span>
+                            )}
+                          </div>
                         </div>
-                      </div>
 
-                      <div className="text-right">
-                        <div className="flex items-baseline gap-1.5 justify-end">
-                          {option.discount > 0 && (
-                            <span className="text-[10px] text-gray-400 line-through font-semibold">
-                              ₹{optOriginalTotal.toFixed(2)}
+                        <div className="text-right">
+                          <div className="flex items-baseline gap-1.5 justify-end">
+                            {optDiscount > 0 && (
+                              <span className="text-[10px] text-gray-400 line-through font-semibold">
+                                ₹{optOriginalTotal.toFixed(2)}
+                              </span>
+                            )}
+                            <span className="text-xs font-black text-primary font-display">
+                              ₹{optTotalPrice.toFixed(2)}
                             </span>
-                          )}
-                          <span className="text-xs font-black text-primary font-display">
-                            ₹{optTotalPrice.toFixed(2)}
-                          </span>
+                          </div>
                         </div>
-                      </div>
-                    </label>
+                      </label>
+
+                      {isOptCustom && selectedQuantityOption === 'custom' && (
+                        <div className="mt-2.5 p-3 bg-gray-50 border border-gray-150 rounded-xl flex items-center justify-between animate-fadeIn text-left">
+                          <span className="text-[10px] font-bold text-text-muted">Enter Quantity:</span>
+                          <div className="flex items-center gap-2">
+                            <input
+                              type="number"
+                              min="1"
+                              max="10000"
+                              value={customQuantityVal}
+                              onChange={(e) => setCustomQuantityVal(Math.min(10000, Math.max(1, parseInt(e.target.value) || 1)))}
+                              className="w-20 bg-white border border-gray-250 rounded-lg px-2.5 py-1 text-xs font-bold text-text-dark text-center focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all font-sans"
+                            />
+                            <span className="text-[10px] font-black text-primary uppercase">Plants</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   );
                 })}
               </div>
@@ -358,10 +394,15 @@ export default function ProductDetail({ productId, onClose }) {
             {/* Action Buttons */}
             <div className="flex flex-col gap-3">
               <button
-                onClick={() => setShowInquiryModal(true)}
+                onClick={() => {
+                  addToCart({
+                    ...product,
+                    price: basePrice
+                  }, qty, selectedPot);
+                }}
                 className="w-full py-4 bg-primary hover:bg-primary-dark text-white font-display font-black text-sm rounded-xl tracking-wider shadow-md hover:shadow-lg transition-all cursor-pointer focus:outline-none uppercase"
               >
-                Book Inquiry (₹{totalPrice.toFixed(2)})
+                Add to Cart (₹{totalPrice.toFixed(2)})
               </button>
 
               <button

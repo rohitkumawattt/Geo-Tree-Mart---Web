@@ -19,18 +19,31 @@ import FlowringPage from '../Pages/Flowring';
 import FruitsPage from '../Pages/Fruits';
 import ProductDetailPage from '../Pages/ProductDetail';
 import BlogPage from '../Pages/Blog';
+import CartPage from '../Pages/Cart';
 
 function App() {
   useSmoothScroll();
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedProductId, setSelectedProductId] = useState(null);
   const [showBlog, setShowBlog] = useState(false);
+  const [showCart, setShowCart] = useState(false);
 
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
       if (hash === '#blog') {
         setShowBlog(true);
+        setShowCart(false);
+        setSelectedCategory(null);
+        setSelectedProductId(null);
+        if (window.lenis) {
+          window.lenis.scrollTo(0, { immediate: true });
+        } else {
+          window.scrollTo(0, 0);
+        }
+      } else if (hash === '#cart') {
+        setShowBlog(false);
+        setShowCart(true);
         setSelectedCategory(null);
         setSelectedProductId(null);
         if (window.lenis) {
@@ -40,6 +53,7 @@ function App() {
         }
       } else if (hash.startsWith('#category/')) {
         setShowBlog(false);
+        setShowCart(false);
         const slug = hash.replace('#category/', '');
         // Map slug back to title case category name
         const validCategories = {
@@ -66,6 +80,7 @@ function App() {
         }
       } else if (hash.startsWith('#product/')) {
         setShowBlog(false);
+        setShowCart(false);
         const id = hash.replace('#product/', '');
         setSelectedProductId(id);
         setSelectedCategory(null);
@@ -76,6 +91,7 @@ function App() {
         }
       } else {
         setShowBlog(false);
+        setShowCart(false);
         setSelectedCategory(null);
         setSelectedProductId(null);
       }
@@ -96,6 +112,10 @@ function App() {
   };
 
   const handleCloseBlog = () => {
+    window.location.hash = '';
+  };
+
+  const handleCloseCart = () => {
     window.location.hash = '';
   };
 
@@ -126,6 +146,8 @@ function App() {
           <ProductDetailPage productId={selectedProductId} onClose={handleCloseProduct} />
         ) : showBlog ? (
           <BlogPage onClose={handleCloseBlog} />
+        ) : showCart ? (
+          <CartPage onClose={handleCloseCart} />
         ) : selectedCategory ? (
           renderCategoryPage()
         ) : (

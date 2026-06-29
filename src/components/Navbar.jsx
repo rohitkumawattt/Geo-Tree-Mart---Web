@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenu, HiX } from 'react-icons/hi';
 import { FaGooglePlay, FaApple } from 'react-icons/fa';
+import { FiShoppingCart } from 'react-icons/fi';
+import { useCart } from '../context/CartContext';
 
 const NAV_ITEMS = [
   { label: 'Home', id: 'home' },
@@ -14,6 +16,8 @@ const NAV_ITEMS = [
 ];
 
 export default function Navbar() {
+  const { cartCount } = useCart();
+  const displayCount = cartCount > 99 ? '99+' : cartCount;
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -91,7 +95,7 @@ export default function Navbar() {
     }
 
     const currentHash = window.location.hash;
-    const isSpecialPage = currentHash.startsWith('#category/') || currentHash === '#blog' || currentHash.startsWith('#product/');
+    const isSpecialPage = currentHash.startsWith('#category/') || currentHash === '#blog' || currentHash.startsWith('#product/') || currentHash === '#cart';
 
     if (isSpecialPage) {
       // Return to landing page hash context
@@ -243,6 +247,19 @@ export default function Navbar() {
 
             {/* Call To Action Buttons (Right) */}
             <div className="hidden md:flex items-center gap-4">
+              {/* Desktop Cart Button */}
+              <button
+                onClick={() => window.location.hash = '#cart'}
+                className="relative p-2.5 bg-gray-50 border border-gray-100 text-text-dark hover:bg-gray-100 rounded-full transition-colors cursor-pointer focus:outline-none"
+              >
+                <FiShoppingCart className="text-base" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 bg-primary text-white text-[9px] font-black px-1 min-w-[18px] h-[18px] rounded-full flex items-center justify-center border border-white shadow-sm">
+                    {displayCount}
+                  </span>
+                )}
+              </button>
+
               <button
                 onClick={() => setShowDownloadModal(true)}
                 className="relative overflow-hidden group px-4 py-1.5 bg-gradient-to-r from-primary to-primary-dark text-white font-bold text-xs rounded-full shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/35 hover:scale-[1.03] active:scale-[0.97] transition-all duration-300 cursor-pointer focus:outline-none"
@@ -250,6 +267,19 @@ export default function Navbar() {
                 <span className="relative z-10">Download App</span>
               </button>
             </div>
+
+            {/* Mobile Cart Button */}
+            <button
+              onClick={() => window.location.hash = '#cart'}
+              className="md:hidden relative p-2.5 bg-gray-50 border border-gray-100 text-text-dark hover:bg-gray-100 rounded-full transition-colors cursor-pointer focus:outline-none mr-2"
+            >
+              <FiShoppingCart className="text-sm" />
+              {cartCount > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 bg-primary text-white text-[9px] font-black px-1 min-w-[18px] h-[18px] rounded-full flex items-center justify-center border border-white shadow-sm">
+                  {displayCount}
+                </span>
+              )}
+            </button>
 
             {/* Hamburger Icon for Mobile */}
             <button

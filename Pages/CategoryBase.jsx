@@ -13,6 +13,7 @@ import {
 } from 'react-icons/fi';
 import { FaLeaf } from 'react-icons/fa';
 import { PRODUCTS_DB } from '../src/data/products';
+import { useCart } from '../src/context/CartContext';
 
 // Slogan mapping to give each page a premium green theme feeling
 const CATEGORY_DETAILS = {
@@ -55,6 +56,7 @@ const CATEGORY_DETAILS = {
 };
 
 export default function CategoryBase({ categoryName, onClose }) {
+  const { addToCart } = useCart();
   const categoryInfo = CATEGORY_DETAILS[categoryName] || CATEGORY_DETAILS["Medicinal"];
   const products = useMemo(() => {
     return PRODUCTS_DB.filter(p => p.parentCategory === categoryName);
@@ -212,24 +214,22 @@ export default function CategoryBase({ categoryName, onClose }) {
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10 text-left">
-          {/* Breadcrumbs & Back Button Inline */}
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex flex-wrap items-center gap-1 text-[10px] font-bold text-text-muted/70 tracking-wide">
-              <button onClick={onClose} className="hover:text-primary transition-colors cursor-pointer uppercase">Home</button>
-              <FiChevronRight />
-              <span className="text-text-dark uppercase tracking-tight">
-                {categoryName === "Flowring" ? "Flowering" : categoryName}
-              </span>
-            </div>
-
-            <button
-              onClick={onClose}
-              className="group inline-flex items-center gap-1.5 text-[10px] font-semibold text-primary hover:text-primary-dark bg-white border border-primary/10 px-3 py-1 rounded-full transition-all duration-300 cursor-pointer shadow-sm hover:shadow focus:outline-none"
-            >
-              <FiArrowLeft className="group-hover:-translate-x-0.5 transition-transform" />
-              Back
-            </button>
+          {/* Breadcrumbs */}
+          <div className="flex flex-wrap items-center gap-1 text-[10px] font-bold text-text-muted/70 tracking-wide mb-4">
+            <button onClick={onClose} className="hover:text-primary transition-colors cursor-pointer uppercase">Home</button>
+            <FiChevronRight />
+            <span className="text-text-dark uppercase tracking-tight">
+              {categoryName === "Flowring" ? "Flowering" : categoryName}
+            </span>
           </div>
+
+          <button
+            onClick={onClose}
+            className="group inline-flex items-center gap-2 mb-6 text-xs font-black text-primary hover:text-primary-dark bg-white border border-primary/10 hover:border-primary/20 px-4 py-2 rounded-full transition-all duration-300 shadow-sm hover:shadow cursor-pointer"
+          >
+            <FiArrowLeft className="group-hover:-translate-x-0.5 transition-transform" />
+            BACK TO HOME
+          </button>
 
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
             <div className="max-w-2xl">
@@ -557,11 +557,11 @@ export default function CategoryBase({ categoryName, onClose }) {
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
-                                setInquiryProduct(product);
+                                addToCart(product, 1);
                               }}
                               className="px-3 py-1.5 bg-primary hover:bg-primary-dark text-white font-bold text-[10px] md:text-xs rounded-full shadow-sm hover:shadow transition-all cursor-pointer focus:outline-none"
                             >
-                              Get Quote
+                              Buy
                             </button>
                           </div>
 
@@ -637,11 +637,18 @@ export default function CategoryBase({ categoryName, onClose }) {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      setInquiryProduct({ name: item.name, origin: "GeoTree Bestsellers Hub", price: item.price, unit: item.unit, stock: 5000, desc: "Bestseller nursery item." });
+                      addToCart({
+                        id: item.id,
+                        name: item.name,
+                        price: Number(item.price),
+                        image: item.image,
+                        origin: "GeoTree Bestsellers Hub",
+                        unit: item.unit
+                      }, 1);
                     }}
                     className="text-[9px] md:text-[10px] font-bold text-primary hover:text-primary-dark underline cursor-pointer"
                   >
-                    Quick Quote
+                    Quick Buy
                   </button>
                 </div>
               </div>
